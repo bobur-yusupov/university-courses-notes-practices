@@ -11,6 +11,10 @@ public class Person {
         this.gender = gender;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void introduce() {
         System.out.println("My name is " + this.name + ". I am " + this.age + " old. I am a " + this.gender);
     }
