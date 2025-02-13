@@ -1,0 +1,10 @@
+The_Hobbit JRR_Tolkien 15.99 21 4 25
+1984 George_Orwell 10.49 12 0 12
+Pride_and_Prejudice Jane_Austen 8.99 5 3 8
+To_Kill_a_Mockingbird Harper_Lee 12.99 18 7 25
+The_Great_Gatsby F_Scott_Fitzgerald 14.49 10 2 12
+Moby_Dick Herman_Melville 17.49 3 5 8
+War_and_Peace Leo_Tolstoy 20.99 6 10 16
+Crime_and_Punishment Fyodor_Dostoevsky 18.49 8 6 14
+Jane_Eyre Charlotte_Bronte 11.99 15 3 18
+Brave_New_World Aldous_Huxley 9.99 13 0 13
