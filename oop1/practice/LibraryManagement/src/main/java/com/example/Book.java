@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.exceptions.UnavailableBookException;
+
 public class Book
 {
     private String bookID;
@@ -22,9 +24,14 @@ public class Book
         return this.availabilityStatus;
     }
 
-    public void issueBook()
+    public void issueBook() throws UnavailableBookException
     {
-        this.availabilityStatus = false;
+        if (this.availabilityStatus)
+        {
+            this.availabilityStatus = false;
+        } else {
+            throw new UnavailableBookException("This book is already issued and not available.");
+        }
     }
 
     public void returnBook()
