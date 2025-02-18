@@ -1,21 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.LibraryManagementOOP;
 
 /**
  *
  * @author dev-yusupov
  */
-public class Book {
+public class Book 
+{
     private String bookID;
     private String title;
     private String author;
     private String genre;
     private boolean availabilityStatus;
     
-    public Book(String bookID, String title, String author, String genre) {
+    public Book(String bookID, String title, String author, String genre) 
+    {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
@@ -23,16 +21,58 @@ public class Book {
         this.availabilityStatus = true;
     }
     
-    public boolean isAvailable() {
+    public boolean isAvailable() 
+    {
         return this.availabilityStatus;
     }
     
-    public void issueBook() {
+    public void issueBook() 
+    {
         this.availabilityStatus = false;
     }
     
-    public void returnBook() {
+    public void returnBook() 
+    {
         this.availabilityStatus = true;
     }
     
+    public String getBookID() 
+    {
+        return this.bookID;
+    }
+    
+    public void setNewBookID(String newBookID) 
+    {
+        this.bookID = newBookID;
+    }
+    
+    public String getBookTitle()
+    {
+        return this.title;
+    }
+    
+    public void setNewBookTitle(String newBookTitle)
+    {
+        this.title = newBookTitle;
+    }
+    
+    public String getBookAuthor()
+    {
+        return this.author;
+    }
+    
+    public void setNewBookAuthor(String newBookAuthorName)
+    {
+        this.author = newBookAuthorName;
+    }
+    
+    public String getBookGenre() 
+    {
+        return this.genre;
+    }
+    
+    public void setBookGenre(String newBookGenre)
+    {
+        this.genre = newBookGenre;
+    }
 }

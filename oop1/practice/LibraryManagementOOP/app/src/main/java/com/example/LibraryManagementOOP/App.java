@@ -4,11 +4,10 @@
 package com.example.LibraryManagementOOP;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Book book1 = new Book("00001", "Hamsa", "Alisher Navoi", "doston");
+        
+        System.out.println(book1.isAvailable());
+        
     }
 }
