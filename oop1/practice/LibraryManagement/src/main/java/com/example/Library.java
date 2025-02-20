@@ -27,13 +27,21 @@ public class Library
         collectionOfUsers.remove(userToRemove);
     }
 
+    public void addBook(Book newBook)
+    {
+        collectionOfBooks.add(newBook);
+    }
+
+    public void removeBook(Book bookToRemove)
+    {
+        collectionOfBooks.remove(bookToRemove);
+    }
+
     public Book findBookByTitle(String stringTitleOfBook)
     {
-        for (int index = 0; index < collectionOfBooks.size(); index++)
-        {
-            if (collectionOfBooks.get(index).getBookTitle().toLowerCase().equals(stringTitleOfBook.toLowerCase()))
-            {
-                return collectionOfBooks.get(index);
+        for (Book collectionOfBook : collectionOfBooks) {
+            if (collectionOfBook.getBookTitle().equalsIgnoreCase(stringTitleOfBook)) {
+                return collectionOfBook;
             }
         }
 
