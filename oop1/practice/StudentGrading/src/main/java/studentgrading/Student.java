@@ -9,7 +9,7 @@ public class Student {
     private int age;
     private List<Double> grades = new ArrayList<>();
 
-    Student(String name, int age) {
+    public Student(String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -64,11 +64,9 @@ public class Student {
         }
     }
 
-    public double calculateAverage()
-    {
+    public double calculateAverage() {
         double total = 0;
-        for (double number: this.grades)
-        {
+        for (double number : this.grades) {
             total += number;
         }
 
