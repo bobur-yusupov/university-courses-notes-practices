@@ -33,9 +33,12 @@ public class CakeShop {
     }
     
     public void sellCake(int index) {
-        cakes.remove(index);
-        
-        totalSold ++;
+        try {
+            cakes.remove(index);
+            totalSold ++;
+        } catch (NullPointerException e) {
+            System.out.printf("Could not remove the cake");
+        }
     }
     
     public int getTotalSold() {
