@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEST MOVIES ABOUT THE <INTERNET /WEB> - Homepage</title>
+</head>
+
+<body>
+    <header>
+        <nav id="skip">
+             <h2>Skip to main content</h2>
+             <a href="#content">Skip to main content</a>
+           </nav>
+           
+        <h1>BEST MOVIES ABOUT THE &lt;INTERNET/WEB&gt;</h1>
+        <nav id="mainmenu">
+            Homepage | <a href="form.html">Form</a>
+        </nav>
+        <article>
+            <h2>Introduction</h2>
+            <p><q>Although for some people cinema means something superficial and glamorous, it is something else.<br>
+I think it is the mirror of the world.</q><br>    
+Jeanne Moreau</p>
+            <p>I love movies about the Internet. As someone who has grown up just as much on the web as off it, I feel as if it’s my virtual home, and inherently connect to films with social networks or hacking or viral media as major plot points perhaps more than films about any other subject.These movies thematically explore different aspects of the web, revealing both the positive and negative affects of living in such a connected world.</p>
+            <p><strong>Please be aware that</strong> my list is <em>strongly subjective</em></p>
+       </article>
+        <nav id="pagemenu">
+            <ol>
+                <li><a href="#movie1">The Social Network</a></li>
+                <li><a href="#movie2">Her</a></li>
+                <li><a href="#movie3">Deep Web</a></li>
+            </ol>
+        </nav>
+    </header>
+    <main id="content">
+        <article>
+            <h2 id="movie1">The Social Network</h2>
+            <aside></aside>
+           <p>Harvard student <b>Mark Zuckerberg</b> creates the <b>social networking</b> site that would become known as <b>Facebook</b>, but is later sued by two brothers who claimed he stole their idea, and the co-founder who was later squeezed out of the business.</p>
+        <p><i>The Social Network" is a great film not because of its dazzling style or visual cleverness, but because it is splendidly well-made. Despite the baffling complications of computer programming, web strategy and big finance, Aaron Sorkin's screenplay makes it all clear, and we don't follow the story so much as get dragged along behind it.</i></p>
+            
+
+            <section>
+                <h3>Source codes in the movie</h3>
+                <pre><code>
+#!/usr/bin/perl
+$wget = "wget -q0- http://leverett.harvard.edu/facebook/compactshow.php --post-data='action=Search'";
+
+print "$wget\n";
+$page = ` $wget`;
+while ($page =~ m/compactshow\.php\?student_id=([0-9]+)/g) {
+    $id=$1
+    $wget = "wget -q0- http://leverett.harvard.edu/facebook/compactshow.php?student_id=$id";
+    print "$wget\n";
+}
+</code></pre>
+            </section>
+            <section>
+                <h3>Movie soundtrack</h3>
+            </section>
+        </article>
+        <hr>
+        <article>
+            <h2 id="movie2">Her</h2>
+            <aside></aside>
+            <section>
+                <h3>The trailer of movie</h3>
+            </section>
+        </article>
+        <hr>
+        <article>
+            <h2 id="movie3">Deep web</h2>
+            <aside></aside>
+            <section>
+                <h3>What is the deep web?</h3>
+            </section>
+        </article>
+        <hr>
+        <aside>
+            <h2>Sources</h2>
+            <ul>
+                <li><a href="https://www.techtimes.com/articles/10259/20140711/the-best-movies-about-the-internet.htm" target="_blank">Techtimes.com</a></li>
+                <li><a href="https://www.imdb.com/" target="_blank">imdb.com</a></li>
+            </ul>
+       </aside>
+    </main>
+    <footer>
+        <address>
+            <p>Author: John Smith <br>
+                (<a href="mailto:johnsmith@mailinator.com">johnsmith@mailinator.com</a>)<br>
+H-1117 Budapest, Noname street 17</p>
+        </address>
+    </footer>
+</body>
+
+</html>
+<!-- Created by VSC -->
