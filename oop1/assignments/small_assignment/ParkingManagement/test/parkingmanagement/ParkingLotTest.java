@@ -28,8 +28,8 @@ public class ParkingLotTest {
     @Before
     public void setUp() {
         lot = new ParkingLot();
-        spot1 = new ParkingSpot(ParkingSpotSize.SMALL, 10);
-        spot2 = new ParkingSpot(ParkingSpotSize.MEDIUM, 15);
+        spot1 = new ParkingSpot(ParkingSpotSize.COMPACT, 10);
+        spot2 = new ParkingSpot(ParkingSpotSize.STANDARD, 15);
         spot3 = new ParkingSpot(ParkingSpotSize.LARGE, 20);
     }
 
@@ -51,8 +51,8 @@ public class ParkingLotTest {
         lot.registerSpot(spot2);
         lot.registerSpot(spot3);
 
-        assertEquals(1, lot.filterParkingSpot(ParkingSpotSize.SMALL, 10).size());
-        assertEquals(spot1, lot.filterParkingSpot(ParkingSpotSize.SMALL, 10).get(0));
+        assertEquals(1, lot.filterParkingSpot(ParkingSpotSize.COMPACT, 10).size());
+        assertEquals(spot1, lot.filterParkingSpot(ParkingSpotSize.COMPACT, 10).get(0));
     }
 
     @Test

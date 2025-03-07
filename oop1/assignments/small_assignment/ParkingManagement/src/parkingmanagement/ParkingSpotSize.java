@@ -4,7 +4,7 @@ package parkingmanagement;
  * Enum class for parking spot sizes
  */
 public enum ParkingSpotSize {
-    SMALL,
-    MEDIUM,
+    COMPACT,
+    STANDARD,
     LARGE
 }

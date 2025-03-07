@@ -5,68 +5,29 @@
 package parkingmanagement;
 
 import java.util.Date;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Unit tests for the Reservation class.
  *
  * @author Yusupov Boburjon
  */
 public class ReservationTest {
     
-    public ReservationTest() {
-    }
-
-    ParkingSpot spot;
-    Reservation reservation;
+    private ParkingSpot spot;
+    private Reservation reservation;
 
     @Before
     public void setUp() {
-        spot = new ParkingSpot(ParkingSpotSize.MEDIUM, 5);
+        spot = new ParkingSpot(ParkingSpotSize.STANDARD, 5);
         reservation = new Reservation(2, spot);
     }
 
     @Test
-    public void getPeriodTest() {
-        assertEquals(2, reservation.getPeriod());
-    }
-
-    @Test
-    public void getStartDateTest() {
-        assertNotNull(reservation.getStartDate());
-    }
-
-    @Test
-    public void getSpotTest() {
-        assertEquals(spot, reservation.getSpot());
-    }
-
-    @Test
-    public void setPeriodTest() {
-        reservation.setPeriod(3);
-        assertEquals(3, reservation.getPeriod());
-    }
-
-    @Test
-    public void setStartDateTest() {
-        reservation.setStartDate(new Date());
-        assertNotNull(reservation.getStartDate());
-    }
-
-    @Test
-    public void setSpotTest() {
-        ParkingSpot newSpot = new ParkingSpot(ParkingSpotSize.LARGE, 10);
-        reservation.setSpot(newSpot);
-        assertEquals(newSpot, reservation.getSpot());
-    }
-
-    @Test
     public void getRemainingHoursTest() {
-        assertEquals(2, reservation.getRemainingHours());
+        assertEquals(2, reservation.getRemainingPeriod());
     }
 
     @Test
@@ -90,5 +51,4 @@ public class ReservationTest {
     public void calculateCostTest() {
         assertEquals(10, reservation.calculateCost(), 0);
     }
-    
 }

@@ -1,6 +1,7 @@
 package parkingmanagement;
 
 public class ParkingSpot {
+    private int spotNumber;
     private ParkingSpotSize size;
     private double hourlyRate;
     private boolean availability;
@@ -9,6 +10,10 @@ public class ParkingSpot {
         this.size = size;
         this.hourlyRate = hourlyRate;
         this.availability = true;
+    }
+
+    public int getSpotNumber() {
+        return spotNumber;
     }
 
     public ParkingSpotSize getSize() {
@@ -22,7 +27,11 @@ public class ParkingSpot {
     public boolean getAvailability() {
         return availability;
     }
-    
+
+    public void setSpotNumber(int spotNumber) {
+        this.spotNumber = spotNumber;
+    }
+
     public void setSize(ParkingSpotSize newSize) {
         this.size = newSize;
     }

@@ -43,7 +43,7 @@ public class Reservation {
      * Returns the remaining hours of the reservation
      * @return remaining hours
      */
-    public int getRemainingHours() {
+    public int getRemainingPeriod() {
         Date now = new Date();
         long diff = now.getTime() - startDate.getTime();
         return period - (int) (diff / 3600000);
@@ -71,12 +71,13 @@ public class Reservation {
      */
     public double calculateCost() {
         int periodInDays = period / 24;
+        double penalty = calculatePenalty();
 
         if (periodInDays > 10) {
             double discounted = (period - 10 * 24) * spot.getHourlyRate() * 0.5;
             return 10 * 24 * spot.getHourlyRate() + discounted;
         }
 
-        return period * spot.getHourlyRate();
+        return period * spot.getHourlyRate() + penalty;
     }
 }
