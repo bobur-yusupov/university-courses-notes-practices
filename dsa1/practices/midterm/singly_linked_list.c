@@ -115,6 +115,42 @@ node_t* deleteAt(node_t* head, int position) {
     return head;
 }
 
+node_t* updateAt(node_t* head, int data, int position) {
+    if (head == NULL) {
+        exit(-1);
+    }
+
+    if (position < 1) { 
+        printf("Invalid position.");
+        exit(-1);
+    }
+
+    node_t* current = head;
+
+    for (int i = 1; i < position && current != NULL; i++) {
+        current = current->next;
+    }
+
+    current->data = data;
+
+    return head;
+}
+
+node_t* revese(node_t* head) {
+    node_t* prev = NULL;
+    node_t* current = head;
+    node_t* next = NULL;
+
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+
+    return prev;
+}
+
 int main() {
     node_t* head = createNewNode(1, NULL);
 
@@ -143,11 +179,9 @@ int main() {
     //     current1 = current1->next;
     // }
     
-    deleteLast(head);
-    deleteAt(head, 49);
+    head = revese(head);
 
     node_t* current1 = head;
-
     while (current1 != NULL) {
         printf("%d->", current1->data);
         current1 = current1->next;
