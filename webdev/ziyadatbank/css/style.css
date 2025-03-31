@@ -1,0 +1,47 @@
+/* Brand colors */
+:root {
+    --primary-color: #045F9F;
+    --secondary-color: #047DD3;
+    --tertiary-color: #5EBCFF;
+}
+
+
+@font-face {
+    font-family: 'Cairo';
+    src: url(../assets/fonts/static/Cairo-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Cairo', sans-serif;
+    color: #333;
+}
+
+/* Button styles */
+button {
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border-radius: 8px;
+    transform: .4s linear;
+}
+
+button:hover {
+    background-color: var(--primary-color);
+}
+
+button:active {
+    background-color: var(--tertiary-color);
+}
