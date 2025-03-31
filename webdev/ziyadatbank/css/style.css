@@ -5,7 +5,6 @@
     --tertiary-color: #5EBCFF;
 }
 
-
 @font-face {
     font-family: 'Cairo';
     src: url(../assets/fonts/static/Cairo-Regular.ttf) format('truetype');
@@ -27,9 +26,11 @@ html {
 }
 
 /* Button styles */
-button {
+button, a.button {
+    display: inline-block;
+    text-align: center;
     font-size: 18px;
-    padding: 12px 24px;
+    padding: 8px 24px;
     border: none;
     cursor: pointer;
     background-color: var(--secondary-color);
@@ -44,4 +45,220 @@ button:hover {
 
 button:active {
     background-color: var(--tertiary-color);
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 700;
+}
+h5 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+/* Header styles */
+header {
+    background-color: #fff;
+    color: #2c2c2c;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1.header-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+header img.header-logo {
+    width: 250px;
+}
+
+header ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 20px;
+}
+
+/* Navbar styles */
+nav.navbar {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px;
+}
+
+nav.navbar ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    gap: 20px;
+}
+
+nav.navbar ul li a {
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+}
+
+section {
+    margin-bottom: 60px;
+    padding: 40px; /* Standardized padding */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px; /* Standardized gap */
+    background-color: #f9f9f9; /* Standardized background color */
+    border-radius: 8px; /* Standardized border-radius */
+}
+
+section.main-poster {
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left!important;
+    color: #fff;
+    padding: 40px;
+}
+
+section.main-poster .main-poster-text {
+    display: flex;
+    flex-direction: column;
+    align-items: left!important;
+    gap: 20px;
+
+    max-width: 670px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    gap: 20px; /* Standardized gap */
+}
+
+section.about-us,
+section.services,
+section.card,
+section.why-ziyadat,
+section.ready-to-experience {
+    flex-direction: row;
+    gap: 30px; /* Standardized gap */
+}
+
+section.about-us .about-us-text,
+section.services .services-text,
+section.card .card-text,
+section.why-ziyadat .why-ziyadat-text {
+    width: 50%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px; /* Standardized gap */
+}
+
+section.services {
+    background-color: #f1f1f1; /* Specific to services */
+}
+
+section.card {
+    background-color: #f9f9f9; /* Standardized background color */
+}
+
+section.why-ziyadat {
+    background-color: #f1f1f1; /* Specific to why-ziyadat */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Specific to why-ziyadat */
+}
+
+section.ready-to-experience {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px; /* Standardized gap */
+    padding: 40px; /* Standardized padding */
+    background-color: #f1f1f1; /* Specific to ready-to-experience */
+    border-radius: 8px; /* Standardized border-radius */
+}
+
+section .services-image,
+section .about-us-image,
+section .card-image,
+section .why-ziyadat-image {
+    width: 50%;
+}
+
+section .services-image img,
+section .about-us-image img,
+section .card-image img,
+section .why-ziyadat-image img {
+    width: 100%;
+    border-radius: 8px; /* Standardized border-radius */
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+footer ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    gap: 20px; /* Standardized gap */
 }
