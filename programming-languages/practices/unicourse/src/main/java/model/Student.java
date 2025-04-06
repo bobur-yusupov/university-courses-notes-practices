@@ -16,4 +16,12 @@ public class Student extends Person {
         System.out.println("Student last name: " + this.lastNameString);
         System.out.println("Major: " + this.major);
     }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
 }

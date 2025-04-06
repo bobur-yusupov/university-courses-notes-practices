@@ -8,6 +8,11 @@ public class Course {
     private String courseTitle;
     private List<Student> enrolledStudentsList = new ArrayList<>();
 
+    public Course(String courseIDString, String courseTitle) {
+        this.courseIDString = courseIDString;
+        this.courseTitle = courseTitle;
+    }
+
     public String getCourseIDString() {
         return courseIDString;
     }
@@ -24,11 +29,11 @@ public class Course {
         this.courseTitle = courseTitle;
     }
 
-    public List getEnrolledStudentsList() {
+    public List<Student> getEnrolledStudentsList() {
         return enrolledStudentsList;
     }
 
-    public void setEnrolledStudentsList(List enrolledStudentsList) {
+    public void setEnrolledStudentsList(List<Student> enrolledStudentsList) {
         this.enrolledStudentsList = enrolledStudentsList;
     }
 

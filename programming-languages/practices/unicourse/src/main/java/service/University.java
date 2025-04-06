@@ -11,6 +11,18 @@ public class University {
     private HashMap<String, Course> courses = new HashMap<>();
     private HashMap<Integer, Professor> professors = new HashMap<>();
 
+    public HashMap<Integer, Student> getStudents() {
+        return students;
+    }
+
+    public HashMap<String, Course> getCourses() {
+        return courses;
+    }
+    
+    public HashMap<Integer, Professor> getProfessors() {
+        return professors;
+    }
+
     public void addStudent(Student student) {
         this.students.put(student.getIdInt(), student);
     }

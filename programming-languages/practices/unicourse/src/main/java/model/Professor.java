@@ -16,4 +16,12 @@ public class Professor extends Person {
         System.out.println("Professor last name: " + this.lastNameString);
         System.out.println("Department: " + this.department);
     }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 }
