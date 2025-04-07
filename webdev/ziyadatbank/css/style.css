@@ -97,6 +97,136 @@ li {
     font-size: 16px;
 }
 
+.container { 
+    width: 100%;
+    padding: 30px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .column {
+        flex: 0 0 100%;
+    }
+}
+
+/** Utility classes for margin and padding */
+/* Padding classes */
+.pt-10 {
+    padding-top: 10px;
+}
+.pt-20 {
+    padding-top: 20px;
+}
+.pt-30 {
+    padding-top: 30px;
+}
+
+.pb-10 {
+    padding-bottom: 10px;
+}
+.pb-20 {
+    padding-bottom: 20px;
+}
+.pb-30 {
+    padding-bottom: 30px;
+}
+.px-10 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.px-20 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.px-30 {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.p-10 {
+    padding: 10px;
+}
+.p-20 {
+    padding: 20px;
+}
+.p-30 {
+    padding: 30px;
+}
+
+/* Margin classes */
+
+.mt-10 {
+    margin-top: 10px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mt-30 {
+    margin-top: 30px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.mb-30 {
+    margin-bottom: 30px;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+.ml-20 {
+    margin-left: 20px;
+}
+.ml-30 {
+    margin-left: 30px;
+}
+.mr-10 {
+    margin-right: 10px;
+}
+.mr-20 {
+    margin-right: 20px;
+}
+.mr-30 {
+    margin-right: 30px;
+}
+
+.m-10 {
+    margin: 10px;
+}
+.m-20 {
+    margin: 20px;
+}
+.m-30 {
+    margin: 30px;
+}
+
 /* Header styles */
 header {
     background-color: #fff;
@@ -150,13 +280,7 @@ nav.navbar ul li a {
 
 section {
     margin-bottom: 60px;
-    padding: 40px; /* Standardized padding */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 30px; /* Standardized gap */
-    background-color: #f9f9f9; /* Standardized background color */
-    border-radius: 8px; /* Standardized border-radius */
+    background-color: #f9f9f9;
 }
 
 section.main-poster {
@@ -185,15 +309,6 @@ section.main-poster .main-poster-text {
     gap: 20px; /* Standardized gap */
 }
 
-section.about-us,
-section.services,
-section.card,
-section.why-ziyadat,
-section.ready-to-experience {
-    flex-direction: row;
-    gap: 30px; /* Standardized gap */
-}
-
 section.about-us .about-us-text,
 section.services .services-text,
 section.card .card-text,
@@ -207,29 +322,6 @@ section.why-ziyadat .why-ziyadat-text {
     align-items: flex-start;
     justify-content: center;
     gap: 20px; /* Standardized gap */
-}
-
-section.services {
-    background-color: #f1f1f1; /* Specific to services */
-}
-
-section.card {
-    background-color: #f9f9f9; /* Standardized background color */
-}
-
-section.why-ziyadat {
-    background-color: #f1f1f1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-section.ready-to-experience {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px; /* Standardized gap */
-    padding: 40px; /* Standardized padding */
-    background-color: #f1f1f1; /* Specific to ready-to-experience */
-    border-radius: 8px; /* Standardized border-radius */
 }
 
 section .services-image,
@@ -265,13 +357,7 @@ footer ul {
 
 .who-we-are {
     background-color: #f1f1f1;
-    padding: 40px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
 }
 
 .who-we-are p {
@@ -375,3 +461,87 @@ footer ul {
     color: #555; /* Slightly darker text for readability */
     line-height: 1.5;
 }
+
+.commitment {
+    background-color: #f1f1f1;
+    padding: 40px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.commitment {
+    background-color: #f9f9f9; /* Light background for contrast */
+    padding: 50px 20px;
+    border-radius: 12px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto; /* Center the section */
+    font-family: Arial, sans-serif;
+}
+
+.commitment h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+.commitment p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.commitment h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-subscribtion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-subscribtion input {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-subscribtion input:focus {
+    border-color: #4CAF50; /* Green border on focus */
+}
+
+.input-subscribtion button {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4CAF50; /* Green button */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.input-subscribtion button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.input-subscribtion button:active {
+    transform: scale(0.95); /* Slight shrink on click */
+}
+
