@@ -47,6 +47,19 @@ button:active {
     background-color: var(--tertiary-color);
 }
 
+input {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: var(--tertiary-color); /* Green border on focus */
+}
+
 p {
     font-size: 16px;
     line-height: 1.5;
@@ -116,9 +129,44 @@ li {
 .column {
     flex: 1;
     padding: 10px;
-    background-color: #f1f1f1;
     text-align: center;
 }
+
+.justify-center {
+    justify-content: center;
+}
+.justify-left {
+    justify-content: left;
+}
+.justify-right {
+    justify-content: right;
+}
+.align-center {
+    align-items: center;
+}
+.align-left {
+    align-items: left;
+}
+.align-right {
+    align-items: right;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.justify-around {
+    justify-content: space-around;
+}
+
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+
 
 @media (max-width: 768px) {
     .container {
@@ -280,7 +328,6 @@ nav.navbar ul li a {
 
 section {
     margin-bottom: 60px;
-    background-color: #f9f9f9;
 }
 
 section.main-poster {
@@ -347,16 +394,12 @@ footer {
 }
 
 footer ul {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     list-style: none;
-    gap: 20px;
+    gap: 10px!important;
+    padding: 0!important;
 }
 
 .who-we-are {
-    background-color: #f1f1f1;
     align-items: center;
 }
 
@@ -364,66 +407,52 @@ footer ul {
     width: 80%;
     font-size: 19px;
     line-height: 1.5;
-    margin-bottom: 20px;
 }
 
 .what-is-islamic-finance {
     background-color: #f1f1f1;
-    padding: 40px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
 }
 
-.our-mission, .our-vision {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
+.our-mission-vision {
+    position: relative;
+    background-image: url(../assets/images/about-us-poster.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     align-items: flex-start;
     justify-content: flex-start;
     text-align: left;
 }
 
-.our-vision {
-    align-items: flex-end;
-    justify-content: flex-end;
-    text-align: right;
+.our-mission-vision .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
 }
 
-.our-mission p, .our-vision p {
-    width: 60%;
-    font-size: 18px;
-    line-height: 1.6;
+.our-mission-vision .content p {
+    font-size: 22px;
+    color: #fff;
     margin-bottom: 20px;
-    color: #333;
-}
-
-.our-vision {
-    align-items: flex-end;
-    justify-content: flex-end;
-    text-align: right;
-}
-
-.our-mission p::before, .our-vision p::before {
-    content: "“"; /* Added a decorative quote mark */
-    font-size: 24px;
-    color: #999;
-    margin-right: 8px;
+    letter-spacing: 1px;
 }
 
 .values {
-    flex-direction: column;
-    background-color: #f9f9f9;
-    padding: 40px;
-    border-radius: 12px;
-    text-align: left;
+    background-color: var(--tertiary-color);
+    text-align: center;
     max-width: 800px;
-    margin: 0 auto;
+    border-radius: 12px;
+}
+
+.values h2 {
+    color: var(--primary-color)
+}
+
+.values strong {
+    color: var(--primary-color)
 }
 
 .values h3 {
@@ -452,7 +481,7 @@ footer ul {
 .values li::before {
     content: "-"; /* Add a checkmark icon */
     font-size: 18px;
-    color: #4CAF50; /* Green color for the icon */
+    color: var(--secondary-color); /* Green color for the icon */
     margin-right: 15px;
 }
 
@@ -464,84 +493,69 @@ footer ul {
 
 .commitment {
     background-color: #f1f1f1;
-    padding: 40px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     text-align: center;
-}
-
-.commitment {
-    background-color: #f9f9f9; /* Light background for contrast */
-    padding: 50px 20px;
-    border-radius: 12px; /* Rounded corners for a modern look */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto; /* Center the section */
-    font-family: Arial, sans-serif;
-}
-
-.commitment h1 {
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 20px;
-    text-transform: capitalize;
-    letter-spacing: 1px;
+    gap: 5px!important;
 }
 
 .commitment p {
     font-size: 18px;
     color: #555;
     line-height: 1.6;
-    margin-bottom: 30px;
+    width: 80%;
 }
 
-.commitment h3 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+.contact-us {
+    background-color: var(--tertiary-color);
 }
 
-.input-subscribtion {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+.contact-us p, .contact-us a {
+    margin-bottom: 0px!important;
+    color: white;
+    font-size: 18px;
 }
 
-.input-subscribtion input {
-    padding: 12px 15px;
-    font-size: 16px;
-    border: 1px solid #ccc;
+.our-services {
+    background-color: #f1f1f1;
+}
+
+.our-services p {
+    font-size: 23px;
+    color: #555;
+    line-height: 1.6;
+    width: 70%;
+}
+
+.service {
+    background-color: #f1f1f1;
+    text-align: center;
+    gap: 5px!important;
+}
+
+.service img {
+    width: 500px;
     border-radius: 8px;
-    outline: none;
-    transition: border-color 0.3s ease;
 }
 
-.input-subscribtion input:focus {
-    border-color: #4CAF50; /* Green border on focus */
+.service ul li {
+    font-size: 20px;
 }
 
-.input-subscribtion button {
-    padding: 12px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #4CAF50; /* Green button */
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+.card-tariff-container h1 {
+    font-size: 32px;
+    color: var(--primary-color);
 }
 
-.input-subscribtion button:hover {
-    background-color: #45a049; /* Darker green on hover */
-    transform: scale(1.05); /* Slight zoom on hover */
+table.card-tariffs {
+    border-collapse: collapse;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    float: center;
 }
 
-.input-subscribtion button:active {
-    transform: scale(0.95); /* Slight shrink on click */
+table.card-tariffs th, table.card-tariffs td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    width: 200px;
+    font-weight: 400;
 }
-
