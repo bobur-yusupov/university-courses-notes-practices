@@ -14,17 +14,20 @@
 <body>
     <header>
         <img
-            src="../assets/images/logo-en.png"
+            src="./assets/images/logo-en.png"
             class="header-logo"
             alt="Ziyadat Bank Logo in English"
         />
-        <h1 class="header-title">Ziyadat Venture</h1>
-        <ul>
+        <h1 class="header-title">Home</h1>
+        <ul id="headerNav">
             <li><button id="loginBtn" onclick="document.getElementById('login').style.display = 'flex'">Log in</button></li>
             <li><a href="#">Sign up</a></li>
             <li><a href="#">MyTijarah</a></li>
             <li><a href="#">MyTamwil</a></li>
         </ul>
+        <div class="hamburger" id="hamburgerHeader">
+            <i class="fa-solid fa-bars"></i>
+        </div>
     </header>
 
     <section id="login">
@@ -53,6 +56,31 @@
             <li><a href="./pages/solutions.html">Solutions</a></li>
             <li><a href="./pages/venture.html">Ziyadat Venture</a></li>
         </ul>
+    </nav>
+
+    <nav class="navbar-mobile container column" id="navbarMobile">
+        <div class="navbar-mobile-header row justify-between">
+            <div></div>
+            <div class="close-navbar-mobile" id="closeNavbarMobile">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./pages/about.html">About Us</a></li>
+            <li><a href="./pages/services.html">Services</a></li>
+            <li><a href="./pages/solutions.html">Solutions</a></li>
+            <li><a href="./pages/venture.html">Ziyadat Venture</a></li>
+        </ul>
+        <div class="navbar-mobile-footer">
+            <ul>
+                <li><button id="loginBtn" onclick="document.getElementById('login').style.display = 'flex'">Log in</button></li>
+                <li><a href="#">Sign up</a></li>
+                <li><a href="#">MyTijarah</a></li>
+                <li><a href="#">MyTamwil</a></li>
+            </ul>
+        </div>
+        
     </nav>
 
     <!-- Main Poster Section -->
@@ -156,5 +184,8 @@
             <li>Follow on social media</li>
         </ul>
     </footer>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/navbar.js"></script>
 </body>
 </html>

@@ -182,17 +182,29 @@ li {
     text-align: center;
 }
 
-@media (max-width: 768px) {
+.hidden {
+    display: none!important;
+}
+
+.visible {
+    display: block!important;
+}
+
+@media (max-width: 600px) {
     .container {
-        flex-direction: column;
+        padding: 7px;
     }
+}
 
-    .row {
-        flex-direction: column;
+@media (min-width: 601px) and (max-width: 900px) {
+    .container {
+        padding: 15px;
     }
+}
 
-    .column {
-        flex: 0 0 100%;
+@media (min-width: 901px) and (max-width: 1200px) {
+    .container {
+        padding: 20px;
     }
 }
 
@@ -318,6 +330,16 @@ header ul {
     gap: 20px;
 }
 
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger i {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
 /* Navbar styles */
 nav.navbar {
     background-color: var(--primary-color);
@@ -338,6 +360,75 @@ nav.navbar ul li a {
     font-size: 18px;
     font-weight: 500;
     color: #fff;
+}
+
+nav.navbar-mobile {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+nav.navbar-mobile ul li a {
+    font-size: 23px;
+}
+
+nav.navbar-mobile i {
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+@media (max-width: 600px) {
+    header h1.header-title {
+        display: none;
+        
+    }
+
+    header ul {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    header ul.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        padding: 20px;
+        z-index: 1000;
+    }
+    nav.navbar {
+        display: none;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    header h1.header-title {
+        display: none;
+        
+    }
+
+    header ul {
+        display: none;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+    .container {
+        padding: 20px;
+    }
 }
 
 section {
