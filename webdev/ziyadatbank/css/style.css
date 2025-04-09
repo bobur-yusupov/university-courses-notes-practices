@@ -39,7 +39,8 @@ a.button {
     border-radius: 8px;
     transform: 0.4s linear;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease,
+        box-shadow 0.3s ease;
 }
 
 button:hover,
@@ -183,16 +184,117 @@ li {
 }
 
 .hidden {
-    display: none!important;
+    display: none !important;
 }
 
 .visible {
-    display: block!important;
+    display: block !important;
 }
 
 @media (max-width: 600px) {
     .container {
         padding: 7px;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    button,
+    a.button {
+        display: inline-block;
+        text-align: center;
+        font-size: 18px;
+        padding: 8px 24px;
+        border: none;
+        cursor: pointer;
+        background-color: var(--secondary-color);
+        color: #fff;
+        border-radius: 8px;
+        transform: 0.4s linear;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: background-color 0.3s ease, transform 0.2s ease,
+            box-shadow 0.3s ease;
+    }
+
+    button:hover,
+    a.button:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-2px); /* Lift effect */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    }
+
+    button:active,
+    a.button:active {
+        background-color: var(--tertiary-color);
+        transform: translateY(0); /* Reset lift effect */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow */
+    }
+
+    button:focus,
+    a.button:focus {
+        outline: 2px solid var(--tertiary-color); /* Focus outline for accessibility */
+        outline-offset: 2px;
+    }
+
+    input {
+        padding: 12px 15px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+        border-color: var(--tertiary-color); /* Green border on focus */
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        font-size: 14px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    h1 {
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: 23px;
+        font-weight: 700;
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    h4 {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    h5 {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    li {
+        margin-bottom: 5px;
+        font-size: 14px;
     }
 }
 
@@ -301,6 +403,105 @@ li {
     margin: 30px;
 }
 
+@media (max-width: 600px) {
+    .pt-10 {
+        padding-top: 10px;
+    }
+    .pt-20 {
+        padding-top: 20px;
+    }
+    .pt-30 {
+        padding-top: 30px;
+    }
+
+    .pb-10 {
+        padding-bottom: 10px;
+    }
+    .pb-20 {
+        padding-bottom: 20px;
+    }
+    .pb-30 {
+        padding-bottom: 30px;
+    }
+    .px-10 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .px-20 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .px-30 {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .p-10 {
+        padding: 10px;
+    }
+    .p-20 {
+        padding: 20px;
+    }
+    .p-30 {
+        padding: 30px;
+    }
+
+    /* Margin classes */
+
+    .mt-10 {
+        margin-top: 5px;
+    }
+    .mt-20 {
+        margin-top: 15px;
+    }
+    .mt-30 {
+        margin-top: 20px;
+    }
+    .mb-10 {
+        margin-bottom: 5px;
+    }
+    .mb-20 {
+        margin-bottom: 15px;
+    }
+    .mb-30 {
+        margin-bottom: 20px;
+    }
+    .ml-10 {
+        margin-left: 5px;
+    }
+    .ml-20 {
+        margin-left: 15px;
+    }
+    .ml-30 {
+        margin-left: 20px;
+    }
+    .mr-10 {
+        margin-right: 5px;
+    }
+    .mr-20 {
+        margin-right: 15px;
+    }
+    .mr-30 {
+        margin-right: 20px;
+    }
+
+    .m-10 {
+        margin: 5px;
+    }
+    .m-20 {
+        margin: 15px;
+    }
+    .m-30 {
+        margin: 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+}
+
 /* Header styles */
 header {
     background-color: #fff;
@@ -363,7 +564,7 @@ nav.navbar ul li a {
 }
 
 nav.navbar-mobile {
-    display: none;
+    visibility: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -371,6 +572,9 @@ nav.navbar-mobile {
     bottom: 0;
     background-color: var(--primary-color);
     color: white;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    transform: translateY(-100%);
 }
 
 nav.navbar-mobile ul li a {
@@ -383,11 +587,15 @@ nav.navbar-mobile i {
     cursor: pointer;
 }
 
+nav.navbar-mobile.open {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Reset transition for opening */
+}
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     header h1.header-title {
         display: none;
-        
     }
 
     header ul {
@@ -417,7 +625,6 @@ nav.navbar-mobile i {
 @media (min-width: 601px) and (max-width: 900px) {
     header h1.header-title {
         display: none;
-        
     }
 
     header ul {
@@ -429,10 +636,6 @@ nav.navbar-mobile i {
     .container {
         padding: 20px;
     }
-}
-
-section {
-    margin-bottom: 60px;
 }
 
 section.main-poster {
@@ -489,6 +692,50 @@ section .card-image img,
 section .why-ziyadat-image img {
     width: 100%;
     border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    section.main-poster {
+        height: 50vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: left !important;
+        color: #fff;
+        padding: 40px;
+    }
+
+    section.main-poster .main-poster-text {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        max-width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 15px;
+        border-radius: 8px;
+        gap: 15px;
+    }
+
+    section.about-us .about-us-text,
+    section.services .services-text,
+    section.card .card-text,
+    section.why-ziyadat .why-ziyadat-text {
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    section .services-image,
+    section .about-us-image,
+    section .card-image,
+    section .why-ziyadat-image {
+        width: 80%;
+    }
 }
 
 footer {
@@ -686,7 +933,7 @@ table.card-tariffs td {
 }
 
 .testimonial p {
-    font-size: 21px!important;
+    font-size: 21px !important;
     font-size: 1.1rem;
     margin-bottom: 20px;
     color: #555;

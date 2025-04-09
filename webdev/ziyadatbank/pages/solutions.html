@@ -26,11 +26,21 @@
             />
             <h1 class="header-title">Solutions</h1>
             <ul>
-                <li><button id="loginBtn" onclick="document.getElementById('login').style.display = 'flex'">Log in</button></li>
+                <li>
+                    <button
+                        id="loginBtn"
+                        onclick="document.getElementById('login').style.display = 'flex'"
+                    >
+                        Log in
+                    </button>
+                </li>
                 <li><a href="#">Sign up</a></li>
                 <li><a href="#">MyTijarah</a></li>
                 <li><a href="#">MyTamwil</a></li>
             </ul>
+            <div class="hamburger" id="hamburgerHeader">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </header>
 
         <section id="login">
@@ -51,6 +61,7 @@
                 <button type="submit">Login</button>
             </form>
         </section>
+
         <nav class="navbar">
             <ul>
                 <li><a href="../index.html">Home</a></li>
@@ -59,6 +70,37 @@
                 <li><a href="./solutions.html">Solutions</a></li>
                 <li><a href="./venture.html">Ziyadat Venture</a></li>
             </ul>
+        </nav>
+
+        <nav class="navbar-mobile container column" id="navbarMobile">
+            <div class="navbar-mobile-header row justify-between">
+                <div></div>
+                <div class="close-navbar-mobile" id="closeNavbarMobile">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./about.html">About Us</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./solutions.html">Solutions</a></li>
+                <li><a href="./venture.html">Ziyadat Venture</a></li>
+            </ul>
+            <div class="navbar-mobile-footer">
+                <ul>
+                    <li>
+                        <button
+                            id="loginBtn"
+                            onclick="document.getElementById('login').style.display = 'flex'"
+                        >
+                            Log in
+                        </button>
+                    </li>
+                    <li><a href="#">Sign up</a></li>
+                    <li><a href="#">MyTijarah</a></li>
+                    <li><a href="#">MyTamwil</a></li>
+                </ul>
+            </div>
         </nav>
 
         <section
@@ -241,7 +283,10 @@
         >
             <h1>Ready to Experience Ethical Banking?</h1>
             <p>
-                Ziyadat Bank is here to help you grow without compromising your values. Whether you're an individual, a startup, or a large enterprise, our Sharia-compliant banking solutions ensure your success.
+                Ziyadat Bank is here to help you grow without compromising your
+                values. Whether you're an individual, a startup, or a large
+                enterprise, our Sharia-compliant banking solutions ensure your
+                success.
             </p>
             <h3 class="mb-10">Apply with your email</h3>
             <div class="input-subscribtion">
@@ -260,5 +305,6 @@
         </footer>
 
         <script src="../js/script.js"></script>
+        <script src="../js/navbar.js"></script>
     </body>
 </html>
