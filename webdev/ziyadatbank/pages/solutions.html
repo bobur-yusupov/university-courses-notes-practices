@@ -24,14 +24,33 @@
                 class="header-logo"
                 alt="Ziyadat Bank Logo in English"
             />
-            <h1 class="header-title">Solutions</h1>
+            <h1 class="header-title">Ziyadat Venture</h1>
             <ul>
-                <li><a href="#">Log in</a></li>
+                <li><button id="loginBtn" onclick="document.getElementById('login').style.display = 'flex'">Log in</button></li>
                 <li><a href="#">Sign up</a></li>
                 <li><a href="#">MyTijarah</a></li>
                 <li><a href="#">MyTamwil</a></li>
             </ul>
         </header>
+
+        <section id="login">
+            <form action="/login" method="post">
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                />
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                />
+
+                <button type="submit">Login</button>
+            </form>
+        </section>
         <nav class="navbar">
             <ul>
                 <li><a href="../index.html">Home</a></li>
@@ -101,8 +120,145 @@
                 </div>
             </div>
             <div class="container row justify-right">
-                <img src="../assets/images/services-mytamwil.jpg" alt="" />
+                <img src="../assets/images/solutions-individuals.jpg" alt="" />
             </div>
         </section>
+
+        <section
+            class="service container row justify-between align-center mt-30 mb-30 p-30"
+            style="background-color: white"
+        >
+            <div class="container row justify-left">
+                <img src="../assets/images/solutions-startupsjpg.jpg" alt="" />
+            </div>
+            <div class="container justify-left text-left">
+                <h3>How We Help Startups?</h3>
+                <h1>
+                    Fueling entrepreneurship with ethical financial solutions.
+                </h1>
+                <ul>
+                    <li>
+                        <strong>Murabaha-Based Startup Financing</strong> – Get
+                        capital without compromising Islamic principles.
+                    </li>
+                    <li>
+                        <strong>AI-Driven Financial Planning</strong> – Smart
+                        insights to optimize your business growth.
+                    </li>
+                    <li>
+                        <strong>Blockchain-Powered Security</strong> –
+                        Transparent, fraud-resistant financial transactions.
+                    </li>
+                    <li>
+                        <strong>Business Banking with MyTijarat</strong> –
+                        Automated invoicing & payments for seamless operations.
+                    </li>
+                </ul>
+                <div>
+                    <button>Get started</button>
+                </div>
+            </div>
+        </section>
+
+        <section
+            class="service container row justify-between align-center mt-30 mb-30 p-30"
+        >
+            <div class="container justify-left text-left">
+                <h3>How We Help Businesses?</h3>
+                <h1>Ethical business banking for sustainable growth.</h1>
+                <ul>
+                    <li>
+                        <strong>Ijarah Leasing</strong> – Affordable asset
+                        financing without interest.
+                    </li>
+                    <li>
+                        <strong>AI-Powered Risk Analysis</strong> – Predict
+                        market trends & make informed decisions.
+                    </li>
+                    <li>
+                        <strong>Islamic Trade Finance</strong> – Expand globally
+                        with Sharia-compliant solutions.
+                    </li>
+                    <li>
+                        <strong>Corporate Debit & Credit Cards</strong> – Secure
+                        transactions with AI fraud detection.
+                    </li>
+                </ul>
+
+                <div>
+                    <button>Get started</button>
+                </div>
+            </div>
+            <div class="container row justify-right">
+                <img src="../assets/images/solutions-individuals.jpg" alt="" />
+            </div>
+        </section>
+
+        <section class="carousel-container p-30">
+            <div class="carousel-inner" id="carousel">
+                <div class="testimonial">
+                    <p>
+                        "With Ziyadat Bank, I finally found a banking partner
+                        that respects my values. The AI tools helped me manage
+                        my Zakat effortlessly!"
+                    </p>
+                    <h2>Ahmed K.</h2>
+                    <p>Customer</p>
+                </div>
+                <div class="testimonial">
+                    <p>
+                        "Ziyadat Bank helped us launch our startup with ethical
+                        financing. Their AI insights saved us time and money!"
+                    </p>
+                    <h2>Fatima A.</h2>
+                    <p>Startup Founder</p>
+                </div>
+                <div class="testimonial">
+                    <p>
+                        "Thanks to Ziyadat Bank’s ethical financing, we expanded
+                        our operations while staying Sharia-compliant. A true
+                        banking partner!"
+                    </p>
+                    <h2>Omar S.</h2>
+                    <p>Chief Finance Officer</p>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button id="prev">&#10094;</button>
+                <button id="next">&#10095;</button>
+            </div>
+
+            <div class="dots" id="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+        <section
+            class="commitment container align-center column mt-30 mb-30 p-30"
+        >
+            <h1>Ready to Experience Ethical Banking?</h1>
+            <p>
+                Ziyadat Bank is here to help you grow without compromising your values. Whether you're an individual, a startup, or a large enterprise, our Sharia-compliant banking solutions ensure your success.
+            </p>
+            <h3 class="mb-10">Apply with your email</h3>
+            <div class="input-subscribtion">
+                <input type="text" placeholder="Enter your email address" />
+                <button>Apply</button>
+            </div>
+        </section>
+
+        <footer>
+            <ul class="container row justify-around align-center">
+                <li>Contact us</li>
+                <li>Find branch</li>
+                <li>Terms & policies</li>
+                <li>Follow on social media</li>
+            </ul>
+        </footer>
+
+        <script src="../js/script.js"></script>
     </body>
 </html>

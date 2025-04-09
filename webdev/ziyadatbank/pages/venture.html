@@ -1,35 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ziyadat Venture - Ziyadat Bank | Empowering Islamic finance</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            Ziyadat Venture - Ziyadat Bank | Empowering Islamic finance
+        </title>
 
-    <!-- CSS Stylesheet Link -->
-    <link rel="stylesheet" href="../css/style.css">
+        <!-- CSS Stylesheet Link -->
+        <link rel="stylesheet" href="../css/style.css" />
 
-    <!-- Fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <header>
-        <img src="../assets/images/logo-en.png" class="header-logo" alt="Ziyadat Bank Logo in English">
-        <h1 class="header-title">Ziyadat Venture</h1>
-        <ul>
-            <li><a href="#">Log in</a></li>
-            <li><a href="#">Sign up</a></li>
-            <li><a href="#">MyTijarah</a></li>
-            <li><a href="#">MyTamwil</a></li>
-        </ul>
-    </header>
-    <nav class="navbar">
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="./about.html">About Us</a></li>
-            <li><a href="./services.html">Services</a></li>
-            <li><a href="./solutions.html">Solutions</a></li>
-            <li><a href="./venture.html">Ziyadat Venture</a></li>
-        </ul>
-    </nav>
-</body>
+        <!-- Fontawesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+    </head>
+    <body>
+        <header>
+            <img
+                src="../assets/images/logo-en.png"
+                class="header-logo"
+                alt="Ziyadat Bank Logo in English"
+            />
+            <h1 class="header-title">Ziyadat Venture</h1>
+            <ul>
+                <li><button id="loginBtn" onclick="document.getElementById('login').style.display = 'flex'">Log in</button></li>
+                <li><a href="#">Sign up</a></li>
+                <li><a href="#">MyTijarah</a></li>
+                <li><a href="#">MyTamwil</a></li>
+            </ul>
+        </header>
+
+        <section id="login">
+            <form action="/login" method="post">
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                />
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                />
+
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./about.html">About Us</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./solutions.html">Solutions</a></li>
+                <li><a href="./venture.html">Ziyadat Venture</a></li>
+            </ul>
+        </nav>
+
+        <form action="" method="post" class="form-container">
+            <h2>Apply to Ziyadat Venture's Startup Program</h2>
+            <div class="form-group">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="First name..."
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <input
+                    type="text"
+                    name="surname"
+                    placeholder="Last name..."
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email..."
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <input
+                    type="text"
+                    name="phone"
+                    placeholder="Phone..."
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label>Select your startup size</label>
+                <div class="radio-group">
+                    <label>
+                        <input
+                            type="radio"
+                            name="program"
+                            value="startup"
+                            required
+                        />
+                        $0-$100k
+                    </label>
+                    <label>
+                        <input type="radio" name="program" value="scaleup" />
+                        $100k-$500k
+                    </label>
+                    <label>
+                        <input type="radio" name="program" value="innovation" />
+                        $500k-$1M
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="startup-name">Startup Name</label>
+                <input
+                    type="text"
+                    name="startup-name"
+                    id="startup-name"
+                    placeholder="Enter your startup name..."
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label>Select your startup stage</label>
+                <div class="radio-group">
+                    <label>
+                        <input
+                            type="radio"
+                            name="stage"
+                            value="idea"
+                            required
+                        />
+                        Idea
+                    </label>
+                    <label>
+                        <input type="radio" name="stage" value="prototype" />
+                        Prototype
+                    </label>
+                    <label>
+                        <input type="radio" name="stage" value="product" />
+                        Product
+                    </label>
+                    <label>
+                        <input type="radio" name="stage" value="market" />
+                        Market
+                    </label>
+                    <label>
+                        <input type="radio" name="stage" value="growth" />
+                        Growth
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Select your startup type</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="type" value="tech" required />
+                        Tech
+                    </label>
+                    <label>
+                        <input type="radio" name="type" value="fintech" />
+                        Fintech
+                    </label>
+                    <label>
+                        <input type="radio" name="type" value="healthtech" />
+                        Healthtech
+                    </label>
+                    <label>
+                        <input type="radio" name="type" value="edutech" />
+                        Edutech
+                    </label>
+                    <label>
+                        <input type="radio" name="type" value="ecommerce" />
+                        E-commerce
+                    </label>
+                    <label>
+                        <input type="radio" name="type" value="other" />
+                        Other
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Describe your startup</label>
+                <textarea
+                    name="description"
+                    id="description"
+                    cols="30"
+                    rows="10"
+                    placeholder="Tell us about your startup..."
+                    required
+                ></textarea>
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+
+        <script src="../js/script.js"></script>
+    </body>
 </html>

@@ -1,13 +1,13 @@
 /* Brand colors */
 :root {
-    --primary-color: #045F9F;
-    --secondary-color: #047DD3;
-    --tertiary-color: #5EBCFF;
+    --primary-color: #045f9f;
+    --secondary-color: #047dd3;
+    --tertiary-color: #5ebcff;
 }
 
 @font-face {
-    font-family: 'Cairo';
-    src: url(../assets/fonts/static/Cairo-Regular.ttf) format('truetype');
+    font-family: "Cairo";
+    src: url(../assets/fonts/static/Cairo-Regular.ttf) format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -21,12 +21,13 @@
 html {
     font-size: 12px;
     font-weight: 400;
-    font-family: 'Cairo', sans-serif;
+    font-family: "Cairo", sans-serif;
     color: #333;
 }
 
 /* Button styles */
-button, a.button {
+button,
+a.button {
     display: inline-block;
     text-align: center;
     font-size: 18px;
@@ -36,15 +37,29 @@ button, a.button {
     background-color: var(--secondary-color);
     color: #fff;
     border-radius: 8px;
-    transform: .4s linear;
+    transform: 0.4s linear;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-button:hover {
+button:hover,
+a.button:hover {
     background-color: var(--primary-color);
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
-button:active {
+button:active,
+a.button:active {
     background-color: var(--tertiary-color);
+    transform: translateY(0); /* Reset lift effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow */
+}
+
+button:focus,
+a.button:focus {
+    outline: 2px solid var(--tertiary-color); /* Focus outline for accessibility */
+    outline-offset: 2px;
 }
 
 input {
@@ -110,7 +125,7 @@ li {
     font-size: 16px;
 }
 
-.container { 
+.container {
     width: 100%;
     padding: 30px;
     margin: 0 auto;
@@ -166,7 +181,6 @@ li {
 .text-center {
     text-align: center;
 }
-
 
 @media (max-width: 768px) {
     .container {
@@ -338,7 +352,7 @@ section.main-poster {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: left!important;
+    align-items: left !important;
     color: #fff;
     padding: 40px;
 }
@@ -346,7 +360,7 @@ section.main-poster {
 section.main-poster .main-poster-text {
     display: flex;
     flex-direction: column;
-    align-items: left!important;
+    align-items: left !important;
     gap: 20px;
 
     max-width: 670px;
@@ -395,8 +409,8 @@ footer {
 
 footer ul {
     list-style: none;
-    gap: 10px!important;
-    padding: 0!important;
+    gap: 10px !important;
+    padding: 0 !important;
 }
 
 .who-we-are {
@@ -448,11 +462,11 @@ footer ul {
 }
 
 .values h2 {
-    color: var(--primary-color)
+    color: var(--primary-color);
 }
 
 .values strong {
-    color: var(--primary-color)
+    color: var(--primary-color);
 }
 
 .values h3 {
@@ -494,7 +508,7 @@ footer ul {
 .commitment {
     background-color: #f1f1f1;
     text-align: center;
-    gap: 5px!important;
+    gap: 5px !important;
 }
 
 .commitment p {
@@ -508,8 +522,9 @@ footer ul {
     background-color: var(--tertiary-color);
 }
 
-.contact-us p, .contact-us a {
-    margin-bottom: 0px!important;
+.contact-us p,
+.contact-us a {
+    margin-bottom: 0px !important;
     color: white;
     font-size: 18px;
 }
@@ -528,7 +543,7 @@ footer ul {
 .service {
     background-color: #f1f1f1;
     text-align: center;
-    gap: 5px!important;
+    gap: 5px !important;
 }
 
 .service img {
@@ -552,10 +567,193 @@ table.card-tariffs {
     float: center;
 }
 
-table.card-tariffs th, table.card-tariffs td {
+table.card-tariffs th,
+table.card-tariffs td {
     padding: 12px;
     text-align: center;
     border: 1px solid #ddd;
     width: 200px;
     font-weight: 400;
+}
+
+.carousel-container {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.6s ease;
+}
+
+.testimonial {
+    flex: 0 0 100%;
+    padding: 30px;
+    text-align: center;
+}
+
+.testimonial p {
+    font-size: 21px!important;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.testimonial .author {
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.nav-buttons button {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.nav-buttons button:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dots {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #555;
+}
+
+/* Form styles */
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--secondary-color);
+}
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: var(--secondary-color);
+}
+
+#login {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 100%;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#login form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#login form input {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#login form button {
+    width: 100%;
 }

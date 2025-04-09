@@ -13,15 +13,38 @@
 </head>
 <body>
     <header>
-        <img src="./assets/images/logo-en.png" class="header-logo" alt="Ziyadat Bank Logo in English">
-        <h1 class="header-title">Home</h1>
+        <img
+            src="../assets/images/logo-en.png"
+            class="header-logo"
+            alt="Ziyadat Bank Logo in English"
+        />
+        <h1 class="header-title">Ziyadat Venture</h1>
         <ul>
-            <li><a href="#">Log in</a></li>
+            <li><button id="loginBtn" onclick="document.getElementById('login').style.display = 'flex'">Log in</button></li>
             <li><a href="#">Sign up</a></li>
             <li><a href="#">MyTijarah</a></li>
             <li><a href="#">MyTamwil</a></li>
         </ul>
     </header>
+
+    <section id="login">
+        <form action="/login" method="post">
+            <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+            />
+            <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+            />
+
+            <button type="submit">Login</button>
+        </form>
+    </section>
     <nav class="navbar">
         <ul>
             <li><a href="./index.html">Home</a></li>
