@@ -1,0 +1,6 @@
+@startuml Wildlife Simulator Use Case Diagram
+
+actor Animal
+actor 
+
+@enduml
