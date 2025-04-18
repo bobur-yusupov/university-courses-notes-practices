@@ -57,6 +57,7 @@ class Animal {
     +increaseStress(int amount) : void
     +decreaseStress(int amount) : void
     +heal(int amount) : void
+    +hurtAnimal(int amount) : void
     +needsHelp() : boolean
 }
 
@@ -83,6 +84,15 @@ note left of Animal::heal
         health += amount
         if (health > 100) {
             health := 100
+        }
+    }
+end note
+
+note left of Animal::hurtAnimal
+    hurtAnimal(amount) {
+        health -= amount
+        if (health < 0) {
+            health := 0OOP
         }
     }
 end note

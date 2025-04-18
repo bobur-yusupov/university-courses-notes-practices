@@ -440,3 +440,4 @@ replay_pid*
 
 # If using latexmk, the auxiliary files might be:
 latexmk.tmp
+/oop1/assignments/big_assignment/WildlifeSimulation/nbproject/private/
