@@ -123,5 +123,68 @@ Play it out, roll out your rangers, and save the wildlife!
     \item Moves between habitats to hunt animals.
     \item Fights rangers if they confront them in the same habitat.
 \end{itemize}
+
+\bigskip
+
+\textbf{\large Animal}:
+\begin{itemize}
+    \item Wander between habitats.
+    \item Get stressed or injured due to poachers or natural events.
+    \item Get treated by rangers to improve their health and reduce stress.
+\end{itemize}
+
+\bigskip
+
+\textbf{\large Simulation System}:
+\begin{itemize}
+    \item Runs the simulation day-by-day.
+    \item Generates report at the end of the day about the state of the reserve and happenings.
+\end{itemize}
 \end{flushleft}
-\end{document}
+
+\newpage
+
+
+\section*{\centering 3. Object Diagram}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{object.png}}
+    \caption{Object Diagram}
+    \label{fig:object-diagram}
+\end{figure}
+
+\vspace{0.5em}
+
+\noindent
+The \textbf{Object Diagram} illustrates the relationships and interactions among key entities in the \emph{Wildlife Simulator} system. The primary objects involved are:
+
+\begin{itemize}
+    \item \textbf{Balazs (Ranger)}
+    \item \textbf{V1 (Vehicle)}
+    \item \textbf{Savannah (Habitat)}
+    \item \textbf{Elephant (Animal)}
+    \item \textbf{Poacher}
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+The relationships are characterized using standard UML semantics:
+\begin{itemize}
+    \item \textbf{Composition (\texttt{*--})}: The \texttt{Elephant} (Animal) is part of the \texttt{Savannah} (Habitat), indicating a strong lifecycle dependency. If the habitat ceases to exist, so does the animal.
+    
+    \item \textbf{Association (\texttt{--})}: 
+    \begin{itemize}
+        \item The \texttt{Ranger} uses the \texttt{Vehicle} (e.g., to travel or patrol), showing a weak ownership relationship.
+        \item The \texttt{Ranger} can interact with \texttt{Animal} objects for treating or calming them.
+        \item The \texttt{Poacher} can target and hurt \texttt{Animals}.
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+This diagram helps visualize how individual components in the simulation are interconnected at runtime and supports understanding of object-level behavior and control flow.
+
+\end {document}
