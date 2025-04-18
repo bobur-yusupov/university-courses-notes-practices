@@ -1,6 +1,68 @@
 @startuml Wildlife Simulator Use Case Diagram
 
+actor Ranger
 actor Animal
-actor 
+actor Poacher
+actor SimulationSystem
+
+rectangle "Wildlife Simulator" {
+
+    (Run Daily Simulation) as Run
+    (Generate End-of-Day Report) as Report
+
+    (Patrol Habitat) as Patrol
+    (Find Animals Needing Help) as Detect
+    (Calm Animal to Reduce Stress) as CalmAnimal
+    (Treat Animal to Improve Health) as TreatAnimal
+    (Find and Fight Poacher) as FightPoacher
+    (Determine Fight Outcome) as FightOutcome
+    (Travel to Habitat by Jeep) as TravelHabitat
+
+    (Enter Habitat) as EnterHabitat
+    (Leave Habitat) as LeaveHabitat
+    (React to Natural Event) as ReactEvent
+
+    (Stress Animal) as StressAnimal
+    (Hurt Animal) as HurtAnimal
+    (Poacher Incursion into Habitat) as Incursion
+    (Enter Habitat to Hunt) as PoacherEnter
+    (Target Animal Species) as Target
+
+    (Refuel Jeep) as Refuel
+    (Deploy Jeep to Habitat) as Deploy
+
+    ' === Relationships ===
+
+    Run --> Patrol : <<include>>
+    Run --> Report : <<include>>
+    Run --> PoacherEnter : <<include>>
+    Run --> ReactEvent : <<include>>
+
+    Patrol --> Detect : <<include>>
+    Patrol --> FightPoacher : <<include>>
+    FightPoacher --> FightOutcome : <<include>>
+    Detect --> CalmAnimal : <<include>>
+    Detect --> TreatAnimal : <<include>>
+
+    PoacherEnter --> Target : <<include>>
+    PoacherEnter --> Incursion : <<include>>
+    PoacherEnter --> StressAnimal : <<include>>
+    PoacherEnter --> HurtAnimal : <<include>>
+
+    TravelHabitat --> Refuel : <<include>>
+    TravelHabitat --> Deploy : <<extend>>
+}
+
+SimulationSystem --> Run
+SimulationSystem --> PoacherEnter
+
+Ranger --> Patrol
+Ranger --> TravelHabitat
+
+Poacher --> PoacherEnter
+
+Animal --> EnterHabitat
+Animal --> LeaveHabitat
+Animal --> ReactEvent
 
 @enduml

@@ -1,0 +1,80 @@
+@startuml Wildlife Simulator - Use Case Diagram
+
+'=== ACTORS ===
+left to right direction
+
+actor Ranger as "Ranger" <<Actor>> #FF7F50
+actor Animal as "Animal" <<Actor>> #32CD32
+actor Poacher as "Poacher" <<Actor>> #D2691E
+actor SimulationSystem as "Simulation System" <<Actor>> #1E90FF
+
+'=== SYSTEM BOUNDARY ===
+rectangle "Wildlife Simulator" <<Rectangle>> {
+    skinparam rectangle {
+        BackgroundColor #F0F8FF
+        BorderColor #4682B4
+        BorderThickness 2
+    }
+
+    '=== Simulation Flow ===
+    (Run Daily Simulation) as Run
+    (Generate Report) as Report
+
+    '=== Ranger Operations ===
+    (Patrol Habitat) as Patrol
+    (Detect Animals Needing Help) as Detect
+    (Treat or Calm Animal) as AidAnimal
+    (Find and Fight Poacher) as FightPoacher
+    (Determine Fight Outcome) as FightOutcome
+
+    '=== Vehicle Operations ===
+    (Travel by Jeep) as Travel
+    (Refuel Jeep) as Refuel
+    (Deploy Jeep to Habitat) as Deploy
+
+    '=== Poacher Actions ===
+    (Enter Habitat to Hurt Animal) as Incursion
+    (Stress or Hurt Animal) as PoacherHurt
+
+    '=== Animal Behaviors ===
+    (Wander Between Habitats) as Wander
+    (React to Natural Event) as ReactEvent
+
+    '=== Use Case Relationships ===
+    Run --> Patrol : <<include>>
+    
+    Patrol --> Detect : <<include>>
+    Detect --> AidAnimal : <<extend>>
+    Patrol --> FightPoacher : <<extend>>
+    FightPoacher --> FightOutcome : <<include>>
+
+    Incursion --> PoacherHurt : <<include>>
+
+    Travel --> Refuel : <<include>>
+    Travel --> Deploy : <<extend>>
+    Deploy --> Refuel : <<extend>>
+    
+    ' Report includes important outcomes
+    Report --> AidAnimal
+    Report --> FightOutcome
+    Report --> ReactEvent
+}
+
+'=== SYSTEM INTERACTIONS ===
+SimulationSystem --> Run
+SimulationSystem --> Report
+
+'=== RANGER INTERACTIONS ===
+Ranger --> Patrol
+Ranger --> Travel
+
+'=== POACHER INTERACTIONS ===
+Poacher --> Incursion
+
+'=== ANIMAL INTERACTIONS ===
+Animal --> AidAnimal
+Animal --> PoacherHurt
+Animal --> ReactEvent
+Animal --> Wander
+
+@enduml

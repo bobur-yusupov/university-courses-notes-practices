@@ -8,11 +8,12 @@
 \usepackage{xcolor}
 \usepackage{caption}
 \usepackage{geometry}
-\geometry{margin=0.5in}
+\geometry{margin=1in}
 
 \title{Big Assignment: Object-Oriented Programming\\\large Design of Project}
 \author{Yusupov Boburjon\\Neptun Code: YTAJDI}
-\date{}
+\date{April 18, 2024}
+\captionsetup[figure]{labelformat=empty} % Remove figure label
 
 \begin{document}
 
@@ -20,7 +21,7 @@
 
 \newpage
 
-\section*{8. Wildlife Simulation}
+\section*{1. Project description: Wildlife Simulation}
 
 Wildlife conservation is the most critical issue in a major game reserve.  
 Trained rangers venture out daily to spot wildlife, administer medicine to diseased animals, and protect the habitat from desecrating poachers. The reserve is a well-organized company where rangers, animals, habitats, and support vehicles coexist in symbiosis for fostering nature’s fragile balance.
@@ -87,4 +88,40 @@ Play it out, roll out your rangers, and save the wildlife!
     \end{verbatim}
 \end{itemize}
 
+\newpage
+\section*{\centering 2. Use Case Diagram}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{use-case.png}}
+    \caption{Use Case Diagram}
+    \label{fig:use-case}
+\end{figure}
+
+\noindent Use case diagram shows the interactions between the actors (Ranger, Poacher, Vehicle) and the system (Wildlife Simulation). The actors perform various actions such as patrolling, treating animals, hunting, and moving between habitats. The system manages the habitats, animals, and vehicles.
+
+\bigskip
+
+\begin{flushleft}
+\textbf{\large Ranger}:
+\begin{itemize}
+    \item Patrols the habitat to check for poachers and animals in need of help.
+    \item Treats animals to improve their health and reduce stress.
+    \item Fights poachers if they confront them in the same habitat.
+    \item Moves between habitats to assist animals and patrol areas.
+    \item Uses Jeep to travel between habitats.
+    \item Refuels and deploys the Jeep to specific habitats.
+\end{itemize}
+
+\bigskip
+
+\textbf{\large Poacher}:
+\begin{itemize}
+    \item Incurses in the habitat to hunt animals.
+    \item Hurts animals if they catch them and lowers their health level.
+    \item Stresses animals in the habitat and increases their stress level.
+    \item Moves between habitats to hunt animals.
+    \item Fights rangers if they confront them in the same habitat.
+\end{itemize}
+\end{flushleft}
 \end{document}
