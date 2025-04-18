@@ -12,7 +12,7 @@ abstract class Person {
 
 note left of Person::Person
     Person() {
-        power = random(1, 10)
+        power := random(1, 10)
     }
 end note
 
@@ -30,9 +30,9 @@ class Ranger {
 note right of Ranger::Ranger
     Ranger(name, experience, efficiency) {
         super()
-        this.name = name
-        this.experience = experience
-        this.efficiency = efficiency
+        this.name := name
+        this.experience := experience
+        this.efficiency := efficiency
     }
 end note
 
@@ -49,8 +49,8 @@ class Poacher {
 note right of Poacher::Poacher
     Poacher(target, dangerLevel) {
         super()
-        this.target = target
-        this.dangerLevel = dangerLevel
+        this.target := target
+        this.dangerLevel := dangerLevel
     }
 end note
 
@@ -68,9 +68,9 @@ class Animal {
 
 note right of Animal::Animal
     Animal(species) {
-        this.species = species
-        this.health = 100
-        this.stressLevel = 0
+        this.species := species
+        this.health := 100
+        this.stressLevel := 0
     }
 end note
 
@@ -86,8 +86,8 @@ class Habitat {
 
 note right of Habitat::Habitat
     Habitat(name, capacity) {
-        this.name = name
-        this.capacity = capacity
+        this.name := name
+        this.capacity := capacity
     }
 end note
 
@@ -103,9 +103,9 @@ class Vehicle {
 
 note right of Vehicle::Vehicle
     Vehicle(id, fuelLevel, capacity) {
-        this.id = id
-        this.fuelLevel = fuelLevel
-        this.capacity = capacity
+        this.id := id
+        this.fuelLevel := fuelLevel
+        this.capacity := capacity
     }
 end note
 
@@ -122,9 +122,9 @@ Animal "0..*" --* Habitat
 
 Person -[hidden]-> Ranger
 Person -[hidden]-> Poacher
-' Ranger -[hidden]-> Habitat
-' Poacher -[hidden]-> Habitat
-' Habitat -[hidden]-> Animal
-' Ranger -[hidden]-> Vehicle
+Ranger -[hidden]-> Habitat
+Poacher -[hidden]-> Habitat
+Habitat -[hidden]-> Animal
+Ranger -[hidden]-> Vehicle
 
 @enduml

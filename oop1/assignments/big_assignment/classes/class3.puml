@@ -1,4 +1,4 @@
-@startuml Class Diagram 2
+@startuml Class Diagram 3
 scale 2
 
 skinparam linetype ortho
@@ -21,19 +21,18 @@ class Ranger {
     +patrol(Habitat habitat, List<Poacher> poachers) : void
 }
 
-note right of Ranger::treatAnimal
-    treatAnimal(animal) {
-        animal.heal(efficiency)
-        animal.decreaseStress(efficiency)
-    }
-end note
+note left of Ranger::patrol
+    patrol(habitat, poachers) {
+        for (animal in habitat.getAnimals()) {
+            if (animal.needsHelp()) {
+                treatAnimal(animal)
+            }
+        }
 
-note right of Ranger::fightPoacher
-    fightPoacher(poacher) {
-        if (power > poacher.getPower()) {
-            poacher.defeated := true
-        } else {
-            poacher.defeated := false
+        for (poacher in poachers) {
+            if (poacher.habitat == habitat) {
+                fightPoacher(poacher)
+            }
         }
     }
 end note
@@ -48,6 +47,20 @@ class Poacher {
     +invade(Habitat habitat) : void
 }
 
+note right of Poacher::invade
+    invade(habitat) {
+        this.habitat := habitat
+        
+        for (animal in habitat.getAnimals()) {
+            animal.increaseStress(dangerLevel)
+
+            if (animal.getSpecies() = target) {
+                animal.decreaseStress(dangerLevel)
+            }
+        }
+    }
+end note
+
 class Animal {
     -species : String {getter}
     -health : int {getter}
@@ -60,30 +73,9 @@ class Animal {
     +needsHelp() : boolean
 }
 
-note right of Animal::increaseStress
-    increaseStress(amount) {
-        stressLevel += amount
-        if (stressLevel > 100) {
-            stressLevel := 100
-        }
-    }
-end note
-
-note right of Animal::decreaseStress
-    decreaseStress(amount) {
-        stressLevel -= amount
-        if (stressLevel < 0) {
-            stressLevel := 0
-        }
-    }
-end note
-
-note left of Animal::heal
-    heal(amount) {
-        health += amount
-        if (health > 100) {
-            health := 100
-        }
+note left of Animal::needsHelp
+    needsHelp() {
+        return health < 100 || stressLevel > 50
     }
 end note
 
@@ -97,23 +89,6 @@ class Habitat {
     +removeAnimal(animal : Animal) : boolean
 }
 
-note right of Habitat::addAnimal
-    addAnimal(animal) {
-        if (animals.size() < capacity) {
-            animals.add(animal)
-            return true
-        } else {
-            return false
-        }
-    }
-end note
-
-note left of Habitat::removeAnimal
-    removeAnimal(animal) {
-        return animals.remove(animal)
-    }
-end note
-
 class Vehicle {
     -id : String {getter}
     -fuelLevel : int {getter}
@@ -123,25 +98,6 @@ class Vehicle {
     +refuel(int amount) : void
     +deploy() : boolean
 }
-
-note right of Vehicle::refuel
-    refuel(amount) {
-        fuelLevel += amount
-        if (fuelLevel > 100) {
-            fuelLevel := 100
-        }
-    }
-end note
-
-note left of Vehicle::deploy
-    deploy() {
-        if (fuelLevel > 10) {
-            fuelLevel := fuelLevel - 10
-            return true
-        }
-        return false
-    }
-end note
 
 Ranger -down-|> Person
 Ranger -- Habitat

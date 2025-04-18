@@ -9,7 +9,7 @@ actor Poacher as "Poacher" <<Actor>> #D2691E
 actor SimulationSystem as "Simulation System" <<Actor>> #1E90FF
 
 '=== SYSTEM BOUNDARY ===
-rectangle "Wildlife Simulator" <<Rectangle>> {
+rectangle "Wildlife Simulator" {
     skinparam rectangle {
         BackgroundColor #F0F8FF
         BorderColor #4682B4

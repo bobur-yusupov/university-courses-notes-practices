@@ -8,12 +8,19 @@
 \usepackage{xcolor}
 \usepackage{caption}
 \usepackage{geometry}
+\usepackage{fancyhdr} % Added for headers
 \geometry{margin=1in}
 
-\title{Big Assignment: Object-Oriented Programming\\\large Design of Project}
+\title{Big Assignment: Object-Oriented Programming\\\large Project Design Document}
 \author{Yusupov Boburjon\\Neptun Code: YTAJDI}
 \date{April 18, 2024}
-\captionsetup[figure]{labelformat=empty} % Remove figure label
+\captionsetup[figure]{labelformat=empty}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{Big Assignment: Object-Oriented Programming}
+\fancyfoot[C]{\thepage}
 
 \begin{document}
 
@@ -21,7 +28,7 @@
 
 \newpage
 
-\section*{1. Project description: Wildlife Simulation}
+\section*{\centering 1. Project description: Wildlife Simulation}
 
 Wildlife conservation is the most critical issue in a major game reserve.  
 Trained rangers venture out daily to spot wildlife, administer medicine to diseased animals, and protect the habitat from desecrating poachers. The reserve is a well-organized company where rangers, animals, habitats, and support vehicles coexist in symbiosis for fostering nature’s fragile balance.
@@ -157,7 +164,7 @@ Play it out, roll out your rangers, and save the wildlife!
 \vspace{0.5em}
 
 \noindent
-The \textbf{Object Diagram} illustrates the relationships and interactions among key entities in the \emph{Wildlife Simulator} system. The primary objects involved are:
+The \textbf{Object Diagram} illustrates the relationships and interactions among key entities in the \emph{Wildlife Simulator} system. In object diagram and class diagram \texttt{Simulation} is excluded, main focus is to relation of classes and implementations of methods. \texttt{Simulation} is implemented in code. The primary objects involved are:
 
 \begin{itemize}
     \item \textbf{Balazs (Ranger)}
@@ -186,5 +193,61 @@ The relationships are characterized using standard UML semantics:
 
 \noindent
 This diagram helps visualize how individual components in the simulation are interconnected at runtime and supports understanding of object-level behavior and control flow.
+
+\newpage
+
+\section*{\centering 4. Class Diagram}
+
+The implementations of the class diagrams are separated into three for better readability. The first contains implementations of constructors of classes, the second contains implementations of basic methods, and the third contains implementations of advanced methods.
+
+\vspace{0.5em}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{class-1.png}}
+    \caption{Class Diagram 1}
+    \label{fig:class-diagram-1}
+\end{figure}
+
+In the first class diagram you can see the implementations of constructors of classes. The classes are:
+\begin{itemize}
+    \item \textbf{Person} (abstract class) - 
+    \noindent Abstract class Person has field \texttt{power} which is initialized randomly between 1 to 10.
+    \item \textbf{Ranger} (inherits from Person)
+    \item \textbf{Poacher} (inherits from Person)
+    \item \textbf{Animal}
+    \item \textbf{Vehicle}
+    \item \textbf{Habitat}
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{class-2.png}}
+    \caption{Class Diagram 2}
+    \label{fig:class-diagram-2}
+\end{figure}
+
+In the second class diagram you can see the implementations of basic methods of classes.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{class-3.png}}
+    \caption{Class Diagram 3}
+    \label{fig:class-diagram-3}
+\end{figure}
+
+In the third class diagram you can see the implementations of advanced methods of classes.
+The methods are:
+\begin{itemize}
+    \item \textbf{Ranger}:
+    \begin{itemize}
+        \item \texttt{patrol()} - patrols the habitat and treats the animals in need of help.
+    \end{itemize}
+    \item \textbf{Poacher}:
+    \begin{itemize}
+        \item \texttt{invade()} - invades the habitat and threatens the animals.
+    \end{itemize}
+
+\end{itemize}
 
 \end {document}
