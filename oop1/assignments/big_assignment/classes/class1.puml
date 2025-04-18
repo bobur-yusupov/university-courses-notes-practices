@@ -1,0 +1,130 @@
+@startuml Class Diagram 1
+scale 2
+
+skinparam linetype ortho
+
+abstract class Person {
+    #power : int {getter}
+
+    #Person(...)
+    +getPower() : int
+}
+
+note left of Person::Person
+    Person() {
+        power = random(1, 10)
+    }
+end note
+
+class Ranger {
+    -name : String
+    -experience : int
+    -efficiency : int
+
+    +Ranger(...)
+    +treatAnimal(animal : Animal) : void
+    +fightPoacher(poacher : Poacher) : void
+    +patrol(Habitat habitat, List<Poacher> poachers) : void
+}
+
+note right of Ranger::Ranger
+    Ranger(name, experience, efficiency) {
+        super()
+        this.name = name
+        this.experience = experience
+        this.efficiency = efficiency
+    }
+end note
+
+class Poacher {
+    -target : String {getter, setter}
+    -dangerLevel : int {getter, setter}
+    -habitat : Habitat {getter, setter}
+    -defeated : boolean {getter, setter}
+
+    +Poacher(...)
+    +invade(Habitat habitat) : void
+}
+
+note right of Poacher::Poacher
+    Poacher(target, dangerLevel) {
+        super()
+        this.target = target
+        this.dangerLevel = dangerLevel
+    }
+end note
+
+class Animal {
+    -species : String {getter}
+    -health : int {getter}
+    -stressLevel : int {getter}
+
+    +Animal(...)
+    +increaseStress() : void
+    +decreaseStress() : void
+    +heal() : void
+    +needsHelp() : boolean
+}
+
+note right of Animal::Animal
+    Animal(species) {
+        this.species = species
+        this.health = 100
+        this.stressLevel = 0
+    }
+end note
+
+class Habitat {
+    -name : String {getter}
+    -capacity : int {getter}
+    -animals : List<Animal>
+
+    +Habitat(...)
+    +addAnimal(animal : Animal) : boolean
+    +removeAnimal(animal : Animal) : boolean
+}
+
+note right of Habitat::Habitat
+    Habitat(name, capacity) {
+        this.name = name
+        this.capacity = capacity
+    }
+end note
+
+class Vehicle {
+    -id : String {getter}
+    -fuelLevel : int {getter}
+    -capacity : int {getter}
+
+    +Vehicle(...)
+    +refuel(int amount) : void
+    +deploy() : boolean
+}
+
+note right of Vehicle::Vehicle
+    Vehicle(id, fuelLevel, capacity) {
+        this.id = id
+        this.fuelLevel = fuelLevel
+        this.capacity = capacity
+    }
+end note
+
+Ranger -down-|> Person
+Ranger -- Habitat
+Ranger -- Vehicle
+Ranger -- Animal
+
+Poacher -down-|> Person
+Poacher -- Habitat
+Poacher -- Animal
+
+Animal "0..*" --* Habitat
+
+Person -[hidden]-> Ranger
+Person -[hidden]-> Poacher
+' Ranger -[hidden]-> Habitat
+' Poacher -[hidden]-> Habitat
+' Habitat -[hidden]-> Animal
+' Ranger -[hidden]-> Vehicle
+
+@enduml
