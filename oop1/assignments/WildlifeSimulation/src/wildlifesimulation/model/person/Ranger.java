@@ -1,12 +1,3 @@
-/**
- * The `Ranger` class represents a ranger in the wildlife simulation.
- * A ranger is responsible for protecting animals, treating injured or stressed animals,
- * and fighting poachers to maintain the safety of habitats.
- *
- * This class extends the `Person` class and adds specific behavior
- * related to the ranger's duties.
- */
-
 package wildlifesimulation.model.person;
 
 import wildlifesimulation.model.Animal;
@@ -14,22 +5,11 @@ import wildlifesimulation.model.Habitat;
 
 import java.util.List;
 
-/**
- * Represents a ranger in the wildlife simulation.
- */
 public class Ranger extends Person {
     private String name;
     private int experience;
     private int efficiency;
 
-    /**
-     * Constructs a new `Ranger` with the specified name, experience, and efficiency.
-     *
-     * @param name The name of the ranger.
-     * @param experience The experience level of the ranger.
-     * @param efficiency The efficiency level of the ranger, which determines
-     *                   how effectively they can treat animals and fight poachers.
-     */
     public Ranger(String name, int experience, int efficiency) {
         super();
         this.name = name;

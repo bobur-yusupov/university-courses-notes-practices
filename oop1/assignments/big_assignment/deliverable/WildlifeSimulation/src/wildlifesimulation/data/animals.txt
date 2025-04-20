@@ -1,0 +1,3 @@
+Elephant 60 30
+Giraffe 70 20
+Zebra 80 25

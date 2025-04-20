@@ -1,9 +1,0 @@
-@startuml Wildlife Simulator Class Diagram
-
-class Animal {
-    - species : String
-    - health : int
-    - stressLevel : int
-}
-
-@enduml
