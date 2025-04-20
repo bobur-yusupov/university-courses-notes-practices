@@ -76,14 +76,12 @@ public class Animal {
         }
     }
 
+    /**
+     * Checks if the animal needs help based on its health and stress level.
+     *
+     * @return true if the animal needs help, false otherwise.
+     */
     public boolean needsHelp() {
         return this.health < 100 || this.stressLevel > 50;
-    }
-
-    @Override
-    public String toString() {
-        return "Animal: " + species +
-                ", Health: " + health +
-                ", Stress Level: " + stressLevel;
     }
 }

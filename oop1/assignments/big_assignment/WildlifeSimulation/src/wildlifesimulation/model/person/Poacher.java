@@ -39,13 +39,20 @@ public class Poacher extends Person {
         this.defeated = defeated;
     }
 
+    /**
+     * Invades the specified habitat and increases the stress level of all animals
+     * in the habitat. If the target species is found, it will be hurt by the
+     * poacher's danger level.
+     *
+     * @param habitat The habitat to invade.
+     */
     public void invade(Habitat habitat) {
         this.habitat = habitat;
 
         for (Animal animal : habitat.getAnimals()) {
             animal.increaseStress(this.dangerLevel);
 
-            if (animal.getSpecies().equals(target)) {
+            if (animal.getSpecies().equalsIgnoreCase(target)) {
                 animal.hurtAnimal(dangerLevel);
             }
         }

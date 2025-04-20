@@ -193,10 +193,10 @@ public class SimulationUtil {
                         }
                     }
 
-                    int before = (int) poachersList.stream().filter(P -> P.isDefeated()).count();
+                    int before = (int) poachersList.stream().filter(Poacher::isDefeated).count();
                     ranger.patrol(patrolArea, poachersList);
                     poachersList.removeIf(Poacher::isDefeated);
-                    poachersDefeated += (int) poachersList.stream().filter(P -> P.isDefeated()).count() - before;
+                    poachersDefeated += (int) poachersList.stream().filter(Poacher::isDefeated).count() - before;
 
                     for (Animal animal : patrolArea.getAnimals()) {
                         if (!animal.needsHelp()) animalsTreated++;
