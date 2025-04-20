@@ -25,6 +25,12 @@ public class Habitat {
         return animals;
     }
 
+    /**
+     * Adds an animal to the habitat if there is available capacity.
+     *
+     * @param animal The animal to add.
+     * @return True if the animal was added, false otherwise.
+     */
     public boolean addAnimal(Animal animal) {
         if (animals.size() < capacity) {
             animals.add(animal);
@@ -35,6 +41,12 @@ public class Habitat {
         }
     }
 
+    /**
+     * Removes an animal from the habitat.
+     *
+     * @param animal The animal to remove.
+     * @return True if the animal was removed, false otherwise.
+     */
     public boolean removeAnimal(Animal animal) {
         return animals.remove(animal);
     }

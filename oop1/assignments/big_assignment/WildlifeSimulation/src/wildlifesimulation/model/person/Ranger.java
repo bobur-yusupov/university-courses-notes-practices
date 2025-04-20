@@ -29,11 +29,21 @@ public class Ranger extends Person {
         return efficiency;
     }
 
+    /**
+     * Treats an animal by healing it and reducing its stress level.
+     *
+     * @param animal The animal to treat.
+     */
     public void treatAnimal(Animal animal) {
         animal.heal(efficiency);
         animal.decreaseStress(efficiency);
     }
 
+    /**
+     * Fights a poacher, potentially defeating them based on the ranger's power.
+     *
+     * @param poacher The poacher to fight.
+     */
     public void fightPoacher(Poacher poacher) {
         if (this.power > poacher.getPower()) {
             poacher.setDefeated(true);
@@ -42,7 +52,14 @@ public class Ranger extends Person {
         }
     }
 
-    public void Patrol(Habitat habitat, List<Poacher> poachers) {
+    /**
+     * Patrols a habitat, treating animals in need and fighting poachers present in the habitat.
+     *
+     * @param habitat The habitat to patrol.
+     * @param poachers The list of poachers to check for in the habitat.
+     */
+    public void patrol(Habitat habitat, List<Poacher> poachers) {
+        if (habitat == null || poachers == null) return; // Handle null cases
         for (Animal animal : habitat.getAnimals()) {
             if (animal.needsHelp()) {
                 treatAnimal(animal);
@@ -56,3 +73,4 @@ public class Ranger extends Person {
         }
     }
 }
+

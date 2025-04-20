@@ -1,7 +1,11 @@
 package wildlifesimulation.util;
 
+import java.util.Random;
+
 public class RandomUtil {
+    private static final Random RANDOM = new Random();
+
     public static int getRandomInt(int min, int max) {
-        return (int) (Math.random() * (max - min + 1)) + min;
+        return RANDOM.nextInt((max - min + 1)) + min;
     }
 }

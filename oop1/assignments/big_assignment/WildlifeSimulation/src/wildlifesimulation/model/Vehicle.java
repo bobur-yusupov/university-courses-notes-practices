@@ -23,6 +23,11 @@ public class Vehicle {
         return capacity;
     }
 
+    /**
+     * Refuels the vehicle by a specified amount, up to a maximum of 100.
+     *
+     * @param amount The amount of fuel to add.
+     */
     public void refuel(int amount) {
         this.fuelLevel += amount;
 
@@ -31,6 +36,11 @@ public class Vehicle {
         }
     }
 
+    /**
+     * Deploys the vehicle for use, reducing its fuel level by 10.
+     *
+     * @return True if the vehicle was successfully deployed, false otherwise.
+     */
     public boolean deploy() {
         if (this.fuelLevel > 10) {
             this.fuelLevel -= 10;

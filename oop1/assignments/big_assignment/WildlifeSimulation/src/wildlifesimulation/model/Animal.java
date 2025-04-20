@@ -5,16 +5,29 @@ public class Animal {
     private int health;
     private int stressLevel;
 
-    public Animal(String species) {
+    public Animal(String species, int health, int stressLevel) {
         this.species = species;
-        this.health = 100;
-        this.stressLevel = 0;
+        this.health = health;
+        this.stressLevel = stressLevel;
     }
 
     public String getSpecies() {
         return species;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getStressLevel() {
+        return stressLevel;
+    }
+
+    /**
+     * Increases the stress level of the animal by a specified amount.
+     *
+     * @param amount The amount to increase the stress level by.
+     */
     public void increaseStress(int amount) {
         this.stressLevel += amount;
 
@@ -23,6 +36,11 @@ public class Animal {
         }
     }
 
+    /**
+     * Decreases the stress level of the animal by a specified amount.
+     *
+     * @param amount The amount to decrease the stress level by.
+     */
     public void decreaseStress(int amount) {
         this.stressLevel -= amount;
 
@@ -31,6 +49,11 @@ public class Animal {
         }
     }
 
+    /**
+     * Heals the animal by a specified amount, increasing its health.
+     *
+     * @param amount The amount to heal the animal by.
+     */
     public void heal(int amount) {
         this.health += amount;
 
@@ -38,6 +61,12 @@ public class Animal {
             this.health = 100;
         }
     }
+
+    /**
+     * Hurts the animal by a specified amount, decreasing its health.
+     *
+     * @param amount The amount to hurt the animal
+     * */
 
     public void hurtAnimal(int amount) {
         this.health -= amount;
@@ -49,5 +78,12 @@ public class Animal {
 
     public boolean needsHelp() {
         return this.health < 100 || this.stressLevel > 50;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal: " + species +
+                ", Health: " + health +
+                ", Stress Level: " + stressLevel;
     }
 }
