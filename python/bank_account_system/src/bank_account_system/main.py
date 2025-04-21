@@ -9,6 +9,63 @@ from bank_account_system.account import Account
 from bank_account_system.time_zone import TimeZone
 from bank_account_system.utils import parse_confirmation_code
 
+def print_transaction_details(transaction: str, time_zone_offset: int) -> None:
+    """
+    Print transaction details from the confirmation code.
+
+    :param transaction: The transaction confirmation code
+    :param time_zone_offset: The timezone offset for local time conversion
+    """
+    parsed_transaction: Dict[str, Any] = parse_confirmation_code(transaction, time_zone_offset)
+    print("=== Transaction Details ===")
+    print(f"Transaction Code: {parsed_transaction['transaction_code']}")
+    print(f"Account Number: {parsed_transaction['account_number']}")
+    print(f"Time (UTC): {parsed_transaction['time_utc']}")
+    print(f"Time (Local): {parsed_transaction['time_local']}")
+    print(f"Transaction ID: {parsed_transaction['transaction_id']}")
+    print("===========================")
+
+def handle_deposit(account: Account, amount: float) -> None:
+    """
+    Handle deposit operation for the account.
+
+    :param account: The account to deposit into
+    :param amount: The amount to deposit
+    """
+    try:
+        transaction: str = account.deposit(amount)
+        print_transaction_details(transaction, account._time_zone.offset)
+
+    except Exception as e:
+        print(f"Error: {e}\n")
+
+def handle_withdraw(account: Account, amount: float) -> None:
+    """
+    Handle withdraw operation for the account.
+
+    :param account: The account to withdraw from
+    :param amount: The amount to withdraw
+    """
+    try:
+        transaction: str = account.withdraw(amount)
+        print_transaction_details(transaction, account._time_zone.offset)
+
+    except Exception as e:
+        print(f"Error: {e}\n")
+
+def handle_interest(account: Account) -> None:
+    """
+    Handle interest payment operation for the account.
+
+    :param account: The account to pay interest to
+    """
+    try:
+        transaction: str = account.pay_interest()
+        print_transaction_details(transaction, account._time_zone.offset)
+
+    except Exception as e:
+        print(f"Error: {e}\n")
+
 def main() -> None:
     """
     Interactive bank account system simulation.
@@ -35,55 +92,19 @@ def main() -> None:
 
         if choice == "1":
             amount = float(input("Enter the amount to deposit: "))
-            try:
-                transaction = account.deposit(amount)
-                parsed_transaction: Dict[str, Any] = parse_confirmation_code(transaction, timezone_offset)
-                print(f"Deposit successful! New balance: {account.balance}")
-                print(transaction)
-                print("=== Transaction Details ===")
-                print(f"Transaction Code: {parsed_transaction['transaction_code']}")
-                print(f"Account Number: {parsed_transaction['account_number']}")
-                print(f"Time (UTC): {parsed_transaction['time_utc']}")
-                print(f"Time (Local): {parsed_transaction['time_local']}")
-                print(f"Transaction ID: {parsed_transaction['transaction_id']}")
-                print("===========================")
-            except Exception as e:
-                print(f"Error: {e}\n")
+            
+            handle_deposit(account, amount)
 
         elif choice == "2":
             amount = float(input("Enter the amount to withdraw: "))
-            try:
-                transaction = account.withdraw(amount)
-                parsed_transaction: Dict[str, Any] = parse_confirmation_code(transaction, timezone_offset)
-                print(f"Withdrawal successful! New balance: {account.balance}")
-                print("=== Transaction Details ===")
-                print(f"Transaction Code: {parsed_transaction['transaction_code']}")
-                print(f"Account Number: {parsed_transaction['account_number']}")
-                print(f"Time (UTC): {parsed_transaction['time_utc']}")
-                print(f"Time (Local): {parsed_transaction['time_local']}")
-                print(f"Transaction ID: {parsed_transaction['transaction_id']}")
-                print("===========================")
-            except Exception as e:
-                print(f"Error: {e}\n")
+            
+            handle_withdraw(account, amount)
 
         elif choice == "3":
             print(f"Current balance: {account.balance}\n")
 
         elif choice == "4":
-            try:
-                interest = account.calculate_interest()
-                transaction = account.pay_interest()
-                parsed_transaction: Dict[str, Any] = parse_confirmation_code(transaction, timezone_offset)
-                print(f"Interest paid successfully! New balance: {account.balance}")
-                print("=== Transaction Details ===")
-                print(f"Transaction Code: {parsed_transaction['transaction_code']}")
-                print(f"Account Number: {parsed_transaction['account_number']}")
-                print(f"Time (UTC): {parsed_transaction['time_utc']}")
-                print(f"Time (Local): {parsed_transaction['time_local']}")
-                print(f"Transaction ID: {parsed_transaction['transaction_id']}")
-                print("===========================")
-            except Exception as e:
-                print(f"Error: {e}\n")
+            handle_interest(account)
 
         elif choice == "5":
             print("Thank you for using the Bank Account System. Goodbye!")

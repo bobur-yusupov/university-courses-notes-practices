@@ -9,8 +9,6 @@ from bank_account_system.utils import parse_confirmation_code
 from bank_account_system.exceptions import InvalidConfirmationCodeError
 from bank_account_system.time_zone import TimeZone
 
-"DEPOSIT|9000-2000-1022-1921|2025-04-21T13:12:48|1"
-
 class TestUtils(unittest.TestCase):
     def test_parse_confirmation_code(self):
         code: str = "DEPOSIT|9000-2000-1022-1921|2025-04-21T13:12:48|1"

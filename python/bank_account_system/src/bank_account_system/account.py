@@ -3,16 +3,26 @@ Account class to manage Bank Account related operations.
 This class is responsible for creating a bank account, depositing money, withdrawing money, and checking the balance.
 
 """
-from datetime import datetime, timezone
-from typing import List, Dict, Union
-
 import os
 import sys
+from datetime import datetime, timezone
+from typing import List, Dict, Union
+from enum import Enum
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from bank_account_system.exceptions import NegativeAmountError, InsufficientFundsError
 from bank_account_system.time_zone import TimeZone
+from bank_account_system.utils import parse_confirmation_code, generate_confirmation_code
+
+Transaction = Dict[str, Union[str, float, datetime]]
+class TransactionType(Enum):
+    DEPOSIT = "DEPOSIT"
+    WITHDRAW = "WITHDRAW"
+    INTEREST = "INTEREST"
+
+    def __str__(self):
+        return self.value
 
 class Account:
     interest_rate: float = 0.05
@@ -39,7 +49,7 @@ class Account:
         self._last_name: str = last_name
         self._balance: float = balance
         self._time_zone: TimeZone = time_zone if time_zone else TimeZone("UTC", 0)
-        self._transactions: List[Dict[str, Union[str, float, datetime]]] = []
+        self._transactions: List[Transaction] = []
 
     @property
     def first_name(self) -> str:
@@ -112,7 +122,55 @@ class Account:
         :param new_rate: New interest rate as a float
         """
         cls.interest_rate = new_rate
+
+    def _validate_positive_amount(self, amount: float, operation: TransactionType) -> None:
+        """
+        Validate if the amount is positive.
+
+        :param amount: Amount to validate
+        :param operation: Type of operation (e.g., "withdraw", "deposit")
+        :raises NegativeAmountError: If the amount is negative
+        """
+        if amount <= 0:
+            raise NegativeAmountError(f"{operation} amount must be positive")
+
+    def _validate_withdrawal(self, amount: float) -> None:
+        """
+        Validate if the withdrawal amount is less than or equal to the current balance.
+
+        :param amount: Amount to withdraw
+        """
+        if amount > self._balance:
+            raise InsufficientFundsError("Insufficient funds for withdrawal")
+
     
+    def _log_transaction(self, transaction_type: TransactionType, amount: float) -> None:
+        """
+        Log the transaction details.
+
+        :param transaction_type: Type of transaction (e.g., "WITHDRAW", "DEPOSIT", "INTEREST")
+        :param amount: Amount involved in the transaction
+        """
+        utc_now = datetime.now(timezone.utc)
+        local_time = self._time_zone.get_offset_time(utc_now)
+
+        self._transactions.append({
+            "transaction_type": transaction_type,
+            "amount": amount,
+            "timestamp_utc": utc_now,
+            "timestamp_local": local_time,
+        })
+    
+    def _generate_confirmation_code(self, transaction_type: TransactionType) -> str:
+        code = generate_confirmation_code(
+            transaction_type=transaction_type.value,
+            account_number=self._account_number,
+            transaction_id=self.transaction_id
+        )
+        self.increment_transaction_id()
+        return code
+
+
     def withdraw(self, amount: float) -> str:
         """
         Withdraw money from the account.
@@ -122,27 +180,14 @@ class Account:
         :raises NegativeAmountError: If the withdrawal amount is negative
         :raises InsufficientFundsError: If the withdrawal amount exceeds the current balance
         """
-        if amount < 0:
-            raise NegativeAmountError("Withdrawal amount cannot be negative")
 
-        if amount > self._balance:
-            raise InsufficientFundsError("Insufficient funds for withdrawal")
-        
-        utc_now: datetime = datetime.now(timezone.utc)
-        local_time: datetime = self._time_zone.get_offset_time(utc_now)
-
-        self._transactions.append({
-            "transaction_type": "Withdrawal",
-            "amount": amount,
-            "timestamp_utc": utc_now,
-            "timestamp_local": local_time,
-        })
-
+        self._validate_positive_amount(amount, TransactionType.WITHDRAW)
+        self._validate_withdrawal(amount)
+        self._log_transaction(TransactionType.WITHDRAW, amount)
         self._balance -= amount
-        confirmation_code: str = f"WITHDRAW|{self._account_number}|{utc_now.strftime('%Y-%m-%dT%H:%M:%S')}|{self.transaction_id}"
         self.increment_transaction_id()
 
-        return confirmation_code
+        return self._generate_confirmation_code(TransactionType.WITHDRAW)
     
     def deposit(self, amount: float) -> str:
         """
@@ -153,24 +198,12 @@ class Account:
         :raises NegativeAmountError: If the deposit amount is negative
         """
         
-        if amount <= 0:
-            raise NegativeAmountError("Deposit amount must be positive")
-        
-        utc_now: datetime = datetime.now(timezone.utc)
-        local_time: datetime = self._time_zone.get_offset_time(utc_now)
-
-        self._transactions.append({
-            "transaction_type": "Deposit",
-            "amount": amount,
-            "timestamp_utc": utc_now,
-            "timestamp_local": local_time,
-        })
-
+        self._validate_positive_amount(amount, "deposit")
+        self._log_transaction(TransactionType.DEPOSIT, amount)
         self._balance += amount
-        confirmation_code: str = f"DEPOSIT|{self._account_number}|{utc_now.strftime('%Y-%m-%dT%H:%M:%S')}|{self.transaction_id}"
         self.increment_transaction_id()
 
-        return confirmation_code
+        return self._generate_confirmation_code(TransactionType.DEPOSIT)
 
     def calculate_interest(self) -> float:
         """
@@ -194,20 +227,10 @@ class Account:
             print("No interest to pay")
             return False
         
-        utc_now: datetime = datetime.now(timezone.utc)
-        local_time: datetime = self._time_zone.get_offset_time(utc_now)
-        self._transactions.append({
-            "transaction_type": "Interest Payment",
-            "amount": interest,
-            "timestamp_utc": utc_now,
-            "timestamp_local": local_time,
-        })
-
+        self._log_transaction(TransactionType.INTEREST, interest)
         self._balance += interest
-        confirmation_code: str = f"INTEREST|{self._account_number}|{utc_now.strftime('%Y-%m-%dT%H:%M:%S')}|{self.transaction_id}"
         self.increment_transaction_id()
-
-        return confirmation_code
+        return self._generate_confirmation_code(TransactionType.INTEREST)
     
     def __str__(self) -> str:
         """

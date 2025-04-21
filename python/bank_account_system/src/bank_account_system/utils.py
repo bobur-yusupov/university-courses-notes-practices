@@ -4,7 +4,7 @@ Utility functions for the bank account system.
 This module contains utility functions for parsing confirmation codes and handling time zones.
 
 """
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Dict, Any
 
 import os
@@ -13,6 +13,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from bank_account_system.exceptions import InvalidConfirmationCodeError
+from bank_account_system.time_zone import TimeZone
 
 def parse_confirmation_code(code: str, preferred_timezone_offset: int) -> Dict[str, Any]:
     """
@@ -43,3 +44,22 @@ def parse_confirmation_code(code: str, preferred_timezone_offset: int) -> Dict[s
         "time_local": local_timestamp,
         "transaction_id": transaction_id
     }
+
+def generate_confirmation_code(
+    transaction_type: str,
+    account_number: str,
+    transaction_id: int
+) -> str:
+    """
+    Generate a confirmation code for a transaction.
+
+    :param transaction_type: Type of transaction (e.g., "deposit", "withdraw")
+    :param account_number: Account number associated with the transaction
+    :param transaction_id: Unique transaction ID
+    :param local_timezone: TimeZone object representing the local timezone
+    :return: Confirmation code as a string
+    """
+    utc_now: datetime = datetime.now(timezone.utc)
+    confirmation_code: str = f"{transaction_type.upper()}|{account_number}|{utc_now.strftime('%Y-%m-%dT%H:%M:%S')}|{transaction_id}"
+
+    return confirmation_code
