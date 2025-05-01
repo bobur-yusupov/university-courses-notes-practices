@@ -5,6 +5,8 @@ This is a simple bank account system implemented in Python. The system allows us
 To start the program you do not have to install any dependencies. Just run the `main.py` file and follow the instructions.
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate # On Windows use .venv\Scripts\activate
 cd src
 ```
 
