@@ -1,0 +1,63 @@
+@startuml Class Diagram 1
+scale 2
+
+skinparam linetype ortho
+
+class Ranger {
+    ...
+    -stressLevel : int {getter}
+
+    +Ranger(...)
+    +getStressLevel() : int
+    +increaseStressLevel(int level) : void
+    +decreaseStressLevel(int level) : void
+}
+
+note left of Ranger::getStressLevel
+    getStressLevel() {
+        return stressLevel
+    }
+end note
+
+note right of Ranger::increaseStressLevel
+    increaseStressLevel(int level) {
+        stressLevel += level
+    }
+end note
+
+note right of Ranger::decreaseStressLevel
+    decreaseStressLevel(int level) {
+        stressLevel -= level
+    }
+end note
+
+enum Temprament {
+    PASSIVE,
+    DEFENSIVE,
+    AGGRESSIVE,
+    CURIOUS
+}
+
+class Animal {
+    -temperament : Temprament {getter, setter}
+
+    +Animal(...)
+    +getTemperament() : Temprament
+    +setTemperament(Temprament temperament) : void
+}
+
+note left of Animal::getTemperament
+    getTemperament() {
+        return temperament
+    }
+end note
+
+note right of Animal::setTemperament
+    setTemperament(Temprament temperament) {
+        this.temperament := temperament
+    }
+end note
+
+Animal ...> Temprament : <<uses>>
+
+@enduml
