@@ -1,0 +1,253 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{geometry}
+\usepackage{fancyhdr} % Added for headers
+\geometry{margin=1in}
+
+\title{Big Assignment: Object-Oriented Programming\\\large Project Design Document}
+\author{Yusupov Boburjon\\Neptun Code: YTAJDI}
+\date{April 18, 2024}
+\captionsetup[figure]{labelformat=empty}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{Big Assignment: Object-Oriented Programming}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section*{\centering 1. Project description: Wildlife Simulation}
+
+Wildlife conservation is the most critical issue in a major game reserve.  
+Trained rangers venture out daily to spot wildlife, administer medicine to diseased animals, and protect the habitat from desecrating poachers. The reserve is a well-organized company where rangers, animals, habitats, and support vehicles coexist in symbiosis for fostering nature’s fragile balance.
+
+All animals have a species, health, and a stress level. Animals become stressed or injured due to natural events or poachers. The rangers can calm them down and treat them.
+
+Rangers are diligent workers who protect the reserve’s environment. Every ranger has a name, experience, and efficiency. They can assist an animal by improving its status or reducing stress. They can also detect animals that need help among all the animals and help them. If they are in the same habitat as a poacher, they find and fight the poacher. The winner is determined based on the strength of both the ranger and the poacher. The strength is initialized randomly.
+
+Poachers are intruders who hunt down animals. Each poacher targets a specific species. Different poachers are dangerous to a different degree. Poachers disturb wildlife and cause them stress as they evade their hunters. They can also hurt the animals if they catch them.
+
+Each habitat has a name, a capacity, and the animals living in it. Animals can enter and leave habitats. If there is an incursion by a poacher, it stresses all animals in the habitat.
+
+The rangers travel in Jeep vehicles. The vehicle has an ID, fuel level, and a capacity. Vehicles can be refueled and deployed to specific habitats.
+
+The simulation is run day-by-day. Each day, animals wander between habitats, rangers are sent to habitats to patrol them, and poachers go to habitats to hunt animals. The simulation reports at the end of the day the state of the reserve and the happenings on that day — for example, what animals were saved.
+
+Play it out, roll out your rangers, and save the wildlife!
+
+\bigskip
+
+\textbf{Input file examples}
+
+\textbf{\texttt{animals.txt}}
+\begin{itemize}
+    \item Format
+    \newline \text{Species Health StressLevel}
+    \item Example
+    \begin{verbatim}
+        Elephant 60 30
+        Giraffe 70 20
+        Zebra 80 25
+    \end{verbatim}
+\end{itemize}
+
+\textbf{\texttt{rangers.txt}}
+\begin{itemize}
+    \item Format
+    \newline \text{Name Experience Efficiency}
+    \item Example
+    \begin{verbatim}
+        Balazs 5 7
+        Sofiia 6 6
+    \end{verbatim}
+\end{itemize}
+
+\textbf{\texttt{vehicles.txt}}
+\begin{itemize}
+    \item Format
+    \newline \text{ID FuelLevel Capacity}
+    \item Example
+    \begin{verbatim}
+        V1 100 2
+        V2 100 3
+    \end{verbatim}
+\end{itemize}
+
+\textbf{\texttt{habitats.txt}}
+\begin{itemize}
+    \item Format
+    \newline \text{Name Capacity}
+    \item Example
+    \begin{verbatim}
+        Savannah 3
+    \end{verbatim}
+\end{itemize}
+
+\newpage
+\section*{\centering 2. Use Case Diagram}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{use-case.png}}
+    \caption{Use Case Diagram}
+    \label{fig:use-case}
+\end{figure}
+
+\noindent Use case diagram shows the interactions between the actors (Ranger, Poacher, Vehicle) and the system (Wildlife Simulation). The actors perform various actions such as patrolling, treating animals, hunting, and moving between habitats. The system manages the habitats, animals, and vehicles.
+
+\bigskip
+
+\begin{flushleft}
+\textbf{\large Ranger}:
+\begin{itemize}
+    \item Patrols the habitat to check for poachers and animals in need of help.
+    \item Treats animals to improve their health and reduce stress.
+    \item Fights poachers if they confront them in the same habitat.
+    \item Moves between habitats to assist animals and patrol areas.
+    \item Uses Jeep to travel between habitats.
+    \item Refuels and deploys the Jeep to specific habitats.
+\end{itemize}
+
+\bigskip
+
+\textbf{\large Poacher}:
+\begin{itemize}
+    \item Incurses in the habitat to hunt animals.
+    \item Hurts animals if they catch them and lowers their health level.
+    \item Stresses animals in the habitat and increases their stress level.
+    \item Moves between habitats to hunt animals.
+    \item Fights rangers if they confront them in the same habitat.
+\end{itemize}
+
+\bigskip
+
+\textbf{\large Animal}:
+\begin{itemize}
+    \item Wander between habitats.
+    \item Get stressed or injured due to poachers or natural events.
+    \item Get treated by rangers to improve their health and reduce stress.
+\end{itemize}
+
+\bigskip
+
+\textbf{\large Simulation System}:
+\begin{itemize}
+    \item Runs the simulation day-by-day.
+    \item Generates report at the end of the day about the state of the reserve and happenings.
+\end{itemize}
+\end{flushleft}
+
+\newpage
+
+
+\section*{\centering 3. Object Diagram}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{object.png}}
+    \caption{Object Diagram}
+    \label{fig:object-diagram}
+\end{figure}
+
+\vspace{0.5em}
+
+\noindent
+The \textbf{Object Diagram} illustrates the relationships and interactions among key entities in the \emph{Wildlife Simulator} system. In object diagram and class diagram \texttt{Simulation} is excluded, main focus is to relation of classes and implementations of methods. \texttt{Simulation} is implemented in code. The primary objects involved are:
+
+\begin{itemize}
+    \item \textbf{Balazs (Ranger)}
+    \item \textbf{V1 (Vehicle)}
+    \item \textbf{Savannah (Habitat)}
+    \item \textbf{Elephant (Animal)}
+    \item \textbf{Poacher}
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+The relationships are characterized using standard UML semantics:
+\begin{itemize}
+    \item \textbf{Composition (\texttt{*--})}: The \texttt{Elephant} (Animal) is part of the \texttt{Savannah} (Habitat), indicating a strong lifecycle dependency. If the habitat ceases to exist, so does the animal.
+    
+    \item \textbf{Association (\texttt{--})}: 
+    \begin{itemize}
+        \item The \texttt{Ranger} uses the \texttt{Vehicle} (e.g., to travel or patrol), showing a weak ownership relationship.
+        \item The \texttt{Ranger} can interact with \texttt{Animal} objects for treating or calming them.
+        \item The \texttt{Poacher} can target and hurt \texttt{Animals}.
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+This diagram helps visualize how individual components in the simulation are interconnected at runtime and supports understanding of object-level behavior and control flow.
+
+\newpage
+
+\section*{\centering 4. Class Diagram}
+
+The implementations of the class diagrams are separated into three for better readability. The first contains implementations of constructors of classes, the second contains implementations of basic methods, and the third contains implementations of advanced methods.
+
+\vspace{0.5em}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{class-1.png}}
+    \caption{Class Diagram 1}
+    \label{fig:class-diagram-1}
+\end{figure}
+
+In the first class diagram you can see the implementations of constructors of classes. The classes are:
+\begin{itemize}
+    \item \textbf{Person} (abstract class) - 
+    \noindent Abstract class Person has field \texttt{power} which is initialized randomly between 1 to 10.
+    \item \textbf{Ranger} (inherits from Person)
+    \item \textbf{Poacher} (inherits from Person)
+    \item \textbf{Animal}
+    \item \textbf{Vehicle}
+    \item \textbf{Habitat}
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{class-2.png}}
+    \caption{Class Diagram 2}
+    \label{fig:class-diagram-2}
+\end{figure}
+
+In the second class diagram you can see the implementations of basic methods of classes.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{class-3.png}}
+    \caption{Class Diagram 3}
+    \label{fig:class-diagram-3}
+\end{figure}
+
+In the third class diagram you can see the implementations of advanced methods of classes.
+The methods are:
+\begin{itemize}
+    \item \textbf{Ranger}:
+    \begin{itemize}
+        \item \texttt{patrol()} - patrols the habitat and treats the animals in need of help.
+    \end{itemize}
+    \item \textbf{Poacher}:
+    \begin{itemize}
+        \item \texttt{invade()} - invades the habitat and threatens the animals.
+    \end{itemize}
+
+\end{itemize}
+
+\end {document}
