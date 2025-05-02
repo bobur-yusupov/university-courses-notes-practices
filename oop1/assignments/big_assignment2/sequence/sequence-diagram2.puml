@@ -1,0 +1,39 @@
+@startuml Sequence Diagram 2
+
+title Scenario 2: Emergency Treatment in Field
+
+skinparam monochrome false
+skinparam backgroundColor #f9f9f9
+skinparam sequence {
+    ArrowColor #2c3e50
+    LifeLineBorderColor #34495e
+    LifeLineBackgroundColor #ecf0f1
+    ParticipantBorderColor #34495e
+    ParticipantBackgroundColor #ecf0f1
+    ActorBorderColor #2c3e50
+    ActorBackgroundColor #d6eaf8
+    FontColor #2c3e50
+    FontSize 14
+}
+scale 2
+
+participant "Poachers" as Poachers
+participant "Animal" as Animal
+actor "Ranger"
+participant "Rescue Vehicle\n(Med Unit)" as Vehicle
+participant "Rehabilitation Zone" as Rehab
+
+Poachers -> Animal : Launch Attack
+note over Animal : Critically Injured
+
+Ranger -> Vehicle : Activates Rescue Mode
+Vehicle -> Ranger : Ready with Med Unit
+Ranger -> Animal : Rushes to Scene
+
+Ranger -> Animal : Administers Emergency Care
+note over Animal : Condition Stabilized
+
+Vehicle -> Rehab : Drives Animal to Rehab Zone
+Rehab -> Animal : Admits for Recovery
+
+@enduml

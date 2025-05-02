@@ -1,4 +1,4 @@
-@startuml Class Diagram 1
+@startuml Class Diagram 2
 scale 2
 
 skinparam linetype ortho
@@ -13,16 +13,15 @@ class Ranger {
     +decreaseStressLevel(int level) : void
 }
 
-note left of Ranger::Ranger
-    Ranger(...) {
-        ...
-        this.stressLevel := 0
+note right of Ranger::increaseStressLevel
+    increaseStressLevel(int level) {
+        stressLevel += level
     }
 end note
 
-note left of Ranger::getStressLevel
-    getStressLevel() {
-        return stressLevel
+note right of Ranger::decreaseStressLevel
+    decreaseStressLevel(int level) {
+        stressLevel -= level
     }
 end note
 
@@ -54,11 +53,15 @@ class Animal {
     +setTemperament(Temprament temperament) : void
 }
 
-note left of Animal::Animal
-    Animal(..., temperament) <<Updated>> {
-        ...
+note left of Animal::getTemperament
+    getTemperament() {
+        return temperament
+    }
+end note
+
+note right of Animal::setTemperament
+    setTemperament(Temprament temperament) {
         this.temperament := temperament
-        this.state := AnimalState.CALM
     }
 end note
 
@@ -78,22 +81,26 @@ class Vehicle {
     +removeEquipment(Equipment equipment) : void
 }
 
-note left of Vehicle::Vehicle
-    Vehicle(...) {
-        ...
-        this.equipments := new HashMap<Equipment, int>()
+note left of Vehicle::addEquipment
+    addEquipment(Equipment equipment) {
+        if (equipments.containsKey(equipment)) {
+            equipments.put(equipment, equipments.get(equipment) + 1)
+        } else {
+            equipments.put(equipment, 1)
+        }
     }
 end note
 
-note right of Vehicle::getEquipments
-    getEquipments() {
-        return ths.equipments
-    }
-end note
-
-note right of Vehicle::hasEquipment
-    hasEquipment(Equipment equipment) {
-        return equipments.containsKey(equipment)
+note right of Vehicle::removeEquipment
+    removeEquipment(Equipment equipment) {
+        if (equipments.containsKey(equipment)) {
+            int count := equipments.get(equipment)
+            if (count > 1) {
+                equipments.put(equipment, count - 1)
+            } else {
+                equipments.remove(equipment)
+            }
+        }
     }
 end note
 

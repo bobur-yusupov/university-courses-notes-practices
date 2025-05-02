@@ -1,0 +1,45 @@
+@startuml State Diagram
+
+scale 2
+skinparam FolderFontSize 20
+skinparam Linetype ortho
+skinparam Padding 30
+skinparam BackgroundColor #f9f9f9
+skinparam ArrowColor #2c3e50
+skinparam State {
+    BackgroundColor #ecf0f1
+    BorderColor #34495e
+    FontColor #2c3e50
+    FontSize 14
+}
+
+left to right direction
+
+[*] --> CALM : Initial State
+
+' Reactions to ranger approaching (based on temperament)
+CALM ---> ALERTED : Ranger Approaching\n(Temperament: Alerted)
+CALM ----> DEFENSIVE : Ranger Approaching\n(Temperament: Defensive)
+CALM -----> CURIOUS : Ranger Approaching\n(Temperament: Curious)
+CALM -----> AGGRESSIVE : Ranger Approaching\n(Temperament: Aggressive)
+CALM ----> FLEEING : Threatened
+CALM ---> ATTACKING : Injured
+
+' Successful treatment paths
+ALERTED -----> STABILIZED : Successful Treatment
+DEFENSIVE ----> STABILIZED : Successful Treatment
+CURIOUS ---> STABILIZED : Successful Treatment
+AGGRESSIVE ---> STABILIZED : Successful Treatment
+FLEEING ----> STABILIZED : Successful Treatment
+ATTACKING -----> STABILIZED : Successful Treatment
+
+FLEEING -[hidden]-> ATTACKING
+
+' ' Escalation to critical condition
+FLEEING --> CRITICAL : Severe Injury
+ATTACKING --> CRITICAL : Severe Injury
+
+' Optional recovery from critical
+CRITICAL --> STABILIZED : Emergency Care
+
+@enduml
