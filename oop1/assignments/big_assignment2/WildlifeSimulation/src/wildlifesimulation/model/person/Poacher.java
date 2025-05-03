@@ -73,8 +73,12 @@ public class Poacher extends Person {
             animal.increaseStress(this.dangerLevel);
 
             if (animal.getSpecies().equalsIgnoreCase(target)) {
-                animal.hurtAnimal(dangerLevel);
+                animal.injure();
             }
         }
+    }
+
+    public void injureAnimal(Animal animal) {
+        animal.injure();
     }
 }

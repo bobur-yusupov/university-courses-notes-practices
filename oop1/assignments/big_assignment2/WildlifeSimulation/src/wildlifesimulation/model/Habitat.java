@@ -17,6 +17,8 @@ public class Habitat {
      * The maximum number of animals the habitat can hold.
      */
     private int capacity;
+    
+    private boolean safe;
 
     /**
      * The list of animals currently in the habitat.
@@ -26,6 +28,7 @@ public class Habitat {
     public Habitat(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
+        this.safe = true;
     }
 
     public String getName() {
@@ -38,6 +41,14 @@ public class Habitat {
 
     public List<Animal> getAnimals() {
         return animals;
+    }
+    
+    public boolean isSafe() {
+        return this.safe;
+    }
+    
+    public void setSafe(boolean safity) {
+        this.safe = safity;
     }
 
     /**

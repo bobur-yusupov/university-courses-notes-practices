@@ -22,7 +22,7 @@ public class Ranger extends Person {
     private int experience;
     private int efficiency; // Efficiency range should be between 1 and 10
     private int stressLevel;
-    private boolean isAvailable;
+    public boolean isAvailable;
 
     /**
      * Constructs a new `Ranger` with the specified name, experience, and efficiency.
