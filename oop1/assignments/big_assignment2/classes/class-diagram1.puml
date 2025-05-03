@@ -52,6 +52,7 @@ class Animal {
     +Animal(...)
     +getTemperament() : Temprament
     +setTemperament(Temprament temperament) : void
+    +injure() : void
 }
 
 note left of Animal::Animal

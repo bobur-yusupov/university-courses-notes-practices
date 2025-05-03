@@ -21,7 +21,7 @@ public class RangerTest {
     
     @Test
     public void testTreatAnimal() {
-        Animal animal = new Animal("Elephant", 60, 3);
+        Animal animal = new Animal("Elephant", 60, 3, TemperamentProfile.PASSIVE);
         Ranger ranger = new Ranger("Daniel", 5, 10);
         
         ranger.treatAnimal(animal);
@@ -46,7 +46,7 @@ public class RangerTest {
     @Test
     public void testPatrolHabitat() {
         Habitat habitat = new Habitat("Savannah", 10);
-        Animal animal = new Animal("Lion", 50, 2);
+        Animal animal = new Animal("Lion", 50, 2, TemperamentProfile.PASSIVE);
         Poacher poacher = new Poacher("Elephant", 5);
         habitat.addAnimal(animal);
         poacher.setHabitat(habitat);

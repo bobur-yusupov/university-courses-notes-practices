@@ -21,7 +21,7 @@ public class Simulation {
      */
     private static void readDataFromFiles() {
         readFile("src/wildlifesimulation/data/animals.txt", animalsList, parts -> 
-            new Animal(parts[0], Integer.parseInt(parts[1]), Integer.parseInt(parts[2]))
+            new Animal(parts[0], Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), TemperamentProfile.PASSIVE)
         );
         readFile("src/wildlifesimulation/data/habitats.txt", habitatsList, parts -> 
             new Habitat(parts[0], Integer.parseInt(parts[1]))
@@ -64,7 +64,7 @@ public class Simulation {
             return;
         }
         animalsList.forEach(animal -> {
-            Habitat randomHabitat = SimulationUtil.getRandomElememt(habitatsList, 0, habitatsList.size() - 1);
+            Habitat randomHabitat = SimulationUtil.getRandomElement(habitatsList, 0, habitatsList.size() - 1);
             if (SimulationUtil.isAvailableHabitat(randomHabitat)) {
                 randomHabitat.addAnimal(animal);
             }

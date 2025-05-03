@@ -69,7 +69,7 @@ public class SimulationUtil {
      * @param <T> The type of elements in the list.
      * @return A random element from the list, or null if the list is empty.
      */
-    public static <T> T getRandomElememt(List<T> list, int min, int max) {
+    public static <T> T getRandomElement(List<T> list, int min, int max) {
         return list.isEmpty() ? null : list.get(RandomUtil.getRandomInt(min, max));
     }
 
@@ -85,7 +85,7 @@ public class SimulationUtil {
         if (list.size() <= 1) return null;
         List<T> filteredList = new ArrayList<>(list);
         filteredList.remove(exclude);
-        return getRandomElememt(filteredList, 0, filteredList.size() - 1);
+        return getRandomElement(filteredList, 0, filteredList.size() - 1);
     }
 
     /**
@@ -148,7 +148,7 @@ public class SimulationUtil {
                 poachersToRemove.add(poacher);
                 continue;
             }
-            Habitat target = getRandomElememt(habitatsList, 0, habitatsList.size() - 1);
+            Habitat target = getRandomElement(habitatsList, 0, habitatsList.size() - 1);
             if (target != null) {
                 poacher.invade(target);
             }
@@ -185,7 +185,7 @@ public class SimulationUtil {
             }
 
             if (vehicle.deploy()) {
-                Habitat patrolArea = getRandomElememt(habitatsList, 0, habitatsList.size() - 1);
+                Habitat patrolArea = getRandomElement(habitatsList, 0, habitatsList.size() - 1);
                 if (patrolArea != null) {
                     rangerPatrols++;
                     for (Animal animal : patrolArea.getAnimals()) {

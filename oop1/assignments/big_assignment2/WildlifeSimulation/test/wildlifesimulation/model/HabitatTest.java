@@ -10,7 +10,7 @@ public class HabitatTest {
 
     @Test
     public void testAddAnimal() {
-        Animal animal = new Animal("Lion", 5, 0);
+        Animal animal = new Animal("Lion", 5, 0, TemperamentProfile.PASSIVE);
         Habitat habitat = new Habitat("Savannah", 1000);
 
         habitat.addAnimal(animal);
@@ -19,7 +19,7 @@ public class HabitatTest {
 
     @Test
     public void testRemoveAnimal() {
-        Animal animal = new Animal("Lion", 5, 0);
+        Animal animal = new Animal("Lion", 5, 0, TemperamentProfile.PASSIVE);
         Habitat habitat = new Habitat("Savannah", 1000);
 
         habitat.addAnimal(animal);

@@ -20,7 +20,9 @@ import java.util.List;
 public class Ranger extends Person {
     private String name;
     private int experience;
-    private int efficiency;
+    private int efficiency; // Efficiency range should be between 1 and 10
+    private int stressLevel;
+    private boolean isAvailable;
 
     /**
      * Constructs a new `Ranger` with the specified name, experience, and efficiency.
@@ -35,6 +37,8 @@ public class Ranger extends Person {
         this.name = name;
         this.experience = experience;
         this.efficiency = efficiency;
+        this.stressLevel = 0;
+        isAvailable = true;
     }
 
     public String getName() {
@@ -49,14 +53,79 @@ public class Ranger extends Person {
         return efficiency;
     }
 
+    public int getStressLevel() {
+        return stressLevel;
+    }
+
     /**
      * Treats an animal by healing it and reducing its stress level.
      *
      * @param animal The animal to treat.
      */
     public void treatAnimal(Animal animal) {
-        animal.heal(efficiency);
-        animal.decreaseStress(efficiency);
+        if (!isAvailable) {
+            System.out.println("Ranger " + this.name + " is not available to treat the animal.");
+            return;
+        }
+
+        boolean treatmentSuccessful = false;
+
+        switch (animal.getState()) {
+            case CALM:
+                treatmentSuccessful = attemptToTreatAnimal(animal);
+                break;
+
+            case CURIOUS:
+                treatmentSuccessful = attemptToTreatAnimal(animal);
+                break;
+
+            case DEFENSIVE:
+                if (efficiency > 5) {
+                    treatmentSuccessful = attemptToTreatAnimal(animal);
+                } else {
+                    System.out.println("Ranger " + this.name + " is not experienced enough to treat a defensive animal.");
+                }
+                break;
+
+            case AGGRESSIVE:
+                if (efficiency > 5) {
+                    treatmentSuccessful = attemptToTreatAnimal(animal);
+                } else {
+                    System.out.println("Ranger " + this.name + " is not experienced enough to treat an aggressive animal.");
+                }
+                break;
+
+            case FLEEING:
+                if (efficiency > 7) {
+                    treatmentSuccessful = attemptToTreatAnimal(animal);
+                } else {
+                    System.out.println("Ranger " + this.name + " is not experienced enough to treat a fleeing animal.");
+                }
+                break;
+
+            case ATTACKING:
+                if (efficiency > 8) {
+                    treatmentSuccessful = attemptToTreatAnimal(animal);
+                } else {
+                    System.out.println("Ranger " + this.name + " is not experienced enough to treat an attacking animal.");
+                }
+                break;
+        }
+
+        if (treatmentSuccessful) {
+            animal.stabilize(this.efficiency, this.experience);
+            stressLevel = Math.max(stressLevel - 2, 0);
+            animal.heal(efficiency);
+            animal.decreaseStress(efficiency);
+            System.out.println("Ranger " + this.name + " treated the animal successfully.");
+        } else {
+            this.stressLevel = Math.min(10, this.stressLevel + 1);
+            System.out.println("Ranger " + this.name + " failed to treat the animal.");
+        }
+    }
+
+    private boolean attemptToTreatAnimal(Animal animal) {
+        return efficiency > 3;
     }
 
     /**
@@ -91,6 +160,34 @@ public class Ranger extends Person {
                 fightPoacher(poacher);
             }
         }
+    }
+
+    /**
+     * Increases the ranger's stress level of the ranger.
+     *
+     * @param amount The amount to increase the stress level by.
+     */
+    public void increaseStress(int amount) {
+        this.stressLevel += amount;
+        if (this.stressLevel > 100) {
+            this.stressLevel = 100;
+        }
+    }
+
+    /**
+     * Decreases the ranger's stress level of the ranger.
+     *
+     * @param amount The amount to decrease the stress level by.
+     */
+    public void decreaseStress(int amount) {
+        this.stressLevel -= amount;
+        if (this.stressLevel < 0) {
+            this.stressLevel = 0;
+        }
+    }
+
+    public void retreat() {
+        
     }
 }
 
