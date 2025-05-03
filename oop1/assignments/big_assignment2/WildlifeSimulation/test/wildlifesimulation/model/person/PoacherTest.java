@@ -25,7 +25,6 @@ public class PoacherTest {
         Poacher poacher = new Poacher("Elephant", 5);
         poacher.invade(habitat);
 
-        assertEquals(5, animal.getStressLevel());
-        assertEquals(5, animal.getHealth());
+        assertEquals(AnimalState.CRITICAL, animal.getState());
     }
 }

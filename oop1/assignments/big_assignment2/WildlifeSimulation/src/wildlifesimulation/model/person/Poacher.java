@@ -78,6 +78,11 @@ public class Poacher extends Person {
         }
     }
 
+    /**
+     * Injures the specified animal, reducing its health.
+     *
+     * @param animal The animal to injure.
+     */
     public void injureAnimal(Animal animal) {
         animal.injure();
     }

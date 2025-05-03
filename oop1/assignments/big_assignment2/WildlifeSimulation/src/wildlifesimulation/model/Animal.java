@@ -128,11 +128,17 @@ public class Animal {
         return this.health < 100 || this.stressLevel > 5;
     }
 
+    /**
+     * Injures the animal, changing its state to CRITICAL and reducing its health.
+     */
     public void injure() {
         this.state = AnimalState.CRITICAL;
         this.hurtAnimal(20);
     }
 
+    /**
+     * Applies an injury to the animal, changing its state and increasing its stress level.
+     */
     public void applyInjury() {
         if (this.state == AnimalState.FLEEING || this.state == AnimalState.ATTACKING) {
             this.state = AnimalState.CRITICAL;
@@ -143,6 +149,11 @@ public class Animal {
         injure();
     }
 
+    /**
+     * Reacts to a ranger based on the animal's temperament.
+     *
+     * @param ranger The ranger that is interacting with the animal.
+     */
     public void reactToRanger(Ranger ranger) {
         switch (this.temperament) {
             case PASSIVE:
@@ -160,6 +171,12 @@ public class Animal {
         }
     }
 
+    /**
+     * Stabilizes the animal by healing it and decreasing its stress level.
+     *
+     * @param efficiency The efficiency of the ranger treating the animal.
+     * @param experience The experience of the ranger treating the animal.
+     */
     public void stabilize(int efficiency, int experience) {
         if (this.state == AnimalState.CRITICAL || this.state == AnimalState.ATTACKING) {
             this.heal(experience);

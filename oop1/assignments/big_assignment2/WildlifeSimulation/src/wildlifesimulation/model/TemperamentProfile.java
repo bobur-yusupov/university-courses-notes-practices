@@ -10,16 +10,4 @@ public enum TemperamentProfile {
     DEFENSIVE,
     AGGRESSIVE,
     CURIOUS,;
-
-    /**
-     *
-     * @return
-     */
-    public boolean isHostile() {
-        return this == AGGRESSIVE;
-    }
-
-    public boolean mayAttack() {
-        return this == AGGRESSIVE || this == DEFENSIVE;
-    }
 }

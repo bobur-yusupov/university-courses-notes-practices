@@ -124,6 +124,12 @@ public class Ranger extends Person {
         }
     }
 
+    /**
+     * Attempts to treat an animal based on the ranger's efficiency.
+     *
+     * @param animal The animal to treat.
+     * @return true if the treatment is successful, false otherwise.
+     */
     private boolean attemptToTreatAnimal(Animal animal) {
         return efficiency > 3;
     }

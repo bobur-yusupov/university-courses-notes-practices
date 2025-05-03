@@ -63,4 +63,6 @@ public class RangerTest {
             assertFalse(poacher.isDefeated());
         }
     }
+    
+    
 }

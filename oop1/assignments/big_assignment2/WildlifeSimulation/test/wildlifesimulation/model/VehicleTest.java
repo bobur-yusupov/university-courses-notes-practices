@@ -23,5 +23,4 @@ public class VehicleTest {
 
         assertEquals(40, vehicle.getFuelLevel());
     }
-    
 }
