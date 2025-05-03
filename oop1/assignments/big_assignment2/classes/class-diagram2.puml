@@ -9,19 +9,59 @@ class Ranger {
 
     +Ranger(...)
     +getStressLevel() : int
-    +increaseStressLevel(int level) : void
-    +decreaseStressLevel(int level) : void
+    +increaseStress(int level) : void
+    +decreaseStress(int level) : void
+    +treatAnimal(Animal animal) : void
+    -attemptToTreatAnimal(Animal animal) : boolean
 }
 
-note right of Ranger::increaseStressLevel
-    increaseStressLevel(int level) {
-        stressLevel += level
+note right of Ranger::attemptToTreatAnimal
+    attemptToTreatAnimal() {
+        return this.efficiency > 5
     }
 end note
 
-note right of Ranger::decreaseStressLevel
-    decreaseStressLevel(int level) {
-        stressLevel -= level
+note left of Ranger::treatAnimal
+    treatAnimal(Animal animal) {
+        if (!isAvailable) {
+            return
+        }
+
+        treatmentSuccessful := false
+
+        switch (animal.getState()) {
+            case CALM, CURIOUS:
+                treatmentSuccessful := attemptToTreatAnimal(animal)
+                break
+
+            case DEFENSIVE, AGGRESSIVE:
+                if (efficiency > 5) {
+                    treatmentSuccessful := attemptToTreatAnimal(animal)
+                } else {
+                }
+                break
+
+            case FLEEING:
+                if (efficiency > 7) {
+                    treatmentSuccessful := attemptToTreatAnimal(animal)
+                }
+                break
+
+            case ATTACKING:
+                if (efficiency > 8) {
+                    treatmentSuccessful := attemptToTreatAnimal(animal)
+                }
+                break
+        }
+
+        if (treatmentSuccessful) {
+            animal.stabilize(efficiency, experience)
+            stressLevel := max(stressLevel - 2, 0)
+            animal.heal(efficiency)
+            animal.decreaseStress(efficiency)
+        } else {
+            stressLevel := min(10, stressLevel + 1)
+        }
     }
 end note
 
@@ -109,5 +149,6 @@ Animal --- State : <<uses>>
 
 Vehicle --- Equipment : <<uses>>
 Ranger --- Vehicle : <<uses>>
+Ranger --- Animal
 
 @enduml

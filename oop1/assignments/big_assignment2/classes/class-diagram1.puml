@@ -9,8 +9,10 @@ class Ranger {
 
     +Ranger(...)
     +getStressLevel() : int
-    +increaseStressLevel(int level) : void
-    +decreaseStressLevel(int level) : void
+    +increaseStress(int level) : void
+    +decreaseStress(int level) : void
+    +treatAnimal(Animal animal) : void
+    -attemptToTreatAnimal(Animal animal) : boolean
 }
 
 note left of Ranger::Ranger
@@ -23,6 +25,18 @@ end note
 note left of Ranger::getStressLevel
     getStressLevel() {
         return stressLevel
+    }
+end note
+
+note right of Ranger::increaseStressLevel
+    increaseStressLevel(int level) {
+        stressLevel += level
+    }
+end note
+
+note right of Ranger::decreaseStressLevel
+    decreaseStressLevel(int level) {
+        stressLevel -= level
     }
 end note
 
@@ -53,6 +67,9 @@ class Animal {
     +getTemperament() : Temprament
     +setTemperament(Temprament temperament) : void
     +injure() : void
+    +stabilize() : void
+    +applyInjury() : void
+    +reactToRanger(Ranger ranger) : void
 }
 
 note left of Animal::Animal
@@ -103,5 +120,6 @@ Animal --- State : <<uses>>
 
 Vehicle --- Equipment : <<uses>>
 Ranger --- Vehicle : <<uses>>
+Ranger --- Animal : <<uses>>
 
 @enduml
