@@ -14,7 +14,7 @@ public class SimulationUtil {
         System.out.println("Ranger " + ranger.getName() + " encounters a " + animal.getSpecies() + " with temperament " + animal.getTemperament());
         System.out.println("Ranger approaches the animal cautiously...");
 
-        // Animal reacts aggressively to ranger's presence
+        // Animal reacts aggressively to ranger's pres  ence
         animal.reactToRanger(ranger);
         System.out.println("Animal's state after encounter: " + animal.getState());
 
@@ -94,5 +94,6 @@ public class SimulationUtil {
         System.out.println("Zebra State: " + zebra.getState());
         System.out.println("Zebra Stress Level: " + zebra.getStressLevel());
         System.out.println("Ranger Stress Level: " + ranger.getStressLevel());
+        System.out.println("Animal " + zebra.getSpecies() + " is now in rehabilitation zone.");
     }
 }

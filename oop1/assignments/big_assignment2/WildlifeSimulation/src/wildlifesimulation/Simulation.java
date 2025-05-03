@@ -10,6 +10,8 @@ public class Simulation {
      */
     public static void main(String[] args) {
         SimulationUtil.runFirstScenario();
+        System.out.println("\n----------------------------------------");
+        System.out.println("\n");
         SimulationUtil.runSecondScenario();
     }
 }
