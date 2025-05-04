@@ -17,8 +17,8 @@ public class Gate {
     }
 
     private Space findTakenSpaceByCar(Car car) {
-        for (Space[] spaces : parkingLot.getFloorPlan()) {
-            for (Space space : spaces) {
+        for (Space[] floor : parkingLot.getFloorPlan()) {
+            for (Space space : floor) {
                 if (space.isTaken() && space.getCarLicensePlate().equals(car.getLicensePlate())) {
                     return space;
                 }
@@ -28,11 +28,12 @@ public class Gate {
     }
 
     private Space findAvailableSpaceOnFloor(int floor, Car car) {
-        for (int i = 0; i < parkingLot.getFloorPlan()[floor].length; i++) {
-            Space space = parkingLot.getFloorPlan()[floor][i];
+        Space[] floorSpaces = parkingLot.getFloorPlan()[floor];
+        for (int i = 0; i < floorSpaces.length; i++) {
+            Space space = floorSpaces[i];
             if (!space.isTaken()) {
                 if (car.getSpotOccupation() == Size.LARGE) {
-                    if (i + 1 < parkingLot.getFloorPlan()[floor].length && !parkingLot.getFloorPlan()[floor][i + 1].isTaken()) {
+                    if (i + 1 < floorSpaces.length && !floorSpaces[i + 1].isTaken()) {
                         return space;
                     }
                 } else {
@@ -45,9 +46,16 @@ public class Gate {
 
     public Space findAnyAvailableSpaceForCar(Car car) {
         for (Space[] spaces : parkingLot.getFloorPlan()) {
-            for (Space space : spaces) {
-                if (!space.isTaken() && space.getOccupyingCarSize().equals(car.getSpotOccupation())) {
-                    return space;
+            for (int i = 0; i < spaces.length; i++) {
+                Space space = spaces[i];
+                if (!space.isTaken()) {
+                    if (car.getSpotOccupation() == Size.LARGE) {
+                        if (i + 1 < spaces.length && !spaces[i + 1].isTaken()) {
+                            return space;
+                        }
+                    } else {
+                        return space;
+                    }
                 }
             }
         }
@@ -61,34 +69,39 @@ public class Gate {
         for (int offset = 0; offset < totalFloors; offset++) {
             int floor = (preferredFloor + offset) % totalFloors;
             Space space = findAvailableSpaceOnFloor(floor, car);
-            if (space != null) {
-                return space;
-            }
+            if (space != null) return space;
         }
         return null;
     }
 
     public boolean registerCar(Car car) {
         Space space = findPreferredAvailableSpaceForCar(car);
+        if (space == null) return false;
+        if (space.isTaken()) return false;
 
-        if (space != null) {
-            space.addOccupyingCar(car);
-            if (car.getSpotOccupation() == Size.LARGE) {
-                parkingLot.getFloorPlan()[space.getFloorNumber()][space.getSpaceNumber() + 1].addOccupyingCar(car);
-            }
-            car.setTicketId(space.getFloorNumber() + "-" + space.getSpaceNumber());
-            cars.add(car);
-            return true;
+        int floor = space.getFloorNumber();
+        int spaceNumber = space.getSpaceNumber();
+        space.addOccupyingCar(car);
+
+        if (car.getSpotOccupation() == Size.LARGE) {
+            Space nextSpace = parkingLot.getFloorPlan()[floor][spaceNumber + 1];
+            nextSpace.addOccupyingCar(car);
         }
-        return false;
+
+        car.setTicketId(floor + "-" + spaceNumber);
+        cars.add(car);
+        return true;
     }
 
     public void registerCars(Car... cars) {
         for (Car car : cars) {
-            if (!registerCar(car)) {
-                System.err.println("No available space for car: " + car.getLicensePlate());
+            boolean success = registerCar(car);
+            String plate = car.getLicensePlate();
+
+            if (success) {
+                System.out.println("Car registered: " + plate);
             } else {
-                System.out.println("Car registered: " + car.getLicensePlate());
+                System.err.println("No available space for car: " + plate);
             }
         }
     }
@@ -99,18 +112,20 @@ public class Gate {
         int spaceNumber = Integer.parseInt(parts[1]);
 
         Space space = parkingLot.getFloorPlan()[floorNumber][spaceNumber];
-        if (space.isTaken() && space.getCarLicensePlate() != null) {
-            String licensePlate = space.getCarLicensePlate();
-            if (parkingLot.getFloorPlan()[floorNumber][spaceNumber].getOccupyingCarSize() == Size.LARGE) {
-                parkingLot.getFloorPlan()[floorNumber][spaceNumber].removeOccupyingCar();
-                parkingLot.getFloorPlan()[floorNumber][spaceNumber + 1].removeOccupyingCar();
-            } else {
-                parkingLot.getFloorPlan()[floorNumber][spaceNumber].removeOccupyingCar();
-            }
-            cars.removeIf(car -> car.getLicensePlate().equals(licensePlate));
-            System.out.println("Car deregistered: " + licensePlate);
-        } else {
+        if (!space.isTaken()) {
             System.err.println("No car found in the specified space.");
+            return;
         }
+        
+        String licensePlate = space.getCarLicensePlate();
+        if (space.getOccupyingCarSize() == Size.LARGE) {
+            parkingLot.getFloorPlan()[floorNumber][spaceNumber].removeOccupyingCar();
+            parkingLot.getFloorPlan()[floorNumber][spaceNumber + 1].removeOccupyingCar();
+        } else {
+            space.removeOccupyingCar();
+        }
+
+        cars.removeIf(car -> car.getLicensePlate().equals(licensePlate));
+        System.out.println("Car " + licensePlate + " deregistered from space " + ticketId);
     }
 }

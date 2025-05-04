@@ -3,15 +3,14 @@ package parking.facility;
 import vehicle.*;
 
 public class Space {
-    private final int floorNumber; // The floor number of the parking space
-    private final int spaceNumber; // The space number of the parking space
-    private Car occupyingCar; // The car occupying this parking space
+    private final int floorNumber;
+    private final int spaceNumber;
+    private Car occupyingCar;
 
-    // Constructor to initialize the parking space with its floor and space numbers
     public Space(int floorNumber, int spaceNumber) {
         this.floorNumber = floorNumber;
         this.spaceNumber = spaceNumber;
-        this.occupyingCar = null; // Initially, the space is empty
+        this.occupyingCar = null;
     }
 
     public int getFloorNumber() {
@@ -22,27 +21,41 @@ public class Space {
         return spaceNumber;
     }
 
-    // Method to check if the parking space is occupied by a car
     public boolean isTaken() {
-        return occupyingCar != null; // Returns true if a car is occupying the space
+        return occupyingCar != null;
     }
 
-    // Method to assign a car to this parking space
     public void addOccupyingCar(Car c) {
-        this.occupyingCar = c; // Assigns the reference of the given car to this space
+        if (isTaken()) {
+            System.out.println("Space is already occupied by " + occupyingCar.getLicensePlate());
+        } else {
+            this.occupyingCar = c;
+            System.out.println("Car " + c.getLicensePlate() + " parked in space " + floorNumber + "-" + spaceNumber);
+        }
     }
 
-    // Method to remove the car from this parking space
     public void removeOccupyingCar() {
-                this.occupyingCar = null; // Sets the occupying car reference to null
+        if (!isTaken()) {
+            System.out.println("Space is already empty");
+            return;
+        }
+        System.out.println("Car " + occupyingCar.getLicensePlate() + " left space " + floorNumber + "-" + spaceNumber);
+        this.occupyingCar = null;
     }
 
-    // Method to get the license plate of the car occupying this parking space
     public String getCarLicensePlate() {
-        return (occupyingCar != null) ? occupyingCar.getLicensePlate() : null;
+        if (occupyingCar != null) {
+            return occupyingCar.getLicensePlate();
+        } else {
+            return null;
+        }
     }
 
     public Size getOccupyingCarSize() {
-        return (occupyingCar != null) ? occupyingCar.getSpotOccupation() : null;
+        if (occupyingCar != null) {
+            return occupyingCar.getSpotOccupation();
+        } else {
+            return null;
+        }
     }
 }
