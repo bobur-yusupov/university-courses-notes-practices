@@ -1,16 +1,6 @@
-package parkinglot.parking.facility;
+package parking.facility;
 
-import parkinglot.vehicle.Car;
-/**
- * The Space class enables the creation of a ParkingLot by serving as the structure that holds a reference to its assigned Car.
-
-Operations
-addOccupyingCar(): Assigns the reference of the given Car without creating a copy.
-removeOccupyingCar(): Sets its Car reference to null, effectively removing the occupying car.
-isTaken(): Checks whether a Car is already assigned, returns true if so.
-Remember that in the case of a large Car, it will occupy two adjacent spaces by storing the same Car reference in both spaces.
- * 
- */
+import vehicle.*;
 
 public class Space {
     private final int floorNumber; // The floor number of the parking space
@@ -44,15 +34,15 @@ public class Space {
 
     // Method to remove the car from this parking space
     public void removeOccupyingCar() {
-        this.occupyingCar = null; // Sets the occupying car reference to null
+                this.occupyingCar = null; // Sets the occupying car reference to null
     }
 
     // Method to get the license plate of the car occupying this parking space
     public String getCarLicensePlate() {
-        return (occupyingCar != null) ? occupyingCar.getLicensePlate() : null; // Returns the license plate or null if no car is present
+        return (occupyingCar != null) ? occupyingCar.getLicensePlate() : null;
     }
 
     public Size getOccupyingCarSize() {
-        return (occupyingCar != null) ? occupyingCar.getSize() : null; // Returns the size of the occupying car or null if no car is present
+        return (occupyingCar != null) ? occupyingCar.getSpotOccupation() : null;
     }
 }
