@@ -28,7 +28,14 @@
             />
             <h1 class="header-title">Ziyadat Venture</h1>
             <ul>
-                <li><button id="loginBtn" onclick="document.getElementById('login').style.display = 'flex'">Log in</button></li>
+                <li>
+                    <button
+                        id="loginBtn"
+                        onclick="document.getElementById('login').style.display = 'flex'"
+                    >
+                        Log in
+                    </button>
+                </li>
                 <li><a href="#">Sign up</a></li>
                 <li><a href="#">MyTijarah</a></li>
                 <li><a href="#">MyTamwil</a></li>
@@ -83,7 +90,14 @@
             </ul>
             <div class="navbar-mobile-footer">
                 <ul>
-                    <li><button id="loginBtn" onclick="document.getElementById('login').style.display = 'flex'">Log in</button></li>
+                    <li>
+                        <button
+                            id="loginBtn"
+                            onclick="document.getElementById('login').style.display = 'flex'"
+                        >
+                            Log in
+                        </button>
+                    </li>
                     <li><a href="#">Sign up</a></li>
                     <li><a href="#">MyTijarah</a></li>
                     <li><a href="#">MyTamwil</a></li>
@@ -91,7 +105,7 @@
             </div>
         </nav>
 
-        <form action="" method="post" class="form-container">
+        <form action="https://api.ziyadatbank.com/v2/venture/apply" method="post" class="form-container">
             <h2>Apply to Ziyadat Venture's Startup Program</h2>
             <div class="form-group">
                 <input
@@ -226,6 +240,10 @@
                     placeholder="Tell us about your startup..."
                     required
                 ></textarea>
+            </div>
+            <div class="mb-10">
+                <input type="checkbox" name="terms" id="terms" required />
+                <label for="terms">I agree to the terms and conditions</label>
             </div>
             <button type="submit" class="submit-button">Submit</button>
         </form>
