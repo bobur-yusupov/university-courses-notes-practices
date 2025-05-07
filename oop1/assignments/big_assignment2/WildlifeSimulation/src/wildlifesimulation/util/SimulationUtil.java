@@ -6,7 +6,8 @@ import wildlifesimulation.model.person.*;
 public class SimulationUtil {
     public static void runFirstScenario() {
         Ranger ranger = new Ranger("John Doe", 40, 8);
-        Animal animal = new Animal("Lion", 80, 5, TemperamentProfile.AGGRESSIVE);
+        AggressiveAnimal aggressive = new AggressiveAnimal();
+        Animal animal = new Animal("Lion", 80, 5, aggressive);
         Habitat habitat = new Habitat("Savannah", 20);
         habitat.addAnimal(animal);
 
@@ -27,7 +28,6 @@ public class SimulationUtil {
 
         // Ranger realizes it's too dangerous and retreats
         System.out.println("Ranger realizes it's too dangerous to continue and retreats.");
-        ranger.retreat();
 
         // Ranger calls for help (e.g., backup, medical team)
         System.out.println("Ranger calls for help and reports the incident.");
@@ -49,7 +49,8 @@ public class SimulationUtil {
 
         // Setup
         Habitat savannah = new Habitat("Savannah", 20);
-        Animal zebra = new Animal("Zebra", 100, 3, TemperamentProfile.PASSIVE);
+        PassiveAnimal passive = new PassiveAnimal();
+        Animal zebra = new Animal("Zebra", 100, 3, passive);
         savannah.addAnimal(zebra);
 
         // Poacher enters

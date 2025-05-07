@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/projects/python/uni/oop1/assignments/big_assignment2/WildlifeSimulation/test/wildlifesimulation/model/VehicleTest.java</file>
+            <file>file:/C:/projects/python/uni/oop1/assignments/big_assignment2/WildlifeSimulation/src/wildlifesimulation/model/DefensiveAnimal.java</file>
+            <file>file:/C:/projects/python/uni/oop1/assignments/big_assignment2/WildlifeSimulation/src/wildlifesimulation/model/person/Ranger.java</file>
+            <file>file:/C:/projects/python/uni/oop1/assignments/big_assignment2/WildlifeSimulation/src/wildlifesimulation/model/Temperament.java</file>
             <file>file:/C:/projects/python/uni/oop1/assignments/big_assignment2/WildlifeSimulation/src/wildlifesimulation/model/Animal.java</file>
-            <file>file:/C:/projects/python/uni/oop1/assignments/big_assignment2/WildlifeSimulation/test/wildlifesimulation/model/AnimalTest.java</file>
+            <file>file:/C:/projects/python/uni/oop1/assignments/big_assignment2/WildlifeSimulation/src/wildlifesimulation/model/CuriousAnimal.java</file>
+            <file>file:/C:/projects/python/uni/oop1/assignments/big_assignment2/WildlifeSimulation/src/wildlifesimulation/util/SimulationUtil.java</file>
         </group>
     </open-files>
 </project-private>

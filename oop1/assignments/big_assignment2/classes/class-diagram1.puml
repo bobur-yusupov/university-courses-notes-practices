@@ -1,5 +1,4 @@
 @startuml Class Diagram 1
-scale 2
 
 skinparam linetype ortho
 
@@ -40,12 +39,49 @@ note right of Ranger::decreaseStressLevel
     }
 end note
 
-enum Temprament {
-    PASSIVE
-    DEFENSIVE
-    AGGRESSIVE
-    CURIOUS
+abstract class Temperament {
+    #getAnimalState() : AnimalState
 }
+
+class PassiveAnimal extends Temperament {
+    +getAnimalState() : AnimalState
+}
+
+note left of PassiveAnimal::getAnimalState
+    getAnimalState() {
+        return AnimalState.ALERTED
+    }
+end note
+
+class AggressiveAnimal extends Temperament {
+    +getAnimalState() : AnimalState
+}
+
+note left of AggressiveAnimal::getAnimalState
+    getAnimalState() {
+        return AnimalState.AGGRESSIVE
+    }
+end note
+
+class DefensiveAnimal extends Temperament {
+    +getAnimalState() : AnimalState
+}
+
+note left of DefensiveAnimal::getAnimalState
+    getAnimalState() {
+        return AnimalState.DEFENSIVE
+    }
+end note
+
+class CuriousAnimal extends Temperament {
+    +getAnimalState() : AnimalState
+}
+
+note left of CuriousAnimal::getAnimalState
+    getAnimalState() {
+        return AnimalState.CURIOUS
+    }
+end note
 
 enum State {
     CALM
@@ -60,7 +96,7 @@ enum State {
 }
 
 class Animal {
-    -temperament : Temprament {getter, setter}
+    -temperament : Temperament {getter, setter}
     -state : State {getter, setter}
 
     +Animal(...)

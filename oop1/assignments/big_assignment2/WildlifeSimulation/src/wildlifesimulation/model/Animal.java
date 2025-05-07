@@ -28,9 +28,9 @@ public class Animal {
     /**
      * The temperament profile of the animal, which can influence its behavior.
      */
-    private TemperamentProfile temperament;
+    private Temperament temperament;
 
-    public Animal(String species, int health, int stressLevel, TemperamentProfile temperament) {
+    public Animal(String species, int health, int stressLevel, Temperament temperament) {
         this.species = species;
         this.health = health;
         this.stressLevel = stressLevel;
@@ -88,16 +88,8 @@ public class Animal {
      * Gets the temperament profile of the animal.
      * @return The temperament profile of the animal.
      */
-    public TemperamentProfile getTemperament() {
-        return temperament;
-    }
-
-    /**
-     * Sets the temperament profile of the animal.
-     * @param temperament The new temperament profile of the animal.
-     */
-    public void setTemperament(TemperamentProfile temperament) {
-        this.temperament = temperament;
+    public AnimalState getTemperament() {
+        return temperament.getAnimalState();
     }
 
     /**
@@ -155,20 +147,7 @@ public class Animal {
      * @param ranger The ranger that is interacting with the animal.
      */
     public void reactToRanger(Ranger ranger) {
-        switch (this.temperament) {
-            case PASSIVE:
-                this.state = AnimalState.ALERTED;
-                break;
-            case DEFENSIVE:
-                this.state = AnimalState.DEFENSIVE;
-                break;
-            case AGGRESSIVE:
-                this.state = AnimalState.AGGRESSIVE;
-                break;
-            case CURIOUS:
-                this.state = AnimalState.CURIOUS;
-                break;
-        }
+        this.state = this.temperament.getAnimalState();
     }
 
     /**

@@ -19,7 +19,8 @@ public class PoacherTest {
     @Test
     public void testInvade() {
         Habitat habitat = new Habitat("Savannah", 10);
-        Animal animal = new Animal("Elephant", 10, 0, TemperamentProfile.PASSIVE);
+        PassiveAnimal passive = new PassiveAnimal();
+        Animal animal = new Animal("Elephant", 10, 0, passive);
         habitat.addAnimal(animal);
 
         Poacher poacher = new Poacher("Elephant", 5);
