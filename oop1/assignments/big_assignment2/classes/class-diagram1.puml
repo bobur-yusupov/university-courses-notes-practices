@@ -2,8 +2,21 @@
 
 skinparam linetype ortho
 
+' Define the main classes
+class Animal {
+    -temperament : Temperament {getter, setter}
+    -state : State {getter, setter}
+
+    +Animal(...)
+    +getTemperament() : Temperament
+    +setTemperament(Temperament temperament) : void
+    +injure() : void
+    +stabilize() : void
+    +applyInjury() : void
+    +reactToRanger(Ranger ranger) : void
+}
+
 class Ranger {
-    ...
     -stressLevel : int {getter}
 
     +Ranger(...)
@@ -13,6 +26,86 @@ class Ranger {
     +treatAnimal(Animal animal) : void
     -attemptToTreatAnimal(Animal animal) : boolean
 }
+
+abstract class Temperament {
+    #getAnimalState() : AnimalState
+}
+
+class PassiveAnimal {
+    +getAnimalState() : AnimalState
+}
+
+class AggressiveAnimal {
+    +getAnimalState() : AnimalState
+}
+
+class DefensiveAnimal {
+    +getAnimalState() : AnimalState
+}
+
+class CuriousAnimal {
+    +getAnimalState() : AnimalState
+}
+
+enum State {
+    CALM
+    ALERTED
+    DEFENSIVE
+    CURIOUS
+    AGGRESSIVE
+    FLEEING
+    ATTACKING
+    STABILIZED
+    CRITICAL
+}
+
+enum Equipment {
+    TRANQUILIZER_KIT
+    MEDICAL_KIT
+}
+
+class Vehicle {
+    -equipments: Map<Equipment, int> {getter}
+
+    +Vehicle(...)
+    +getEquipments() : Map<Equipment, int>
+    +hasEquipment(Equipment equipment) : boolean
+    +addEquipment(Equipment equipment) : void
+    +removeEquipment(Equipment equipment) : void
+}
+
+' Notes for behaviors and methods
+note right of Animal::Animal
+    Animal(..., temperament) <<Updated>> {
+        ...
+        this.temperament := temperament
+        this.state := AnimalState.CALM
+    }
+end note
+
+note left of PassiveAnimal::getAnimalState
+    getAnimalState() {
+        return AnimalState.ALERTED
+    }
+end note
+
+note left of AggressiveAnimal::getAnimalState
+    getAnimalState() {
+        return AnimalState.AGGRESSIVE
+    }
+end note
+
+note right of DefensiveAnimal::getAnimalState
+    getAnimalState() {
+        return AnimalState.DEFENSIVE
+    }
+end note
+
+note right of CuriousAnimal::getAnimalState
+    getAnimalState() {
+        return AnimalState.CURIOUS
+    }
+end note
 
 note left of Ranger::Ranger
     Ranger(...) {
@@ -39,99 +132,6 @@ note right of Ranger::decreaseStressLevel
     }
 end note
 
-abstract class Temperament {
-    #getAnimalState() : AnimalState
-}
-
-class PassiveAnimal extends Temperament {
-    +getAnimalState() : AnimalState
-}
-
-note left of PassiveAnimal::getAnimalState
-    getAnimalState() {
-        return AnimalState.ALERTED
-    }
-end note
-
-class AggressiveAnimal extends Temperament {
-    +getAnimalState() : AnimalState
-}
-
-note left of AggressiveAnimal::getAnimalState
-    getAnimalState() {
-        return AnimalState.AGGRESSIVE
-    }
-end note
-
-class DefensiveAnimal extends Temperament {
-    +getAnimalState() : AnimalState
-}
-
-note left of DefensiveAnimal::getAnimalState
-    getAnimalState() {
-        return AnimalState.DEFENSIVE
-    }
-end note
-
-class CuriousAnimal extends Temperament {
-    +getAnimalState() : AnimalState
-}
-
-note left of CuriousAnimal::getAnimalState
-    getAnimalState() {
-        return AnimalState.CURIOUS
-    }
-end note
-
-enum State {
-    CALM
-    ALERTED
-    DEFENSIVE
-    CURIOUS
-    AGGRESSIVE
-    FLEEING
-    ATTACKING
-    STABILIZED
-    CRITICAL
-}
-
-class Animal {
-    -temperament : Temperament {getter, setter}
-    -state : State {getter, setter}
-
-    +Animal(...)
-    +getTemperament() : Temprament
-    +setTemperament(Temprament temperament) : void
-    +injure() : void
-    +stabilize() : void
-    +applyInjury() : void
-    +reactToRanger(Ranger ranger) : void
-}
-
-note left of Animal::Animal
-    Animal(..., temperament) <<Updated>> {
-        ...
-        this.temperament := temperament
-        this.state := AnimalState.CALM
-    }
-end note
-
-enum Equipment {
-    TRANQUILIZER_KIT
-    MEDICAL_KIT
-}
-
-class Vehicle {
-    ...
-    -equipments: Map<Equipment, int> {getter}
-
-    +Vehicle(...)
-    +getEquipments() : Map<Equipment, int>
-    +hasEquipment(Equipment equipment) : boolean
-    +addEquipment(Equipment equipment) : void
-    +removeEquipment(Equipment equipment) : void
-}
-
 note left of Vehicle::Vehicle
     Vehicle(...) {
         ...
@@ -139,9 +139,9 @@ note left of Vehicle::Vehicle
     }
 end note
 
-note right of Vehicle::getEquipments
+note left of Vehicle::getEquipments
     getEquipments() {
-        return ths.equipments
+        return this.equipments
     }
 end note
 
@@ -151,8 +151,14 @@ note right of Vehicle::hasEquipment
     }
 end note
 
-Animal --- Temprament : <<uses>>
+' Relationships between classes
+Animal "1" *-- "1" Temperament : <<uses>>
 Animal --- State : <<uses>>
+
+Temperament <|-- AggressiveAnimal
+Temperament <|-- PassiveAnimal
+Temperament <|-- DefensiveAnimal
+Temperament <|-- CuriousAnimal
 
 Vehicle --- Equipment : <<uses>>
 Ranger --- Vehicle : <<uses>>
