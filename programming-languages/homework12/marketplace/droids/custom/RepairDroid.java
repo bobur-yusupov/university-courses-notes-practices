@@ -15,7 +15,8 @@ public class RepairDroid extends Droid {
     }
 
     public void repairPart(DroidPart droidPart) {
-        droidPart.setDamage(droidPart.getDamage() - 1);
+        int newDamage = Math.max(0, droidPart.getDamage() - 1);
+        droidPart.setDamage(newDamage);
         this.repairAmount += 1;
         this.reducePower(8);
     }
