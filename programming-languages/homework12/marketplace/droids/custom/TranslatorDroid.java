@@ -15,9 +15,9 @@ public class TranslatorDroid extends Droid {
         }
 
         String translatedText;
-        if (language == "huttese") {
+        if ("huttese".equals(language)) {
             translatedText = shiftCharacters(s, 3);
-        } else if (language == "binary") {
+        } else if ("binary".equals(language)) {
             translatedText = shiftCharacters(s, 1);
         } else {
             return "Unknown language";
