@@ -48,9 +48,12 @@ public class Jawa implements Seller {
 
     private int applyDiscount(int totalPrice) {
         double discount = haggle();
-        if (discount == 0) {
-            return totalPrice;
+        if (discount > 0) {
+            int discountAmount = (int) (totalPrice * discount);
+            return totalPrice - discountAmount;
         }
+
+        return totalPrice;
 
         int discountAmount = (int) (totalPrice * discount);
         return totalPrice - discountAmount;
