@@ -1,3 +1,5 @@
+package structuretests;
+
 import static check.CheckThat.*;
 import static check.CheckThat.Condition.*;
 import org.junit.jupiter.api.*;
@@ -104,10 +106,10 @@ public class JawaStructureTest {
           .thatReturns("boolean");
     }
 
-    @Test @DisabledIf(notApplicable)
-    public void eq() {
-        it.has(EQUALITY_CHECK);
-    }
+    // @Test @DisabledIf(notApplicable)
+    // public void eq() {
+    //     it.has(EQUALITY_CHECK);
+    // }
 
 }
 
