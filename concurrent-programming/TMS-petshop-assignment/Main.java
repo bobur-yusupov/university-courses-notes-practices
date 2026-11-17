@@ -10,12 +10,10 @@ import petshop.pet.Pet;
 import petshop.pet.SenegalParrot;
 import petshop.pet.TurkishAngora;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
@@ -69,22 +67,29 @@ public class Main {
         }
         executor.submit(cashier);
 
-        List<Future<?>> customerTasks = new ArrayList<>();
+        // every customer counts down when it is done (finally: even if it fails)
+        CountDownLatch customersDone = new CountDownLatch(parents.size() + children.size());
         for (Parent parent : parents) {
-            customerTasks.add(executor.submit(parent));
+            executor.submit(() -> {
+                try {
+                    parent.run();
+                } finally {
+                    customersDone.countDown();
+                }
+            });
         }
         for (Child child : children) {
-            customerTasks.add(executor.submit(child));
+            executor.submit(() -> {
+                try {
+                    child.run();
+                } finally {
+                    customersDone.countDown();
+                }
+            });
         }
 
         // 6. wait until all customer tasks have finished
-        for (Future<?> task : customerTasks) {
-            try {
-                task.get();
-            } catch (ExecutionException e) {
-                System.err.println("A customer task failed: " + e.getCause());
-            }
-        }
+        customersDone.await();
 
         // 7. stop the pets and the cashier (the cashier finishes queued payments first)
         executor.shutdownNow();

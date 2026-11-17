@@ -2,6 +2,7 @@ package petshop;
 
 import petshop.pet.Pet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -28,9 +29,12 @@ public class PetShop {
 
     public Pet getRandomPet() {
         // only pets that have not been selected yet are available
-        List<Pet> available = pets.stream()
-                .filter(pet -> !pet.isSelected())
-                .toList();
+        List<Pet> available = new ArrayList<>();
+        for (Pet pet : pets) {
+            if (!pet.isSelected()) {
+                available.add(pet);
+            }
+        }
         if (available.isEmpty()) {
             return null;
         }

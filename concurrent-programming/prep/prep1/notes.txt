@@ -1,0 +1,5 @@
+Notes
+
+1. Starting a thread first does not guarantee that it finishes first. 
+   Scheduling and the time each task takes affect the completion order.
+

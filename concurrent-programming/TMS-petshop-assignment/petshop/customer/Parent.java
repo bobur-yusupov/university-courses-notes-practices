@@ -4,8 +4,6 @@ import petshop.CheckoutRequest;
 import petshop.PetShop;
 import petshop.pet.Pet;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -48,14 +46,16 @@ public class Parent extends Customer {
             // wait until every child has finished choosing
             childrenFinishedChoosing.await();
 
-            // all children have put their pet (if any) into the queue before counting down
-            List<Pet> pets = new ArrayList<>();
-            selectedPets.drainTo(pets);
-
-            for (Pet pet : pets) {
+            // all children have put their pet (if any) into the queue before counting down,
+            // so we can take pets until the queue is empty
+            int count = 0;
+            Pet pet = selectedPets.poll();
+            while (pet != null) {
                 petShop.goToCheckout(new CheckoutRequest(this, pet));
+                count++;
+                pet = selectedPets.poll();
             }
-            System.out.println(name + " paid for " + pets.size() + " pet(s): " + pets);
+            System.out.println(name + " sent " + count + " pet(s) to the checkout");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } finally {
