@@ -5,9 +5,12 @@
 #include <stdlib.h>
 %}
 
-DIGIT  		[0-9]
-WS          [ \t\n]
-LETTER      [a-zA-Z]
+DIGIT  		  [0-9]
+WS            [ \t\n]
+LETTER        [a-zA-Z]
+ID_PREFIX     ({LETTER}|_)*
+EVEN_SUFFIX   [02468]{DIGIT}({DIGIT}{DIGIT})*
+ODD_SUFFIX    [13579]({DIGIT}{DIGIT})*
 
 %%
 
@@ -48,7 +51,9 @@ false       std::cout << "T_FALSE" << std::endl;
 
 "#".*\n    // nothing to do
 
-{LETTER}({LETTER}|{DIGIT}|_)*    std::cout << "T_ID" << std::endl;
+// {LETTER}({LETTER}|{DIGIT}|_)*    std::cout << "T_ID" << std::endl;              // <-- v1
+// ({LETTER}|_)+{DIGIT}*  std::cout << "T_ID" << std::endl;                        // <-- v2
+{ID_PREFIX}({EVEN_SUFFIX}|{ODD_SUFFIX})?   std::cout << "T_ID" << std::endl;       // <-- v3
 
 {WS}+   // nothing to do
 
