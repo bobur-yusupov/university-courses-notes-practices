@@ -51,8 +51,8 @@ false       std::cout << "T_FALSE" << std::endl;
 
 "#".*\n    // nothing to do
 
-// {LETTER}({LETTER}|{DIGIT}|_)*    std::cout << "T_ID" << std::endl;              // <-- v1
-// ({LETTER}|_)+{DIGIT}*  std::cout << "T_ID" << std::endl;                        // <-- v2
+	/* {LETTER}({LETTER}|{DIGIT}|_)*    std::cout << "T_ID" << std::endl;              <-- v1 */
+	/* ({LETTER}|_)+{DIGIT}*  std::cout << "T_ID" << std::endl;                        <-- v2 */
 {ID_PREFIX}({EVEN_SUFFIX}|{ODD_SUFFIX})?   std::cout << "T_ID" << std::endl;       // <-- v3
 
 {WS}+   // nothing to do
