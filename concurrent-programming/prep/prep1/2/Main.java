@@ -2,10 +2,17 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         Thread download = new Thread(() -> {
             System.out.println("Start downloading...");
-            for (int i = 1; i <= 5; i++) {
-                System.out.println(
-                    Thread.currentThread().getName() + ": step " + i
-                );
+
+            try {
+                for (int i = 1; i <= 5; i++) {
+                    System.out.println(
+                        Thread.currentThread().getName() + ": step " + i
+                    );
+
+                    Thread.sleep(1000);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
         }, "download");
 
@@ -21,8 +28,8 @@ public class Main {
         download.start();
         music.start();
 
-        download.join(); // music does not wait 
-        music.join();
+        download.join();
+        music.join(); // music does not wait for download
         
         System.out.println("All workers finished");
     }
