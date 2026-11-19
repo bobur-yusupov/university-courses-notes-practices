@@ -108,11 +108,9 @@ false       std::cout << "T_FALSE" << std::endl;
     exit(1);
 }
 {DIGIT}+	                               std::cout << "T_NUM" << std::endl;
-
-
-    /* Comments */
 "/*"([^*]|"*"+[^*/])*"*"+"/"      {}
-
+\"([^"][^"][^"])+\"                                          std::cout << "T_STRING" << std::endl;
+(2[2-9]|[3-9][0-9])-(0[1-9]|1[0-2])-([0-2][1-9]|3[01])       std::cout << "T_DATE" << std::endl;
 
 
 {WS}+   // nothing to do
