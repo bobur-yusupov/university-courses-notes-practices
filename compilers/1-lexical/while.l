@@ -8,9 +8,29 @@
 DIGIT  		  [0-9]
 WS            [ \t\n]
 LETTER        [a-zA-Z]
-ID_PREFIX     ({LETTER}|_)*
+ID_PREFIX     ({LETTER}|_)+
 EVEN_SUFFIX   [02468]{DIGIT}({DIGIT}{DIGIT})*
 ODD_SUFFIX    [13579]({DIGIT}{DIGIT})*
+
+/* Binary components */
+BINARY_PREFIX   "0b"
+BINARY_SUFFIX   [01]+
+
+/* Octal literal components */
+OCTAL_PREFIX    "0o"
+OCTAL_SUFFIX    [0-7]+
+
+/* Hexadecimal literal components */
+HEXAL_PREFIX    "0x"
+HEXAL_SUFFIX    [0-9a-fA-F]+
+
+/* 14-base literal components */
+BASE14_PREFIX   "14"
+BASE14_SUFFIX   [0-9a-dA-D]+
+
+/* 60-base literal components */
+BASE60_PREFIX  "60"
+BASE60_DIGIT   [0-5][0-9]
 
 %%
 
@@ -45,15 +65,19 @@ mod         std::cout << "T_MOD" << std::endl;
 "("         std::cout << "T_OPEN" << std::endl;
 ")"         std::cout << "T_CLOSE" << std::endl;
 
-{DIGIT}+	std::cout << "T_NUM" << std::endl;
 true        std::cout << "T_TRUE" << std::endl;
 false       std::cout << "T_FALSE" << std::endl;
 
 "#".*\n    // nothing to do
 
-	/* {LETTER}({LETTER}|{DIGIT}|_)*    std::cout << "T_ID" << std::endl;              <-- v1 */
-	/* ({LETTER}|_)+{DIGIT}*  std::cout << "T_ID" << std::endl;                        <-- v2 */
-{ID_PREFIX}({EVEN_SUFFIX}|{ODD_SUFFIX})?   std::cout << "T_ID" << std::endl;       // <-- v3
+
+{ID_PREFIX}({EVEN_SUFFIX}|{ODD_SUFFIX})?   std::cout << "T_ID" << std::endl;
+{BINARY_PREFIX}{BINARY_SUFFIX}             std::cout << "T_BINARY" << std::endl;
+{OCTAL_PREFIX}{OCTAL_SUFFIX}               std::cout << "T_OCTAL" << std::endl;
+{HEXAL_PREFIX}{HEXAL_SUFFIX}               std::cout << "T_HEXAL" << std::endl;
+{BASE14_PREFIX}{BASE14_SUFFIX}             std::cout << "T_BASE14" << std::endl;
+{BASE60_PREFIX}{BASE60_DIGIT}+             std::cout << "T_BASE60" << std::endl;
+{DIGIT}+	                               std::cout << "T_NUM" << std::endl;
 
 {WS}+   // nothing to do
 
