@@ -109,6 +109,12 @@ false       std::cout << "T_FALSE" << std::endl;
 }
 {DIGIT}+	                               std::cout << "T_NUM" << std::endl;
 
+
+    /* Comments */
+"/*"([^*]|"*"+[^*/])*"*"+"/"      {}
+
+
+
 {WS}+   // nothing to do
 
 . {
