@@ -1,0 +1,15 @@
+program inc1234
+    integer try6;
+begin
+    skip;
+    /* it's a comment 
+        /
+       apple
+       + -
+    */
+    skip;
+    /* second 
+    */
+    skip;
+    /***/
+end

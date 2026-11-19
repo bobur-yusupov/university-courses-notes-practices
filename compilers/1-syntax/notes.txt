@@ -1,0 +1,14 @@
+DIGIT = [0-9]
+
+Odd first digit -> odd total number of digits
+
+We are expected to have total (including head) odd number of digits
+
+[13579]            <- first element enforcement to be digit
+({DIGIT}{DIGIT})*  <-- promising at least 2 digits after first digit
+
+Beispielen: 1, 102, 34567
+
+
+Even:
+[02468]{DIGIT}({DIGIT}{DIGIT})*
