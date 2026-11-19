@@ -109,8 +109,12 @@ false       std::cout << "T_FALSE" << std::endl;
 }
 {DIGIT}+	                               std::cout << "T_NUM" << std::endl;
 "/*"([^*]|"*"+[^*/])*"*"+"/"      {}
-\"([^"][^"][^"])+\"                                          std::cout << "T_STRING" << std::endl;
-(2[2-9]|[3-9][0-9])-(0[1-9]|1[0-2])-([0-2][1-9]|3[01])       std::cout << "T_DATE" << std::endl;
+\"([^"][^"][^"])+\"                                                std::cout << "T_STRING" << std::endl;
+(2[2-9]|[3-9][0-9])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])       std::cout << "T_DATE" << std::endl;
+{DIGIT}{DIGIT}-{DIGIT}{DIGIT}-{DIGIT}{DIGIT} {
+    std::cerr << "Line " << lineno() << ": Invalid date literal." << std::endl;
+    exit(1);
+}
 
 
 {WS}+   // nothing to do
