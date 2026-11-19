@@ -72,11 +72,41 @@ false       std::cout << "T_FALSE" << std::endl;
 
 
 {ID_PREFIX}({EVEN_SUFFIX}|{ODD_SUFFIX})?   std::cout << "T_ID" << std::endl;
-{BINARY_PREFIX}{BINARY_SUFFIX}             std::cout << "T_BINARY" << std::endl;
-{OCTAL_PREFIX}{OCTAL_SUFFIX}               std::cout << "T_OCTAL" << std::endl;
-{HEXAL_PREFIX}{HEXAL_SUFFIX}               std::cout << "T_HEXAL" << std::endl;
-{BASE14_PREFIX}{BASE14_SUFFIX}             std::cout << "T_BASE14" << std::endl;
-{BASE60_PREFIX}{BASE60_DIGIT}+             std::cout << "T_BASE60" << std::endl;
+{BINARY_PREFIX}{BINARY_SUFFIX} {
+    std::cout << "T_BINARY" << std::endl;
+}
+{BINARY_PREFIX}{DIGIT}* {
+    std::cerr << "Line " << lineno() << ": Invalid binary literal." << std::endl;
+    exit(1);
+}
+{OCTAL_PREFIX}{OCTAL_SUFFIX} {
+    std::cout << "T_OCTAL" << std::endl;
+}
+{OCTAL_PREFIX}{DIGIT}* {
+    std::cerr << "Line " << lineno() << ": Invalid octal literal." << std::endl;
+    exit(1);
+}
+{HEXAL_PREFIX}{HEXAL_SUFFIX} {
+    std::cout << "T_HEXAL" << std::endl;
+}
+{HEXAL_PREFIX}[0-9a-zA-Z]* {
+    std::cerr << "Line " << lineno() << ": Invalid hexal literal." << std::endl;
+    exit(1);
+}
+{BASE14_PREFIX}{BASE14_SUFFIX} {
+    std::cout << "T_BASE14" << std::endl;
+}
+{BASE14_PREFIX}[0-9a-zA-Z]* {
+    std::cerr << "Line " << lineno() << ": Invalid base-14 literal." << std::endl;
+    exit(1);
+}
+{BASE60_PREFIX}{BASE60_DIGIT}+ {
+    std::cout << "T_BASE60" << std::endl;
+}
+{BASE60_PREFIX}{DIGIT}* {
+    std::cerr << "Line " << lineno() << ": Invalid base-60 literal." << std::endl;
+    exit(1);
+}
 {DIGIT}+	                               std::cout << "T_NUM" << std::endl;
 
 {WS}+   // nothing to do
