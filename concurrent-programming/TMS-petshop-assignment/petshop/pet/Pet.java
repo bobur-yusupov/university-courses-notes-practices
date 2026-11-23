@@ -5,8 +5,8 @@ import petshop.State;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Pet implements Runnable {
-    protected String name;
-    protected int age;
+    protected final String name;
+    protected final int age;
     protected State state;
     protected boolean needsFood, needsWater, isSelected;
 
@@ -18,11 +18,11 @@ public abstract class Pet implements Runnable {
 
     public abstract int getPrice();
 
-    public synchronized String getName() {
+    public String getName() {
         return name;
     }
 
-    public synchronized int getAge() {
+    public int getAge() {
         return age;
     }
 

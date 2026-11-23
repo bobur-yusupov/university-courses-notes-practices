@@ -4,6 +4,8 @@ import petshop.CheckoutRequest;
 import petshop.PetShop;
 import petshop.pet.Pet;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -11,14 +13,14 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Parent extends Customer {
     private int numberOfChildren;
     private BlockingQueue<Pet> selectedPets;
-    private BlockingQueue<Boolean> familyFinished;
+    private CountDownLatch timeToGoHome;
     private CountDownLatch childrenFinishedChoosing;
 
     public Parent(String name, PetShop petShop, int numberOfChildren) {
         super(name, petShop);
         this.numberOfChildren = numberOfChildren;
         this.selectedPets = new LinkedBlockingQueue<>();
-        this.familyFinished = new LinkedBlockingQueue<>();
+        this.timeToGoHome = new CountDownLatch(1);
         this.childrenFinishedChoosing = new CountDownLatch(numberOfChildren);
     }
 
@@ -35,7 +37,7 @@ public class Parent extends Customer {
     }
 
     public void awaitFamilyFinished() throws InterruptedException {
-        familyFinished.take();
+        timeToGoHome.await();
     }
 
     @Override
@@ -48,21 +50,25 @@ public class Parent extends Customer {
 
             // all children have put their pet (if any) into the queue before counting down,
             // so we can take pets until the queue is empty
-            int count = 0;
-            Pet pet = selectedPets.poll();
-            while (pet != null) {
-                petShop.goToCheckout(new CheckoutRequest(this, pet));
-                count++;
-                pet = selectedPets.poll();
+            List<CheckoutRequest> requests = new ArrayList<>();
+            while (!selectedPets.isEmpty()) {
+                Pet pet = selectedPets.take();
+                CheckoutRequest request = new CheckoutRequest(this, pet);
+                petShop.goToCheckout(request);
+                requests.add(request);
             }
-            System.out.println(name + " sent " + count + " pet(s) to the checkout");
+            System.out.println(name + " is paying for " + requests.size() + " pet(s)");
+
+            // wait until the cashier has processed every payment of this family
+            for (CheckoutRequest request : requests) {
+                request.awaitPayment();
+            }
+            System.out.println(name + " paid for everything, time to go home");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } finally {
-            // one token per child: time to go home
-            for (int i = 0; i < numberOfChildren; i++) {
-                familyFinished.offer(Boolean.TRUE);
-            }
+            // tell the children it is time to go home
+            timeToGoHome.countDown();
             petShop.leaveShop();
             System.out.println(name + " left the shop");
         }

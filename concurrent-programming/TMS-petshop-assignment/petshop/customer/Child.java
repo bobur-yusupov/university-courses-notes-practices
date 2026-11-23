@@ -36,8 +36,8 @@ public class Child extends Customer {
             }
 
             if (selectedPet != null) {
-                parent.addSelectedPet(selectedPet);
                 System.out.println(name + " chose " + selectedPet);
+                parent.addSelectedPet(selectedPet);
             } else {
                 System.out.println(name + " could not find a pet");
             }

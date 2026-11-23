@@ -63,11 +63,6 @@ public class PetShop {
         return checkoutQueue.take();
     }
 
-    public CheckoutRequest pollCheckout() {
-        // non-blocking: null if no request is waiting
-        return checkoutQueue.poll();
-    }
-
     public synchronized void processCheckout(CheckoutRequest request) {
         Pet pet = request.getPet();
         int price = pet.getPrice();
@@ -76,6 +71,7 @@ public class PetShop {
         System.out.println("[Checkout] " + request.getParent().getName()
                 + " bought " + pet.getClass().getSimpleName() + " " + pet
                 + " for " + price + " | revenue so far: " + revenue);
+        request.markPaid();
     }
 
     public synchronized int getRevenue() {

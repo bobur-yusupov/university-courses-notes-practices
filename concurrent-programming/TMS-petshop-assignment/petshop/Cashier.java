@@ -15,11 +15,7 @@ public class Cashier implements Runnable {
                 petShop.processCheckout(request);
             }
         } catch (InterruptedException e) {
-            // the simulation is shutting down: finish the payments already in the queue
-            CheckoutRequest remaining;
-            while ((remaining = petShop.pollCheckout()) != null) {
-                petShop.processCheckout(remaining);
-            }
+            // all purchases are done and the simulation is shutting down
             Thread.currentThread().interrupt();
         }
     }
