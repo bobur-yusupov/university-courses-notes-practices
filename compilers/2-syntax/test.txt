@@ -1,0 +1,9 @@
+program test
+integer a;
+begin
+    a := 5;
+    a++;
+    ++a;
+    a--;
+    --a;
+end

@@ -19,6 +19,8 @@
 %token T_NUM
 %token T_ID
 
+%token T_INC T_DEC
+
 // later line = the operator has higher priority
 %left T_OR T_AND
 %left T_EQ
@@ -103,6 +105,16 @@ statement:
     loop
     {
         std::cout << "statement -> loop" << std::endl;
+    }
+|
+    increment
+    {
+        std::cout << "statement -> increment" << std::endl;
+    }
+|
+    decrement
+    {
+        std::cout << "statement -> decrement" << std::endl;
     }
 ;
 
@@ -226,4 +238,16 @@ expression:
     {
         std::cout << "expression -> T_OPEN expression T_CLOSE" << std::endl;
     }
+;
+
+increment:
+    T_ID T_INC T_SEMICOLON
+    |
+    T_INC T_ID T_SEMICOLON
+;
+
+decrement:
+    T_ID T_DEC T_SEMICOLON
+    |
+    T_DEC T_ID T_SEMICOLON
 ;

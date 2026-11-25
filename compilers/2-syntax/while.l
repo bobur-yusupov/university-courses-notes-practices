@@ -51,6 +51,9 @@ false       return Parser::T_FALSE;
 
 {LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;
 
+"++"        return Parser::T_INC;
+"--"        return Parser::T_DEC;
+
 {WS}+   // nothing to do
 
 . {
