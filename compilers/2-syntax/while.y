@@ -20,6 +20,7 @@
 %token T_ID
 
 %token T_INC T_DEC
+%token T_FOR T_TO
 
 // later line = the operator has higher priority
 %left T_OR T_AND
@@ -115,6 +116,11 @@ statement:
     decrement
     {
         std::cout << "statement -> decrement" << std::endl;
+    }
+|
+    for_loop
+    {
+        std::cout << "statement -> for_loop" << std::endl;
     }
 ;
 
@@ -250,4 +256,8 @@ decrement:
     T_ID T_DEC T_SEMICOLON
     |
     T_DEC T_ID T_SEMICOLON
+;
+
+for_loop:
+    T_FOR T_ID T_ASSIGN expression T_TO expression T_DO statements T_DONE
 ;

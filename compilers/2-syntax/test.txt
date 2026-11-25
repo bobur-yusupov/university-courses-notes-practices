@@ -1,9 +1,8 @@
 program test
-integer a;
+integer i;
 begin
-    a := 5;
-    a++;
-    ++a;
-    a--;
-    --a;
+    for i := 1 to 10 do
+        write(i);
+        skip;
+    done
 end

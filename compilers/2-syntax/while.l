@@ -49,10 +49,13 @@ false       return Parser::T_FALSE;
 
 "#".*\n    // nothing to do
 
-{LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;
 
 "++"        return Parser::T_INC;
 "--"        return Parser::T_DEC;
+for         return Parser::T_FOR;
+to          return Parser::T_TO;
+
+{LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;
 
 {WS}+   // nothing to do
 
