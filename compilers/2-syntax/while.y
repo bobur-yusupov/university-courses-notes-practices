@@ -122,12 +122,21 @@ statement:
     {
         std::cout << "statement -> for_loop" << std::endl;
     }
+|
+    c_for_loop
+    {
+        std::cout << "statement -> c_for_loop" << std::endl;
+    }
+;
+
+assignment_core:
+    T_ID T_ASSIGN expression
 ;
 
 assignment:
-    T_ID T_ASSIGN expression T_SEMICOLON
+    assignment_core T_SEMICOLON
     {
-        std::cout << "assignment -> T_ID T_ASSIGN expression T_SEMICOLON" << std::endl;
+        std::cout << "assignment -> assignment_core T_SEMICOLON" << std::endl;
     }
 ;
 
@@ -246,18 +255,42 @@ expression:
     }
 ;
 
-increment:
-    T_ID T_INC T_SEMICOLON
+increment_core:
+    T_ID T_INC
     |
-    T_INC T_ID T_SEMICOLON
+    T_INC T_ID
+;
+
+increment:
+    increment_core T_SEMICOLON
+;
+
+decrement_core:
+    T_ID T_DEC
+    |
+    T_DEC T_ID
 ;
 
 decrement:
-    T_ID T_DEC T_SEMICOLON
-    |
-    T_DEC T_ID T_SEMICOLON
+    decrement_core T_SEMICOLON
 ;
 
 for_loop:
     T_FOR T_ID T_ASSIGN expression T_TO expression T_DO statements T_DONE
+;
+
+c_for_loop:
+    T_FOR T_OPEN
+    assignment_core T_SEMICOLON
+    expression T_SEMICOLON
+    for_update T_CLOSE
+    T_DO statements T_DONE
+;
+
+for_update:
+    increment_core
+    |
+    decrement_core
+    |
+    assignment_core
 ;
