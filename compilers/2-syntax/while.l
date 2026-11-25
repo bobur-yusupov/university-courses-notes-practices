@@ -54,6 +54,9 @@ false       return Parser::T_FALSE;
 "--"        return Parser::T_DEC;
 for         return Parser::T_FOR;
 to          return Parser::T_TO;
+time        return Parser::T_TIME;
+hour        return Parser::T_HOUR;
+minute      return Parser::T_MINUTE;
 
 {LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;
 

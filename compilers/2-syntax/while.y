@@ -21,6 +21,7 @@
 
 %token T_INC T_DEC
 %token T_FOR T_TO
+%token T_TIME T_HOUR T_MINUTE
 
 // later line = the operator has higher priority
 %left T_OR T_AND
@@ -62,6 +63,11 @@ declaration:
     T_BOOLEAN T_ID T_SEMICOLON
     {
         std::cout << "declaration -> T_BOOLEAN T_ID T_SEMICOLON" << std::endl;
+    }
+|
+    T_TIME T_HOUR T_MINUTE
+    {
+        std::cout << "declaration -> T_TIME T_HOUR T_MINUTE" << std::endl;
     }
 ;
 
