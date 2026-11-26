@@ -161,21 +161,21 @@ write:
 ;
 
 branch:
-    T_IF expression T_THEN statements T_ENDIF
+    T_IF expression block
     {
-        std::cout << "branch -> T_IF expression T_THEN statements T_ENDIF" << std::endl;
+        std::cout << "branch -> T_IF expression block" << std::endl;
     }
 |
-    T_IF expression T_THEN statements T_ELSE statements T_ENDIF
+    T_IF expression block T_ELSE block
     {
-        std::cout << "branch -> T_IF expression T_THEN statements T_ELSE statements T_ENDIF" << std::endl;
+        std::cout << "branch -> T_IF expression block T_ELSE block" << std::endl;
     }
 ;
 
 loop:
-    T_WHILE expression T_DO statements T_DONE
+    T_WHILE expression block
     {
-        std::cout << "loop -> T_WHILE expression T_DO statements T_DONE" << std::endl;
+        std::cout << "loop -> T_WHILE expression block" << std::endl;
     }
 ;
 
@@ -297,7 +297,7 @@ decrement:
 ;
 
 for_loop:
-    T_FOR T_ID T_ASSIGN expression T_TO expression T_DO statements T_DONE
+    T_FOR T_ID T_ASSIGN expression T_TO expression block
 ;
 
 c_for_loop:
@@ -305,7 +305,7 @@ c_for_loop:
     assignment_core T_SEMICOLON
     expression T_SEMICOLON
     for_update T_CLOSE
-    T_DO statements T_DONE
+    block
 ;
 
 for_update:
@@ -314,4 +314,8 @@ for_update:
     decrement_core
     |
     assignment_core
+;
+
+block:
+    T_BEGIN statements T_END
 ;
