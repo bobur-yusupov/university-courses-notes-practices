@@ -61,19 +61,9 @@ declarations:
 ;
 
 declaration:
-    T_INTEGER T_ID T_SEMICOLON
+    type variables T_SEMICOLON
     {
-        std::cout << "declaration -> T_INTEGER T_ID T_SEMICOLON" << std::endl;
-    }
-|
-    T_BOOLEAN T_ID T_SEMICOLON
-    {
-        std::cout << "declaration -> T_BOOLEAN T_ID T_SEMICOLON" << std::endl;
-    }
-|
-    T_TIME T_ID T_SEMICOLON
-    {
-        std::cout << "declaration -> T_TIME T_ID T_SEMICOLON" << std::endl;
+        std::cout << "declaration -> type variables T_SEMICOLON" << std::endl;
     }
 |
     T_INTEGER T_ARRAY T_ID T_LBRACKET T_NUM T_RBRACKET T_SEMICOLON
@@ -500,4 +490,14 @@ parallel_core:
 
 parallel_statement:
     parallel_core T_SEMICOLON
+;
+
+variable:
+    T_ID
+;
+
+variables:
+    variable
+|
+    variable T_COMMA variables
 ;
