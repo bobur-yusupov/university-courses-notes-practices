@@ -77,7 +77,10 @@ declaration:
         std::cout << "declaration -> T_INTEGER T_ARRAY T_ID T_LBRACKET T_NUM T_RBRACKET T_SEMICOLON" << std::endl;
     }
 |
-    T_FUNCTION T_BOOLEAN T_ID
+    function_declaration
+    {
+        std::cout << "declaration -> function_declaration" << std::endl;
+    }
 ;
 
 statements:
@@ -147,6 +150,16 @@ statement:
     {
         std::cout << "statement -> array_initialization" << std::endl;
     }
+|
+    return_statement
+    {
+        std::cout << "statement -> return_statement" << std::endl;
+    }
+|
+    function_call T_SEMICOLON
+    {
+        std::cout << "statement -> function T_SEMICOLON" << std::endl;
+    }
 ;
 
 assignment_core:
@@ -191,12 +204,27 @@ branch:
     {
         std::cout << "branch -> T_IF expression block T_ELSE block" << std::endl;
     }
+|
+    T_IF expression T_THEN statements T_ENDIF
+    {
+        std::cout << "branch -> T_IF expression T_THEN statements T_ENDIF" << std::endl;
+    }
+|
+    T_IF expression T_THEN statements T_ELSE statements T_ENDIF
+    {
+        std::cout << "branch -> T_IF expression T_THEN statements T_ELSE statements T_ENDIF" << std::endl;
+    }
 ;
 
 loop:
     T_WHILE expression block
     {
         std::cout << "loop -> T_WHILE expression block" << std::endl;
+    }
+|
+    T_WHILE expression T_DO statements T_DONE
+    {
+        std::cout << "loop -> T_WHILE expression T_DO statements T_DONE" << std::endl;
     }
 ;
 
@@ -300,6 +328,11 @@ expression:
     {
         std::cout << "expression -> array_access" << std::endl;
     }
+|
+    function_call
+    {
+        std::cout << "expression -> function_call" << std::endl;
+    }
 ;
 
 increment_core:
@@ -366,4 +399,48 @@ type:
     T_BOOLEAN
 |
     T_TIME
+;
+
+parameter:
+    type T_ID
+;
+
+parameters:
+    parameter
+|
+    parameter T_COMMA parameters
+;
+
+optional_parameters:
+    /* empty */
+|
+    parameters
+;
+
+function_declaration:
+    T_FUNCTION type T_ID T_OPEN optional_parameters T_CLOSE
+    declarations block T_SEMICOLON
+|
+    T_FUNCTION T_ID T_OPEN optional_parameters T_CLOSE
+    declarations block T_SEMICOLON
+;
+
+return_statement:
+    T_RETURN expression T_SEMICOLON
+;
+
+arguments:
+    expression
+|
+    expression T_COMMA arguments
+;
+
+optional_arguments:
+    /* empty */
+|
+    arguments
+;
+
+function_call:
+    T_ID T_OPEN optional_arguments T_CLOSE
 ;
