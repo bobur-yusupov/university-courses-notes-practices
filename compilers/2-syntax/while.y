@@ -25,6 +25,8 @@
 %token T_ARRAY T_LBRACKET T_RBRACKET T_LBRACE T_RBRACE T_COMMA
 %token T_FUNCTION T_RETURN
 
+%token T_QUESTION_MARK T_DOUBLE_DOT
+
 // later line = the operator has higher priority
 %left T_SHIFT
 %left T_OR T_AND
@@ -338,6 +340,11 @@ expression:
     expression T_SHIFT expression
     {
         std::cout << "expression -> expression T_SHIFT expression" << std::endl;
+    }
+|
+    T_OPEN expression T_QUESTION_MARK expression T_DOUBLE_DOT expression T_CLOSE
+    {
+        std::cout << "expression -> T_OPEN expression ? expression : expression T_CLOSE" << std::endl;
     }
 ;
 

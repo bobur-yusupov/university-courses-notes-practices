@@ -67,6 +67,8 @@ function    return Parser::T_FUNCTION;
 return      return Parser::T_RETURN;
 
 ">>"        return Parser::T_SHIFT;
+"?"         return Parser::T_QUESTION_MARK;
+":"         return Parser::T_DOUBLE_DOT;
 
 (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])       return Parser::T_TIME_LITERAL;
 
