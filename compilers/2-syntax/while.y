@@ -22,6 +22,7 @@
 %token T_INC T_DEC
 %token T_FOR T_TO
 %token T_TIME T_HOUR T_MINUTE T_TIME_LITERAL
+%token T_ARRAY T_LBRACKET T_RBRACKET T_LBRACE T_RBRACE T_COMMA
 
 // later line = the operator has higher priority
 %left T_OR T_AND
@@ -68,6 +69,11 @@ declaration:
     T_TIME T_ID T_SEMICOLON
     {
         std::cout << "declaration -> T_TIME T_ID T_SEMICOLON" << std::endl;
+    }
+|
+    T_INTEGER T_ARRAY T_ID T_LBRACKET T_NUM T_RBRACKET T_SEMICOLON
+    {
+        std::cout << "declaration -> T_ARRAY T_INTEGER T_ID T_LBRACKET T_NUM T_RBRACKET T_SEMICOLON" << std::endl;
     }
 ;
 

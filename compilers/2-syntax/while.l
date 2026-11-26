@@ -57,6 +57,12 @@ to          return Parser::T_TO;
 time        return Parser::T_TIME;
 hour        return Parser::T_HOUR;
 minute      return Parser::T_MINUTE;
+"["         return Parser::T_LBRACKET;
+"]"         return Parser::T_RBRACKET;
+"{"         return Parser::T_LBRACE;
+"}"         return Parser::T_RBRACE;
+","         return Parser::T_COMMA;
+array       return Parser::T_ARRAY;
 
 (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])       return Parser::T_TIME_LITERAL;
 
