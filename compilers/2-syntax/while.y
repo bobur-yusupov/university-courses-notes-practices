@@ -23,6 +23,7 @@
 %token T_FOR T_TO
 %token T_TIME T_HOUR T_MINUTE T_TIME_LITERAL
 %token T_ARRAY T_LBRACKET T_RBRACKET T_LBRACE T_RBRACE T_COMMA
+%token T_FUNCTION T_RETURN
 
 // later line = the operator has higher priority
 %left T_OR T_AND
@@ -75,6 +76,8 @@ declaration:
     {
         std::cout << "declaration -> T_INTEGER T_ARRAY T_ID T_LBRACKET T_NUM T_RBRACKET T_SEMICOLON" << std::endl;
     }
+|
+    T_FUNCTION T_BOOLEAN T_ID
 ;
 
 statements:
@@ -355,4 +358,12 @@ initializer_values:
 
 array_initialization:
     T_ID T_LBRACKET T_RBRACKET T_EQ T_LBRACE initializer_values T_RBRACE T_SEMICOLON
+;
+
+type:
+    T_INTEGER
+|
+    T_BOOLEAN
+|
+    T_TIME
 ;
