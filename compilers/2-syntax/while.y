@@ -26,6 +26,7 @@
 %token T_FUNCTION T_RETURN
 
 // later line = the operator has higher priority
+%left T_SHIFT
 %left T_OR T_AND
 %left T_EQ
 %left T_LESS T_GR
@@ -332,6 +333,11 @@ expression:
     function_call
     {
         std::cout << "expression -> function_call" << std::endl;
+    }
+|
+    expression T_SHIFT expression
+    {
+        std::cout << "expression -> expression T_SHIFT expression" << std::endl;
     }
 ;
 

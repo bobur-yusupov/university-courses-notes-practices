@@ -1,7 +1,5 @@
 program test
-integer i;
+integer a;
 begin
-    for (i := 0; i < 10; i++;) do
-        write(i);
-    done
+    a := 1 + 2 >> 3;
 end
