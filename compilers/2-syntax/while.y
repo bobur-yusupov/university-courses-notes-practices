@@ -143,6 +143,8 @@ statement:
 
 assignment_core:
     T_ID T_ASSIGN expression
+|
+    array_access T_ASSIGN expression
 ;
 
 assignment:
@@ -156,6 +158,10 @@ read:
     T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
     {
         std::cout << "read -> T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON" << std::endl;
+    }
+    T_READ T_OPEN array_access T_CLOSE T_SEMICOLON
+    {
+        std::cout << "read -> T_READ T_OPEN array_access T_CLOSE T_SEMICOLON" << std::endl;
     }
 ;
 
@@ -280,6 +286,11 @@ expression:
     {
         std::cout << "expression -> T_MINUTE T_OPEN expression T_CLOSE" << std::endl;
     }
+|
+    array_access
+    {
+        std::cout << "expression -> array_access" << std::endl;
+    }
 ;
 
 increment_core:
@@ -324,4 +335,8 @@ for_update:
 
 block:
     T_BEGIN statements T_END
+;
+
+array_access:
+    T_ID T_LBRACKET expression T_RBRACKET
 ;
