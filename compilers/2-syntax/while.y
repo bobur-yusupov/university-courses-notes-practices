@@ -26,6 +26,7 @@
 %token T_FUNCTION T_RETURN
 
 %token T_QUESTION_MARK T_DOUBLE_DOT
+%token T_PARALLELIZATION
 
 // later line = the operator has higher priority
 %left T_SHIFT
@@ -163,6 +164,41 @@ statement:
     {
         std::cout << "statement -> function T_SEMICOLON" << std::endl;
     }
+|
+    parallel_statement
+    {
+        std::cout << "statement -> parallel_statement" << std::endl;
+    }
+;
+
+statement_core:
+    T_SKIP
+|
+    assignment_core
+|
+    increment_core
+|
+    decrement_core
+|
+    T_READ T_OPEN T_ID T_CLOSE
+|
+    T_READ T_OPEN array_access T_CLOSE
+|
+    T_WRITE T_OPEN expression T_CLOSE
+|
+    function_call
+|
+    T_RETURN expression
+|
+    branch
+|
+    loop
+|
+    for_loop
+|
+    c_for_loop
+|
+    parallel_core
 ;
 
 assignment_core:
@@ -456,4 +492,12 @@ optional_arguments:
 
 function_call:
     T_ID T_OPEN optional_arguments T_CLOSE
+;
+
+parallel_core:
+    T_LBRACKET statement_core T_PARALLELIZATION statement_core T_RBRACKET
+;
+
+parallel_statement:
+    parallel_core T_SEMICOLON
 ;
