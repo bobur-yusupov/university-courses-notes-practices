@@ -73,7 +73,7 @@ declaration:
 |
     T_INTEGER T_ARRAY T_ID T_LBRACKET T_NUM T_RBRACKET T_SEMICOLON
     {
-        std::cout << "declaration -> T_ARRAY T_INTEGER T_ID T_LBRACKET T_NUM T_RBRACKET T_SEMICOLON" << std::endl;
+        std::cout << "declaration -> T_INTEGER T_ARRAY T_ID T_LBRACKET T_NUM T_RBRACKET T_SEMICOLON" << std::endl;
     }
 ;
 
@@ -139,6 +139,11 @@ statement:
     {
         std::cout << "statement -> c_for_loop" << std::endl;
     }
+|
+    array_initialization
+    {
+        std::cout << "statement -> array_initialization" << std::endl;
+    }
 ;
 
 assignment_core:
@@ -159,6 +164,7 @@ read:
     {
         std::cout << "read -> T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON" << std::endl;
     }
+|
     T_READ T_OPEN array_access T_CLOSE T_SEMICOLON
     {
         std::cout << "read -> T_READ T_OPEN array_access T_CLOSE T_SEMICOLON" << std::endl;
@@ -339,4 +345,14 @@ block:
 
 array_access:
     T_ID T_LBRACKET expression T_RBRACKET
+;
+
+initializer_values:
+    expression
+|
+    expression T_COMMA initializer_values
+;
+
+array_initialization:
+    T_ID T_LBRACKET T_RBRACKET T_EQ T_LBRACE initializer_values T_RBRACE T_SEMICOLON
 ;
