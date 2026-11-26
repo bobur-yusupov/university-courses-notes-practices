@@ -58,6 +58,8 @@ time        return Parser::T_TIME;
 hour        return Parser::T_HOUR;
 minute      return Parser::T_MINUTE;
 
+(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])       return Parser::T_TIME_LITERAL;
+
 {LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;
 
 {WS}+   // nothing to do
