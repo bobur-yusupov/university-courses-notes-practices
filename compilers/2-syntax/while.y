@@ -19,21 +19,21 @@
 %token T_NUM
 %token T_ID
 
-%token T_INC T_DEC
+%token T_DEC
 %token T_FOR T_TO
 %token T_TIME T_HOUR T_MINUTE T_TIME_LITERAL
 %token T_ARRAY T_LBRACKET T_RBRACKET T_LBRACE T_RBRACE T_COMMA
 %token T_FUNCTION T_RETURN
 
 %token T_QUESTION_MARK T_DOUBLE_DOT
-%token T_PARALLELIZATION T_DUPLICATE
+%token T_PARALLELIZATION T_DUPLICATE T_LIST T_ADDITION_ASSIGNMENT
 
 // later line = the operator has higher priority
 %left T_SHIFT
 %left T_OR T_AND
 %left T_EQ
 %left T_LESS T_GR
-%left T_ADD T_SUB
+%left T_ADD T_SUB T_INC
 %left T_MUL T_DIV T_MOD
 %nonassoc T_NOT
 
@@ -74,6 +74,11 @@ declaration:
     function_declaration
     {
         std::cout << "declaration -> function_declaration" << std::endl;
+    }
+|
+    list_declaration
+    {
+        std::cout << "declaration -> list_declaration" << std::endl;
     }
 ;
 
@@ -200,6 +205,11 @@ assignment_core:
     T_ID T_ASSIGN expression
 |
     array_access T_ASSIGN expression
+|
+    T_ID T_ADDITION_ASSIGNMENT expression
+    {
+        std::cout << "assignment_core -> T_ID T_ADDITION_ASSIGNMENT expression" << std::endl;
+    }
 ;
 
 assignment:
@@ -377,6 +387,16 @@ expression:
     {
         std::cout << "expression -> T_OPEN expression ? expression : expression T_CLOSE" << std::endl;
     }
+|
+    T_LBRACKET initializer_values T_RBRACKET
+    {
+        std::cout << "expression -> T_LBRACKET initializer_values T_RBRACKET" << std::endl;
+    }
+|
+    expression T_INC expression
+    {
+        std::cout << "expression -> expression T_INC expression" << std::endl;
+    }
 ;
 
 increment_core:
@@ -439,10 +459,19 @@ array_initialization:
 
 type:
     T_INTEGER
+    {
+        std::cout << "type -> T_INTEGER" << std::endl;
+    }
 |
     T_BOOLEAN
+    {
+        std::cout << "type -> T_BOOLEAN" << std::endl;
+    }
 |
     T_TIME
+    {
+        std::cout << "type -> T_TIME" << std::endl;
+    }
 ;
 
 parameter:
@@ -520,5 +549,12 @@ duplicate_statement:
     T_DUPLICATE statement
     {
         std::cout << "duplicate_statement -> T_DUPLICATE statement" << std::endl;
+    }
+;
+
+list_declaration:
+    type T_LIST T_ID T_SEMICOLON
+    {
+        std::cout << "list_declaration -> type T_LIST T_ID T_SEMICOLON" << std::endl;
     }
 ;

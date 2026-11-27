@@ -72,6 +72,8 @@ return      return Parser::T_RETURN;
 "||"        return Parser::T_PARALLELIZATION;
 
 duplicate   return Parser::T_DUPLICATE;
+list        return Parser::T_LIST;
+"+="        return Parser::T_ADDITION_ASSIGNMENT;
 
 (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])       return Parser::T_TIME_LITERAL;
 
