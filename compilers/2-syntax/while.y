@@ -27,6 +27,7 @@
 
 %token T_QUESTION_MARK T_DOUBLE_DOT
 %token T_PARALLELIZATION T_DUPLICATE T_LIST T_ADDITION_ASSIGNMENT
+%token T_DOT
 
 // later line = the operator has higher priority
 %left T_SHIFT
@@ -79,6 +80,11 @@ declaration:
     list_declaration
     {
         std::cout << "declaration -> list_declaration" << std::endl;
+    }
+|
+    tuple_declaration
+    {
+        std::cout << "declaration -> tuple_declaration" << std::endl;
     }
 ;
 
@@ -209,6 +215,11 @@ assignment_core:
     T_ID T_ADDITION_ASSIGNMENT expression
     {
         std::cout << "assignment_core -> T_ID T_ADDITION_ASSIGNMENT expression" << std::endl;
+    }
+|
+    tuple_access T_ASSIGN expression
+    {
+        std::cout << "assignment_core -> tuple_access T_ASSIGN expression" << std::endl;
     }
 ;
 
@@ -397,6 +408,11 @@ expression:
     {
         std::cout << "expression -> expression T_INC expression" << std::endl;
     }
+|
+    tuple_access
+    {
+        std::cout << "expression -> tuple_access" << std::endl;
+    }
 ;
 
 increment_core:
@@ -556,5 +572,25 @@ list_declaration:
     type T_LIST T_ID T_SEMICOLON
     {
         std::cout << "list_declaration -> type T_LIST T_ID T_SEMICOLON" << std::endl;
+    }
+;
+
+types:
+    type
+|
+    type T_COMMA types
+;
+
+tuple_declaration:
+    T_LESS types T_GR T_ID T_SEMICOLON
+    {
+        std::cout << "tuple_declaration -> T_LESS types T_GR T_ID T_SEMICOLON" << std::endl;
+    }
+;
+
+tuple_access:
+    T_ID T_DOT T_NUM
+    {
+        std::cout << "tuple_access -> T_ID T_DOT T_NUM" << std::endl;
     }
 ;
