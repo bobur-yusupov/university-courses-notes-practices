@@ -1,0 +1,149 @@
+Description
+General instructions
+
+You have 90 minutes to solve this exam. Each exercise is worth 5 points, for a maximum of 15 points. In the second exercise, you can also get a bonus point. You have to get at 
+least 40%, or 6 points on this exam, otherwise you'll have to complete the retake in December. But remember, that the average of this and the end-term exam should be at least 50%, 
+so you should solve as many exercises as you can. I will give points for partial solutions. Points will get deducted for build errors, and warnings as well. You can download the 
+starter project from the Task Files tab. Unzip it into a folder to begin. This ZIP file contains all the test cases from TMS, plus even more in dedicated folders. You can add more 
+test cases manually if you want. Use the provided Makefile to build the project. To turn in the exam, zip up the WHOLE project (generated files included!) and upload it to TMS. If 
+you have any questions about the exercises, raise your hand. Good luck, have fun!
+
+Commands to build and run the project:
+
+make                               <- build the project
+make clean                         <- clear out all the generated files (usually not needed, unless something goes very wrong)
+./while <path_to_test>             <- run the generated parser on one of the test files
+
+IP addresses (5 points)
+
+Implement an IP address datatype to the WHILE language scanner and parser. Add a way to declare IP addresses with the address keyword. An IP address can either be in the IPv4 or 
+the IPv6 form. IP expressions can be constructed with the @IPv4 or @IPv6 methods, like in the example below. Both of these methods take their argument inside parentheses.
+
+IPv4 addresses consist of four numbers ("octets") separated by periods. Each octet is a number from 0 to 255, and they do not contain leading zeros.
+
+IPv6 addresses consist of eight groups of four hexadecimal digits (digits from 0-9 and letters from A-F), separated by colons. The letter "digits" may be written in uppercase or 
+lowercase, and you may mix them inside the address. (Note: in the official standard, there are also abbreviation rules for IPv6 addresses, but this task doesn't require them.)
+
+IP expressions are not complex expressions. Both (...)@IPv4 and (...)@IPv6 methods should be scanned as a single token!
+
+Example for a working program:
+
+program ip_addresses
+    address ipaddress1;
+    address ipaddress2;
+begin
+    ipaddress1 := (192.168.1.1)@IPv4;
+    ipaddress2 := (2001:0db8:0000:0000:0000:ff00:0042:8329)@IPv6;
+    
+    write(ipaddress1.version);
+    write(ipaddress1.isLoopback);
+    write(ipaddress1.isPrivate);
+    
+    if ipaddress2.isPrivate then
+        write(ipaddress2);
+    else
+        if ipaddress2.isLoopback then
+            write(ipaddress2);
+        endif
+    endif
+end
+
+IP addresses have three "getter" expressions. We can get the version of the address with .version. .isLoopback states whether the address points inside the network itself. 
+isPrivate states if the address is in the private address range. Identifiers with one of these "getter" expressions should yield a more complex expression.
+Try-catch (5 points)
+
+Implement very basic exception handling for the WHILE language with try-catch statements. First, add three basic exception types called badarith, divbyzero and badtype to the 
+scanner. These should all be keywords, returning separate tokens. A try expressions consists of a try keyword, with statements after it and a list of catch clauses. Each catch 
+clause begins with the catch keyword, followed by one of the three exception types, then by an arrow (->), and then the statements to be executed in case the exception is caught. 
+There can be multiple catch blocks, but always at least one. The try statement always ends in an endtry, with no semicolon needed.
+
+Example for a correct program:
+
+program trycatch
+    integer a;
+    integer b;
+begin
+    try
+        a := 10;
+        b := a div 0;
+        a := b div a;
+    catch badarith ->
+        write(0);
+        skip;
+    catch badtype ->
+        skip;
+        write(0);
+    catch divbyzero ->
+        a := 0;
+        b := 0;
+        write(a + b);
+    endtry
+    skip;
+end
+
+Note: make sure try statements can be used inside each other!
+
+These two tasks can earn you a bonus point. I only recommend you to do them if you've completed everything else. I will not give partial points for partial solutions to these
+bonus tasks.
+
+Bonus for 0.15 points: Implement a "throw" statement. These statements begin with the keyword throw, and then one of the three exception types is given.
+
+Example:
+
+program trycatch
+    integer a;
+    integer b;
+begin
+    try
+        if b = 0 then
+            throw badarith;
+        else
+            write(a div b);
+        endif
+    catch badarith ->
+        write(0);
+    endtry
+end
+
+Bonus for 0.85 points: Implement a "finally" clause. "finally" is an optional clause, that has to be put after the catch clauses. It starts with the finally keyword and an arrow 
+(->), which is then followed by statements. There can at most one finally clause.
+
+Example:
+
+program trycatch
+    integer a;
+begin
+   try
+       a := a div (a - a);
+       write(123);
+   catch divbyzero ->
+       write(234);
+   finally ->
+       write(345);
+   endtry
+end
+
+Intervals (5 points)
+
+Implement intervals and some operations on them. You can declare an interval with the interval keyword. Interval literals start with the lowercase letters in, followed by two 
+numbers inside square brackets, with two periods in between. (Intervals to infinity are not supported.) Interval literals should be scanned as a whole token. You don't need to 
+prevent leading zeros in the two numbers.
+
+program intervals
+    interval a;
+    interval b;
+    interval c;
+    interval d;
+begin
+    a := in[1..3];
+    b := in[3..10];
+    c := in[10..12];
+    d := in[2..5];
+    
+    write(a ^ b | c & d);
+end
+
+Implement three operations on the interval types: union (notated by |), intersection (notated by &), and symmetric difference (notated by ^). These operations join two expressions 
+together, making a more complex expression. All interval operations are right associative. Interval operations have higher priority than the comparison operations, but lower 
+priority that addition or subtraction. Among these new operations, symmetric difference (^) has the highest precedence, intersection (&) is in the middle and union (|) has the 
+lowest.
