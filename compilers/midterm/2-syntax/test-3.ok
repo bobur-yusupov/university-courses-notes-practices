@@ -1,0 +1,13 @@
+program intervals
+    interval a;
+    interval b;
+    interval c;
+    interval d;
+begin
+    a := in[1..3];
+    b := in[3..10];
+    c := in[10..12];
+    d := in[2..5];
+    
+    write(a ^ b | c & d);
+end

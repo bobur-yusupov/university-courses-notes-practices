@@ -22,6 +22,8 @@
 %token T_ADDRESS T_IPV4 T_IPV6
 %token T_DOT T_VERSION T_ISLOOPBACK T_ISPRIVATE
 
+%token T_TRY T_CATCH T_ENDTRY T_ARROW_RIGHT
+
 // later line = the operator has higher priority
 %left T_OR T_AND
 %left T_EQ
@@ -111,6 +113,11 @@ statement:
     loop
     {
         std::cout << "statement -> loop" << std::endl;
+    }
+|
+    try_statement
+    {
+        std::cout << "statement -> try_statement" << std::endl;
     }
 ;
 
@@ -265,5 +272,31 @@ address_declaration:
     T_ADDRESS T_ID T_SEMICOLON
     {
         std::cout << "address_declaration -> T_ADDRESS T_ID T_SEMICOLON" << std::endl;
+    }
+;
+
+try_statement:
+    T_TRY statements catches T_ENDTRY
+    {
+        std::cout << "try_statement -> T_TRY statements catches T_ENDTRY" << std::endl;
+    }
+;
+
+catches:
+    catch
+    {
+        std::cout << "catches -> catch" << std::endl;
+    }
+|
+    catch catches
+    {
+        std::cout << "catches -> catch catches" << std::endl;
+    }
+;
+
+catch:
+    T_CATCH expression T_ARROW_RIGHT statements
+    {
+        std::cout << "catch -> T_CATCH expression T_ARROW_RIGHT statements" << std::endl;
     }
 ;

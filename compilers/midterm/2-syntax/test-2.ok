@@ -1,0 +1,21 @@
+program trycatch
+    integer a;
+    integer b;
+begin
+    try
+        a := 10;
+        b := a div 0;
+        a := b div a;
+    catch badarith ->
+        write(0);
+        skip;
+    catch badtype ->
+        skip;
+        write(0);
+    catch divbyzero ->
+        a := 0;
+        b := 0;
+        write(a + b);
+    endtry
+    skip;
+end

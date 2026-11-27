@@ -60,6 +60,11 @@ version                           return Parser::T_VERSION;
 isLoopback                        return Parser::T_ISLOOPBACK;
 isPrivate                         return Parser::T_ISPRIVATE;
 
+try                               return Parser::T_TRY;
+catch                             return Parser::T_CATCH;
+endtry                            return Parser::T_ENDTRY;
+"->"                              return Parser::T_ARROW_RIGHT;
+
 "#".*\n    // nothing to do
 
 {LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;
