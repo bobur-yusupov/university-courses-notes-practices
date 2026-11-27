@@ -175,6 +175,11 @@ statement:
     {
         std::cout << "statement -> duplicate_statement" << std::endl;
     }
+|
+    outer
+    {
+        std::cout << "statement -> outer" << std::endl;
+    }
 ;
 
 statement_core:
@@ -593,4 +598,17 @@ tuple_access:
     {
         std::cout << "tuple_access -> T_ID T_DOT T_NUM" << std::endl;
     }
+;
+
+outer:
+    T_ID T_COMMA inner T_COMMA expression T_SEMICOLON
+    {
+        std::cout << "outer -> T_ID T_COMMA inner T_COMMA expression" << std::endl;
+    }
+;
+
+inner:
+    T_ID T_ASSIGN expression
+|
+    T_ID T_COMMA inner T_COMMA expression
 ;
