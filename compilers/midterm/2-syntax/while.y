@@ -23,11 +23,17 @@
 %token T_DOT T_VERSION T_ISLOOPBACK T_ISPRIVATE
 
 %token T_TRY T_CATCH T_ENDTRY T_ARROW_RIGHT
+%token T_INTERVAL T_IN_INTERVAL
 
 // later line = the operator has higher priority
 %left T_OR T_AND
 %left T_EQ
 %left T_LESS T_GR
+
+%right T_UNION
+%right T_INTERSECTION
+%right T_SYMMETRIC
+
 %left T_ADD T_SUB
 %left T_MUL T_DIV T_MOD
 %nonassoc T_NOT
@@ -69,6 +75,11 @@ declaration:
     address_declaration
     {
         std::cout << "declaration -> address_declaration" << std::endl;
+    }
+|
+    T_INTERVAL T_ID T_SEMICOLON
+    {
+        std::cout << "declaration -> T_INTERVAL T_ID" << std::endl;
     }
 ;
 
@@ -265,6 +276,26 @@ expression:
     T_ID T_DOT T_ISPRIVATE
     {
         std::cout << "expression -> T_ID T_DOT T_ISPRIVATE" << std::endl;
+    }
+|
+    T_IN_INTERVAL
+    {
+        std::cout << "expression -> T_IN_INTERVALclear" << std::endl;
+    }
+|
+    expression T_SYMMETRIC expression
+    {
+        std::cout << "expression -> expression T_SYMMETRIC expression" << std::endl;
+    }
+|
+    expression T_UNION expression
+    {
+        std::cout << "expression -> expression T_UNION expression" << std::endl;
+    }
+|
+    expression T_INTERSECTION expression
+    {
+        std::cout << "expression -> expression T_INTERSECTION expression" << std::endl;
     }
 ;
 

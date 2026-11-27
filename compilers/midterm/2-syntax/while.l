@@ -64,6 +64,11 @@ try                               return Parser::T_TRY;
 catch                             return Parser::T_CATCH;
 endtry                            return Parser::T_ENDTRY;
 "->"                              return Parser::T_ARROW_RIGHT;
+interval                          return Parser::T_INTERVAL;
+in\[{DIGIT}+\.\.{DIGIT}+\]        return Parser::T_IN_INTERVAL;
+"^"                               return Parser::T_SYMMETRIC;
+"|"                               return Parser::T_UNION;
+"&"                               return Parser::T_INTERSECTION;             
 
 "#".*\n    // nothing to do
 
