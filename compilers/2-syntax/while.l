@@ -71,6 +71,8 @@ return      return Parser::T_RETURN;
 ":"         return Parser::T_DOUBLE_DOT;
 "||"        return Parser::T_PARALLELIZATION;
 
+duplicate   return Parser::T_DUPLICATE;
+
 (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])       return Parser::T_TIME_LITERAL;
 
 {LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;

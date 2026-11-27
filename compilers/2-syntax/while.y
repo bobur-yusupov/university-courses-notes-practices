@@ -26,7 +26,7 @@
 %token T_FUNCTION T_RETURN
 
 %token T_QUESTION_MARK T_DOUBLE_DOT
-%token T_PARALLELIZATION
+%token T_PARALLELIZATION T_DUPLICATE
 
 // later line = the operator has higher priority
 %left T_SHIFT
@@ -158,6 +158,11 @@ statement:
     parallel_statement
     {
         std::cout << "statement -> parallel_statement" << std::endl;
+    }
+|
+    duplicate_statement
+    {
+        std::cout << "statement -> duplicate_statement" << std::endl;
     }
 ;
 
@@ -486,18 +491,34 @@ function_call:
 
 parallel_core:
     T_LBRACKET statement_core T_PARALLELIZATION statement_core T_RBRACKET
+    {
+        std::cout << "parallel_core -> T_LBRACKET statement_core T_PARALLELIZATION statement_core T_RBRACKET" << std::endl;
+    }
 ;
 
 parallel_statement:
     parallel_core T_SEMICOLON
+    {
+        std::cout << "parallel_statement -> parallel_core T_SEMICOLON" << std::endl;
+    }
 ;
 
 variable:
     T_ID
+    {
+        std::cout << "variable -> T_ID" << std::endl;
+    }
 ;
 
 variables:
     variable
 |
     variable T_COMMA variables
+;
+
+duplicate_statement:
+    T_DUPLICATE statement
+    {
+        std::cout << "duplicate_statement -> T_DUPLICATE statement" << std::endl;
+    }
 ;
