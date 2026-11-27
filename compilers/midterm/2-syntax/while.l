@@ -9,6 +9,11 @@
 DIGIT  		[0-9]
 WS          [ \t\n]
 LETTER      [a-zA-Z]
+LITERAL     [a-zA-Z0-9]
+OCTET       (25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])
+H       [0-9a-fA-F]{1,4}
+IPV4        {OCTET}(\.{OCTET}){3}
+IPV6        ({H}(:{H}){7}|"::"({H}(:{H}){0,6})?|{H}"::"({H}(:{H}){0,5})?|{H}(:{H}){1}"::"({H}(:{H}){0,4})?|{H}(:{H}){2}"::"({H}(:{H}){0,3})?|{H}(:{H}){3}"::"({H}(:{H}){0,2})?|{H}(:{H}){4}"::"({H}(:{H}){0,1})?|{H}(:{H}){5}"::"{H}?|{H}(:{H}){6}"::")
 
 %%
 
@@ -46,6 +51,14 @@ mod         return Parser::T_MOD;
 {DIGIT}+	return Parser::T_NUM;
 true        return Parser::T_TRUE;
 false       return Parser::T_FALSE;
+
+address                           return Parser::T_ADDRESS;
+\({IPV4}\)"@IPv4"                 return Parser::T_IPV4;
+\({IPV6}\)"@IPv6"                 return Parser::T_IPV6;
+"."                               return Parser::T_DOT;
+version                           return Parser::T_VERSION;
+isLoopback                        return Parser::T_ISLOOPBACK;
+isPrivate                         return Parser::T_ISPRIVATE;
 
 "#".*\n    // nothing to do
 

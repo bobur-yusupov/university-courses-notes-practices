@@ -1,0 +1,19 @@
+program ip_addresses
+    address ipaddress1;
+    address ipaddress2;
+begin
+    ipaddress1 := (192.168.1.1)@IPv4;
+    ipaddress2 := (2001:0db8:0000:0000:0000:ff00:0042:8329)@IPv6;
+    
+    write(ipaddress1.version);
+    write(ipaddress1.isLoopback);
+    write(ipaddress1.isPrivate);
+    
+    if ipaddress2.isPrivate then
+        write(ipaddress2);
+    else
+        if ipaddress2.isLoopback then
+            write(ipaddress2);
+        endif
+    endif
+end

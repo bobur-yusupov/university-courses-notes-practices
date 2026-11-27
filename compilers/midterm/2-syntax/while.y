@@ -19,6 +19,9 @@
 %token T_NUM
 %token T_ID
 
+%token T_ADDRESS T_IPV4 T_IPV6
+%token T_DOT T_VERSION T_ISLOOPBACK T_ISPRIVATE
+
 // later line = the operator has higher priority
 %left T_OR T_AND
 %left T_EQ
@@ -59,6 +62,11 @@ declaration:
     T_BOOLEAN T_ID T_SEMICOLON
     {
         std::cout << "declaration -> T_BOOLEAN T_ID T_SEMICOLON" << std::endl;
+    }
+|
+    address_declaration
+    {
+        std::cout << "declaration -> address_declaration" << std::endl;
     }
 ;
 
@@ -225,5 +233,37 @@ expression:
     T_OPEN expression T_CLOSE
     {
         std::cout << "expression -> T_OPEN expression T_CLOSE" << std::endl;
+    }
+|
+    T_IPV4
+    {
+        std::cout << "expression -> T_IPV4" << std::endl;
+    }
+|
+    T_IPV6
+    {
+        std::cout << "expression -> T_IPV6" << std::endl;
+    }
+|
+    T_ID T_DOT T_VERSION
+    {
+        std::cout << "expression -> T_ID T_DOT T_VERSION" << std::endl;
+    }
+|
+    T_ID T_DOT T_ISLOOPBACK
+    {
+        std::cout << "expression -> T_ID T_DOT T_ISLOOPBACK" << std::endl;
+    }
+|
+    T_ID T_DOT T_ISPRIVATE
+    {
+        std::cout << "expression -> T_ID T_DOT T_ISPRIVATE" << std::endl;
+    }
+;
+
+address_declaration:
+    T_ADDRESS T_ID T_SEMICOLON
+    {
+        std::cout << "address_declaration -> T_ADDRESS T_ID T_SEMICOLON" << std::endl;
     }
 ;
